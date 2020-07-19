@@ -4,7 +4,7 @@ import './css/style.scss';
 import './images/person walking on path.jpg';
 import './images/The Rock.jpg';
 
-import userData from './data/users';
+// import userData from './data/users';
 import hydrationData from './data/hydration';
 import sleepData from './data/sleep';
 import activityData from './data/activity';
@@ -48,11 +48,53 @@ var bestUserSteps = document.getElementById('bestUserSteps');
 var streakList = document.getElementById('streakList');
 var streakListMinutes = document.getElementById('streakListMinutes')
 
-function startApp() {
-  let userList = [];
-  makeUsers(userList);
-  let userRepo = new UserRepo(userList);
-  let hydrationRepo = new Hydration(hydrationData);
+async function retrieveUserData() {
+  const response = await fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData')
+  const userData = await response.json();
+  const users = userData.userData.map(user => {
+    return new User(user);
+  })
+
+  return users;
+}
+
+async function retrieveSleepData() {
+  const response = await fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData')
+  const sleepData = await response.json();
+  const sleepLogs = sleepData.sleepData.map(sleepLog => {
+    let newSleepLog = new Sleep(sleepLog);
+    return newSleepLog.sleepData;
+  })
+
+  return sleepLogs;
+}
+
+async function retrieveActivityData() {
+  const response = await fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData')
+  const activityData = await response.json();
+  const activityLogs = activityData.activityData.map(activityLog => {
+    let newActivityLog = new Activity(activityLog);
+    return newActivityLog.activityData;
+  })
+
+  return activityLogs;
+}
+
+async function retrieveHydrationData() {
+  const response = await fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData')
+  const hydrationData = await response.json();
+  const hydrationLogs = hydrationData.hydrationData.map(hydrationLog => {
+    let newHydrationLog = new Hydration(hydrationLog);
+    return newHydrationLog.hydrationData;
+  });
+
+  return hydrationLogs;
+}
+
+async function startApp() {
+  let userData = await retrieveUserData();
+  let userRepo = new UserRepo(userData);
+  let hydrationRepo = await retrieveHydrationData();
   let sleepRepo = new Sleep(sleepData);
   let activityRepo = new Activity(activityData);
   var userNowId = pickUser();
@@ -68,13 +110,6 @@ function startApp() {
   addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
 }
 
-function makeUsers(array) {
-  userData.forEach(function(dataItem) {
-    let user = new User(dataItem);
-    array.push(user);
-  })
-}
-
 function pickUser() {
   return Math.floor(Math.random() * 50);
 }
@@ -82,7 +117,6 @@ function pickUser() {
 function getUserById(id, listRepo) {
   return listRepo.getDataFromID(id);
 };
-
 
 function addInfoToSidebar(user, userStorage) {
   sidebarName.innerText = user.name;
