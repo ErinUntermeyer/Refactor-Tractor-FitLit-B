@@ -17,8 +17,8 @@ class User {
     return this.name.split(' ', 1).join();
   }
   
-  getFriendsNames(userStorage) {
-    return this.friends.map((friendId) => (userStorage.getDataFromID(friendId).name));
+  getFriendsNames(userRepo) {
+    return this.friends.map((friendId) => (userRepo.getDataFromID(friendId).name));
   }
 }
 
