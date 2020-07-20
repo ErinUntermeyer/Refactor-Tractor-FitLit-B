@@ -38,17 +38,14 @@ describe('User Repo', function() {
   });
 
   it.only('should have a parameter to take in user data', function() {
-    const users = [user1];
-    const userRepo = new UserRepo(users);
-
     expect(userRepo.users[0].id).to.equal(1);
   });
 
   it.only('should return user data when given user ID', function() {
-    expect(userRepo.getDataFromID(1)).to.eql(user1);
+    expect(userRepo.getDataFromID(1)).to.equal(user1);
   });
 
   it.only('should return the average of all users step goals', function() {
-    expect(userRepo.calculateAverageStepGoal()).to.eql(9500);
+    expect(userRepo.calculateAverageStepGoal()).to.equal(9500);
   });
  });
