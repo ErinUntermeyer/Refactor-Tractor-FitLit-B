@@ -78,7 +78,8 @@ async function retrieveHydrationData() {
 async function startApp() {
 	let userData = await retrieveUserData();
   let userRepo = new UserRepo(userData);
-	let hydrationRepo = new Hydration(await retrieveHydrationData());
+  let hydrationRepo = new Hydration(await retrieveHydrationData()).hydrationData;
+  console.log(hydrationRepo);
 	let sleepRepo = new Sleep(await retrieveSleepData());
   let activityRepo = new Activity(await retrieveActivityData());
 	let currentUser = userRepo.getDataFromUserID(pickUser(), userRepo); // this gets a single user object (the number from userNowId above)

@@ -18,7 +18,12 @@ class User {
   }
   
   getFriendsNames(userRepo) {
-    return this.friends.map(friendId => (userRepo.getDataFromUserID(friendId, userRepo.users).name));
+    let names = [];
+    this.friends.forEach(friend => {
+      let friendMatch = userRepo.users.find(user => user.id === friend);
+      names.push(friendMatch.name);
+    })
+    return names;
   }
 }
 
