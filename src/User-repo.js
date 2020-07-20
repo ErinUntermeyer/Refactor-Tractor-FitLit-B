@@ -19,8 +19,8 @@ class UserRepo {
   };
 
   calculateAverageStepGoal() {
-    var totalStepGoal = this.users.reduce((sumSoFar, data) => {
-      return sumSoFar = sumSoFar + data.dailyStepGoal;
+    const totalStepGoal = this.users.reduce((totalSteps, data) => {
+      return totalSteps += data.dailyStepGoal;
     }, 0);
     return totalStepGoal / this.users.length;
 	};
