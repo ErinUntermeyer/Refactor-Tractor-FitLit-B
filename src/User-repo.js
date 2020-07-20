@@ -1,19 +1,20 @@
+import User from './User';
+
 class UserRepo {
   constructor(users) {
-    this.users = users;
+    this.users = this.checkInput(users) ? users : null;
+  };
+
+  checkInput(users) {
+    return users.every(user => user instanceof User);
   };
 
   getDataFromID(id) {
-    console.log(id);
-    console.log(this.users);
     let userMatch = this.users.find(user => id === user.id);
-    console.log(userMatch);
     return userMatch;
   };
 
   getDataFromUserID(id, dataSet) {
-    console.log(id);
-    console.log(dataSet);
     return dataSet.filter((userData) => id === userData.userID);
   };
 

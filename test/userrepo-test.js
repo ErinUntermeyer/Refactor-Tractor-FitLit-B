@@ -41,6 +41,13 @@ describe('User Repo', function() {
     expect(userRepo.users[0].id).to.equal(1);
   });
 
+  it.only('should only take in instances of user', function() {
+    const data = [1, 2, 3];
+    const badUserRepo = new UserRepo(data);
+
+    expect(badUserRepo.users).to.equal(null);
+  })
+
   it.only('should return user data when given user ID', function() {
     expect(userRepo.getDataFromID(1)).to.equal(user1);
   });
