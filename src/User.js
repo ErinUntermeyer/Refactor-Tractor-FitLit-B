@@ -18,7 +18,7 @@ class User {
   }
   
   getFriendsNames(userRepo) {
-    return this.friends.map((friendId) => (userRepo.getDataFromID(friendId).name));
+    return this.friends.map(friendId => (userRepo.getDataFromUserID(friendId, userRepo.users).name));
   }
 }
 

@@ -16,7 +16,7 @@ class UserRepo {
 
   getDataFromUserID(id, dataSet) {
     console.log(dataSet);
-    return dataSet.filter((userData) => id === userData.userID);
+    return dataSet.filter(dataItem => id === dataItem.userID);
   };
 
   calculateAverageStepGoal() {
