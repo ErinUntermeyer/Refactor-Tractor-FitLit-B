@@ -4,10 +4,10 @@ import './css/style.scss';
 import './images/person walking on path.jpg';
 import './images/The Rock.jpg';
 
-import userData from './data/users';
-import hydrationData from './data/hydration';
-import sleepData from './data/sleep';
-import activityData from './data/activity';
+// import userData from './data/users';
+// import hydrationData from './data/hydration';
+// import sleepData from './data/sleep';
+// import activityData from './data/activity';
 
 import User from './User';
 import Activity from './Activity';
@@ -48,41 +48,59 @@ var bestUserSteps = document.getElementById('bestUserSteps');
 var streakList = document.getElementById('streakList');
 var streakListMinutes = document.getElementById('streakListMinutes')
 
-function startApp() {
-  let userList = [];
-  makeUsers(userList);
-  let userRepo = new UserRepo(userList);
-  let hydrationRepo = new Hydration(hydrationData);
-  let sleepRepo = new Sleep(sleepData);
-  let activityRepo = new Activity(activityData);
-  var userNowId = pickUser();
-  let userNow = getUserById(userNowId, userRepo);
-  let today = makeToday(userRepo, userNowId, hydrationData);
-  let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
-  historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
-  addInfoToSidebar(userNow, userRepo);
-  addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
-  addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
-  let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
-  addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
-  addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
+async function retrieveUserData() {
+	const response = await fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData')
+	const userData = await response.json();
+	const users = userData.userData.map(user => {
+		return new User(user);
+	})
+	return users;
 }
 
-function makeUsers(array) {
-  userData.forEach(function(dataItem) {
-    let user = new User(dataItem);
-    array.push(user);
-  })
+async function retrieveSleepData() {
+	const response = await fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData')
+	const sleepData = await response.json();
+	return sleepData.sleepData;
+}
+
+async function retrieveActivityData() {
+	const response = await fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData')
+	const activityData = await response.json();
+	return activityData.activityData;
+}
+
+async function retrieveHydrationData() {
+	const response = await fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData')
+	const hydrationData = await response.json();
+	return hydrationData.hydrationData;
+}
+
+async function startApp() {
+	let userData = await retrieveUserData();
+	let userRepo = new UserRepo(userData);
+	let hydrationRepo = new Hydration(await retrieveHydrationData());
+	let sleepRepo = new Sleep(await retrieveSleepData());
+	let activityRepo = new Activity(await retrieveActivityData());
+	var userNowId = pickUser(); // this gets a random number between 0 and 50
+	let userNow = getUserById(userNowId, userRepo); // this gets a single user object (the number from userNowId above)
+	let today = makeToday(userRepo, userNowId, await retrieveHydrationData()); // this takes in a data set, sorts the data set and gets the date from last element
+	let randomHistory = makeRandomDate(userRepo, userNowId, await retrieveHydrationData());
+	historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
+	addInfoToSidebar(userNow, userRepo);
+	addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
+	addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
+	let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
+	addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
+	addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
 }
 
 function pickUser() {
-  return Math.floor(Math.random() * 50);
+	return Math.floor(Math.random() * 50);
 }
 
 function getUserById(id, listRepo) {
   return listRepo.getDataFromID(id);
 };
-
 
 function addInfoToSidebar(user, userStorage) {
   sidebarName.innerText = user.name;
@@ -103,7 +121,9 @@ function makeWinnerID(activityInfo, user, dateString, userStorage){
   return activityInfo.getWinnerId(user, dateString, userStorage)
 }
 
+// can call this getToday
 function makeToday(userStorage, id, dataSet) {
+	// return dataSet[dataSet.length - 1].date
   var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
   return sortedArray[0].date;
 }
@@ -114,11 +134,11 @@ function makeRandomDate(userStorage, id, dataSet) {
 
 }
 
-function addHydrationInfo(id, hydrationInfo, dateString, userStorage, laterDateString) {
-  hydrationToday.insertAdjacentHTML('afterBegin', `<p>You drank</p><p><span class="number">${hydrationInfo.calculateDailyOunces(id, dateString)}</span></p><p>oz water today.</p>`);
-  hydrationAverage.insertAdjacentHTML('afterBegin', `<p>Your average water intake is</p><p><span class="number">${hydrationInfo.calculateAverageOunces(id)}</span></p> <p>oz per day.</p>`)
-  hydrationThisWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id, hydrationInfo, userStorage, hydrationInfo.calculateFirstWeekOunces(userStorage, id)));
-  hydrationEarlierWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id, hydrationInfo, userStorage, hydrationInfo.calculateRandomWeekOunces(laterDateString, id, userStorage)));
+function addHydrationInfo(id, hydrationRepo, dateString, userStorage, laterDateString) {
+  hydrationToday.insertAdjacentHTML('afterBegin', `<p>You drank</p><p><span class="number">${hydrationRepo.calculateDailyOunces(id, dateString)}</span></p><p>oz water today.</p>`);
+  hydrationAverage.insertAdjacentHTML('afterBegin', `<p>Your average water intake is</p><p><span class="number">${hydrationRepo.calculateAverageOunces(id)}</span></p> <p>oz per day.</p>`)
+  hydrationThisWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id, hydrationRepo, userStorage, hydrationRepo.calculateFirstWeekOunces(userStorage, id)));
+  hydrationEarlierWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id, hydrationRepo, userStorage, hydrationRepo.calculateRandomWeekOunces(laterDateString, id, userStorage)));
 }
 
 function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
