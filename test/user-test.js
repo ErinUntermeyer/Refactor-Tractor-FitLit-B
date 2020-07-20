@@ -5,7 +5,7 @@ import User from '../src/User';
 
 describe('User', function() {
 	let user1, user2, user3, user4, badUser;
-	
+
 	beforeEach(function() {
 		user1 = new User({
 			id: 1,
@@ -54,15 +54,15 @@ describe('User', function() {
 		});
 	});
 
-  it.only('should be a function', function() {
+  it.skip('should be a function', function() {
     expect(User).to.be.a('function');
   });
 
-  it.only('should be an instance of User', function() {
+  it.skip('should be an instance of User', function() {
     expect(user1).to.be.an.instanceof(User);
   });
 
-  it.only('should take info from user data', function() {
+  it.skip('should take info from user data', function() {
     expect(user1.id).to.equal(1);
 		expect(user1.name).to.equal('Alex Roth');
 		expect(user1.address).to.equal('1234 Turing Street, Denver CO 80301-1697');
@@ -72,27 +72,27 @@ describe('User', function() {
 		expect(user1.friends).to.deep.equal([2, 3, 4]);
 	});
 
-	it.only('should only take a number for id, strideLength and dailyStepGoal', function() {
+	it.skip('should only take a number for id, strideLength and dailyStepGoal', function() {
 		expect(badUser.id).to.equal(null);
 		expect(badUser.strideLength).to.equal(null);
 		expect(badUser.dailyStepGoal).to.equal(null);
 	});
 
-	it.only('should only take a string for name, address and email', function () {
+	it.skip('should only take a string for name, address and email', function () {
 		expect(badUser.name).to.equal(null);
 		expect(badUser.address).to.equal(null);
 		expect(badUser.email).to.equal(null);
 	});
 
-	it.only('should only take an array for friends', function () {
+	it.skip('should only take an array for friends', function () {
 		expect(badUser.friends).to.equal(null);
 	});
 	
-  it.only('should return user first name', function() {
+  it.skip('should return user first name', function() {
     expect(user2.getFirstName()).to.equal('Allie');
   });
 
-  it.only('should return list of friend names from user repository', function() {
+  it.skip('should return list of friend names from user repository', function() {
     const users = [user1, user2, user3, user4];
     const userRepo = new UserRepo(users);
 
