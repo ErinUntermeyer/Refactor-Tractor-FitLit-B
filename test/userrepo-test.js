@@ -3,12 +3,8 @@ import { expect } from 'chai';
 import UserRepo from '../src/User-repo';
 import User from '../src/User';
 
-
 describe('User Repo', function() {
-  let user1;
-  let user2;
-  let user;
-  let userRepo;
+  let user1, user2, users, userRepo;
 
   beforeEach(function() {
     user1 = new User({
@@ -34,13 +30,10 @@ describe('User Repo', function() {
   });
 
   it('should be a function', function() {
-    const userRepo = new UserRepo();
-
     expect(UserRepo).to.be.a('function');
   });
 
   it('takes an array of user data', function() {
-
     expect(userRepo.users).to.include(user2);
   });
 
