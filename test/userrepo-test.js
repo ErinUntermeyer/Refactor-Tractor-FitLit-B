@@ -29,26 +29,26 @@ describe('User Repo', function() {
     userRepo = new UserRepo(users);
   });
 
-  it('should be a function', function() {
+  it.only('should be a function', function() {
     expect(UserRepo).to.be.a('function');
   });
 
-  it('takes an array of user data', function() {
+  it.only('takes an array of user data', function() {
     expect(userRepo.users).to.include(user2);
   });
 
-  it('should have a parameter to take in user data', function() {
+  it.only('should have a parameter to take in user data', function() {
     const users = [user1];
     const userRepo = new UserRepo(users);
 
     expect(userRepo.users[0].id).to.equal(1);
   });
 
-  it('should return user data when given user ID', function() {
+  it.only('should return user data when given user ID', function() {
     expect(userRepo.getDataFromID(1)).to.eql(user1);
   });
 
-  it('should return the average of all users step goals', function() {
+  it.only('should return the average of all users step goals', function() {
     expect(userRepo.calculateAverageStepGoal()).to.eql(9500);
   });
  });
