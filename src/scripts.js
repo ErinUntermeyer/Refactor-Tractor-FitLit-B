@@ -77,30 +77,25 @@ async function retrieveHydrationData() {
 
 async function startApp() {
 	let userData = await retrieveUserData();
-	let userRepo = new UserRepo(userData);
+  let userRepo = new UserRepo(userData);
 	let hydrationRepo = new Hydration(await retrieveHydrationData());
 	let sleepRepo = new Sleep(await retrieveSleepData());
-	let activityRepo = new Activity(await retrieveActivityData());
-	var userNowId = pickUser(); // this gets a random number between 0 and 50
-	let userNow = getUserById(userNowId, userRepo); // this gets a single user object (the number from userNowId above)
-	let today = makeToday(userRepo, userNowId, await retrieveHydrationData()); // this takes in a data set, sorts the data set and gets the date from last element
-	let randomHistory = makeRandomDate(userRepo, userNowId, await retrieveHydrationData());
+  let activityRepo = new Activity(await retrieveActivityData());
+	let currentUser = userRepo.getDataFromUserID(pickUser(), userRepo); // this gets a single user object (the number from userNowId above)
+	let today = makeToday(userRepo, currentUser.id, await retrieveHydrationData()); // this takes in a data set, sorts the data set and gets the date from last element
+	let randomHistory = makeRandomDate(userRepo, currentUser.id, await retrieveHydrationData());
 	historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
-	addInfoToSidebar(userNow, userRepo);
-	addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
-	addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
-	let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
-	addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
-	addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
+	addInfoToSidebar(currentUser, userRepo);
+	addHydrationInfo(currentUser.id, hydrationRepo, today, userRepo, randomHistory);
+	addSleepInfo(currentUser.id, sleepRepo, today, userRepo, randomHistory);
+	let winnerNow = makeWinnerID(activityRepo, currentUser, today, userRepo);
+	addActivityInfo(currentUser.id, activityRepo, today, userRepo, randomHistory, currentUser, winnerNow);
+	addFriendGameInfo(currentUser.id, activityRepo, userRepo, today, randomHistory, currentUser);
 }
 
 function pickUser() {
 	return Math.floor(Math.random() * 50);
 }
-
-function getUserById(id, listRepo) {
-  return listRepo.getDataFromID(id);
-};
 
 function addInfoToSidebar(user, userStorage) {
   sidebarName.innerText = user.name;
