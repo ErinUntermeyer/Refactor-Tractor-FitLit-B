@@ -67,8 +67,12 @@ function getActivityData() {
     .then(response => response.json())
 }
 
-function createUserInstances(dataSet) {
-  return dataSet.map(dataPiece => new User(dataPiece));
+function createUserInstances(userDataSet, hydrationDataSet, sleepDataSet, activityDataSet) {
+  return userDataSet.map(user => new User(user, hydrationDataSet, sleepDataSet, activityDataSet));
+}
+
+function createHydrationInstances(dataSet) {
+  return dataSet.map(dataPiece => new Hydration(dataPiece));
 }
 
 function createSleepInstances(dataSet) {
@@ -79,19 +83,15 @@ function createActivityInstances(dataSet) {
   return dataSet.map(dataPiece => new Activity(dataPiece));
 }
 
-function createHydrationInstances(dataSet) {
-  return dataSet.map(dataPiece => new Hydration(dataPiece));
-}
 
 function getData() {
   return Promise.all([getUserData(), getHydrationData(), getSleepData(), getActivityData()])
     .then(dataSets => {
-      return [
-        createUserInstances(dataSets[0].userData), 
-        createHydrationInstances(dataSets[1].hydrationData), 
-        createSleepInstances(dataSets[2].sleepData), 
-        createActivityInstances(dataSets[3].activityData)
-      ]
+      const hydrationInstances = createHydrationInstances(dataSets[1].hydrationData);
+      const sleepInstances = createSleepInstances(dataSets[2].sleepData);
+      const activityInstances = createActivityInstances(dataSets[3].activityData);
+      const userInstances = createUserInstances(dataSets[0].userData, hydrationInstances, sleepInstances, activityInstances);
+      return [userInstances, hydrationInstances, sleepInstances, activityInstances]
     })
 }
 
@@ -101,6 +101,7 @@ getData()
     const hydrationData = parsedData[1];
     const sleepData = parsedData[2];
     const activityData = parsedData[3];
+    console.log(userData[0].hydrationInfo)
   })
 
 // instantiate the classes with the correct data sets
