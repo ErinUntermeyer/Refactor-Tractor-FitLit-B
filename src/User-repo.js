@@ -14,18 +14,13 @@ class UserRepo {
     return userMatch;
   };
 
-  getDataFromUserID(id, dataSet) {
-    console.log(dataSet);
-    return dataSet.filter(dataItem => id === dataItem.userID);
-  };
-
   calculateAverageStepGoal() {
     const totalStepGoal = this.users.reduce((totalSteps, data) => {
       return totalSteps += data.dailyStepGoal;
     }, 0);
     return totalStepGoal / this.users.length;
 	};
-	
+
   makeSortedUserArray(id, dataSet) {
     let selectedID = this.getDataFromUserID(id, dataSet)
     let sortedByDate = selectedID.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -76,7 +71,7 @@ class UserRepo {
       }, 0) / sortedObjectKeys[b].length)
     });
   }
-  
+
   combineRankedUserIDsAndAveragedData(dataSet, date, relevantData, listFromMethod) {
     let sortedObjectKeys = this.isolateUsernameAndRelevantData(dataSet, date, relevantData, listFromMethod)
     let rankedUsersAndAverages = this.rankUserIDsbyRelevantDataValue(dataSet, date, relevantData, listFromMethod)
