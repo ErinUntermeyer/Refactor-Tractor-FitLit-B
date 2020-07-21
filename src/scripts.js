@@ -50,8 +50,6 @@ var streakListMinutes = document.getElementById('streakListMinutes')
 
 // fetch all data
 
-let hydrationData;
-
 function getUserData() {
   return fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData')
     .then(response => response.json())
@@ -99,7 +97,10 @@ function getData() {
 
 getData()
   .then(parsedData => {
-    hydrationData = parsedData[1];
+    const userData = parsedData[0];
+    const hydrationData = parsedData[1];
+    const sleepData = parsedData[2];
+    const activityData = parsedData[3];
   })
 
 // instantiate the classes with the correct data sets
