@@ -26,15 +26,12 @@ class UserRepo {
     return totalStepGoal / this.users.length;
 	};
 	
-	// not needed now
   makeSortedUserArray(id, dataSet) {
     let selectedID = this.getDataFromUserID(id, dataSet)
     let sortedByDate = selectedID.sort((a, b) => new Date(b.date) - new Date(a.date));
     return sortedByDate;
   }
-  // getToday(id, dataSet) {
-  //   return this.makeSortedUserArray(id, dataSet)[0].date;
-  // };
+
   getFirstWeek(id, dataSet) {
     return this.makeSortedUserArray(id, dataSet).slice(0, 7);
   };
