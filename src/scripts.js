@@ -48,32 +48,49 @@ var bestUserSteps = document.getElementById('bestUserSteps');
 var streakList = document.getElementById('streakList');
 var streakListMinutes = document.getElementById('streakListMinutes')
 
-async function retrieveUserData() {
-	const response = await fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData')
-	const userData = await response.json();
-	const users = userData.userData.map(user => {
-		return new User(user);
-	})
-	return users;
+// need to refactor
+
+let userData, hydrationData, sleepData, activityData;
+
+function getData() {
+  Promise.all([
+    fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData'),
+    fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData'),
+    fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData'),
+    fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData')
+]).then(responses => Promise.all(responses.map(response => response.json())))
+  .then(data => {
+    userData = createUserInstances(data[0].userData);
+    sleepData = createSleepInstances(data[1].sleepData);
+    activityData = createActivityInstances(data[2].activityData);
+    hydrationData = createHydrationInstances(data[3].hydrationData);
+  });
 }
 
-async function retrieveSleepData() {
-	const response = await fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData')
-	const sleepData = await response.json();
-	return sleepData.sleepData;
+getData();
+
+function createUserInstances(dataSet) {
+  return dataSet.map(dataPiece => new User(dataPiece));
 }
 
-async function retrieveActivityData() {
-	const response = await fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData')
-	const activityData = await response.json();
-	return activityData.activityData;
+function createSleepInstances(dataSet) {
+  return dataSet.map(dataPiece => new Sleep(dataPiece));
 }
 
-async function retrieveHydrationData() {
-	const response = await fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData')
-	const hydrationData = await response.json();
-	return hydrationData.hydrationData;
+function createActivityInstances(dataSet) {
+  return dataSet.map(dataPiece => new Activity(dataPiece));
 }
+
+function createHydrationInstances(dataSet) {
+  return dataSet.map(dataPiece => new Hydration(dataPiece));
+}
+
+setTimeout(function() {
+  console.log(userData);
+  console.log(sleepData);
+  console.log(activityData);
+  console.log(hydrationData);
+}, 2000);
 
 async function startApp() {
 	let userData = await retrieveUserData();
@@ -198,4 +215,4 @@ function makeStepStreakHTML(id, activityInfo, userStorage, method) {
   return method.map(streakData => `<li class="historical-list-listItem">${streakData}!</li>`).join('');
 }
 
-startApp();
+setTimeout(startApp(), 1000);
