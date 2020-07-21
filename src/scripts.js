@@ -48,59 +48,88 @@ var bestUserSteps = document.getElementById('bestUserSteps');
 var streakList = document.getElementById('streakList');
 var streakListMinutes = document.getElementById('streakListMinutes')
 
-async function retrieveUserData() {
-	const response = await fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData')
-	const userData = await response.json();
-	const users = userData.userData.map(user => {
-		return new User(user);
-	})
-	return users;
+// fetch all data
+
+function getUserData() {
+  return fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData')
+    .then(response => response.json())
+}
+function getHydrationData() {
+  return fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData')
+    .then(response => response.json())
+}
+function getSleepData() {
+  return fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData')
+    .then(response => response.json())
+}
+function getActivityData() {
+  return fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData')
+    .then(response => response.json())
 }
 
-async function retrieveSleepData() {
-	const response = await fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData')
-	const sleepData = await response.json();
-	return sleepData.sleepData;
+function createUserInstances(dataSet) {
+  return dataSet.map(dataPiece => new User(dataPiece));
 }
 
-async function retrieveActivityData() {
-	const response = await fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData')
-	const activityData = await response.json();
-	return activityData.activityData;
+function createSleepInstances(dataSet) {
+  return dataSet.map(dataPiece => new Sleep(dataPiece));
 }
 
-async function retrieveHydrationData() {
-	const response = await fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData')
-	const hydrationData = await response.json();
-	return hydrationData.hydrationData;
+function createActivityInstances(dataSet) {
+  return dataSet.map(dataPiece => new Activity(dataPiece));
 }
+
+function createHydrationInstances(dataSet) {
+  return dataSet.map(dataPiece => new Hydration(dataPiece));
+}
+
+function getData() {
+  return Promise.all([getUserData(), getHydrationData(), getSleepData(), getActivityData()])
+    .then(dataSets => {
+      return [
+        createUserInstances(dataSets[0].userData), 
+        createHydrationInstances(dataSets[1].hydrationData), 
+        createSleepInstances(dataSets[2].sleepData), 
+        createActivityInstances(dataSets[3].activityData)
+      ]
+    })
+}
+
+getData()
+  .then(parsedData => {
+    const userData = parsedData[0];
+    const hydrationData = parsedData[1];
+    const sleepData = parsedData[2];
+    const activityData = parsedData[3];
+  })
+
+// instantiate the classes with the correct data sets
+// the class instantiations need to be inside of a then statement
+// all data populates from there
+
 
 async function startApp() {
 	let userData = await retrieveUserData();
-	let userRepo = new UserRepo(userData);
-	let hydrationRepo = new Hydration(await retrieveHydrationData());
+  let userRepo = new UserRepo(userData);
+  let hydrationRepo = new Hydration(await retrieveHydrationData()).hydrationData;
+  console.log(hydrationRepo);
 	let sleepRepo = new Sleep(await retrieveSleepData());
-	let activityRepo = new Activity(await retrieveActivityData());
-	var userNowId = pickUser(); // this gets a random number between 0 and 50
-	let userNow = getUserById(userNowId, userRepo); // this gets a single user object (the number from userNowId above)
-	let today = makeToday(userRepo, userNowId, await retrieveHydrationData()); // this takes in a data set, sorts the data set and gets the date from last element
-	let randomHistory = makeRandomDate(userRepo, userNowId, await retrieveHydrationData());
+  let activityRepo = new Activity(await retrieveActivityData());
+	let currentUser = userRepo.getDataFromUserID(pickUser(), userRepo); // this gets a single user object (the number from userNowId above)
+	let today = makeToday(userRepo, currentUser.id, await retrieveHydrationData()); // this takes in a data set, sorts the data set and gets the date from last element
+	let randomHistory = makeRandomDate(userRepo, currentUser.id, await retrieveHydrationData());
 	historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
-	addInfoToSidebar(userNow, userRepo);
-	addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
-	addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
-	let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
-	addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
-	addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
+	addInfoToSidebar(currentUser, userRepo);
+	addHydrationInfo(currentUser.id, hydrationRepo, today, userRepo, randomHistory);
+	addSleepInfo(currentUser.id, sleepRepo, today, userRepo, randomHistory);
+	let winnerNow = makeWinnerID(activityRepo, currentUser, today, userRepo);
+	addActivityInfo(currentUser.id, activityRepo, today, userRepo, randomHistory, currentUser, winnerNow);
+	addFriendGameInfo(currentUser.id, activityRepo, userRepo, today, randomHistory, currentUser);
 }
 
 function pickUser() {
 	return Math.floor(Math.random() * 50);
 }
-
-function getUserById(id, listRepo) {
-  return listRepo.getDataFromID(id);
-};
 
 function addInfoToSidebar(user, userStorage) {
   sidebarName.innerText = user.name;
@@ -202,4 +231,4 @@ function makeStepStreakHTML(id, activityInfo, userStorage, method) {
   return method.map(streakData => `<li class="historical-list-listItem">${streakData}!</li>`).join('');
 }
 
-startApp();
+setTimeout(startApp(), 1000);
