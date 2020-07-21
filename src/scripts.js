@@ -48,26 +48,26 @@ var bestUserSteps = document.getElementById('bestUserSteps');
 var streakList = document.getElementById('streakList');
 var streakListMinutes = document.getElementById('streakListMinutes')
 
-// need to refactor
+// fetch all data
 
-let userData, hydrationData, sleepData, activityData;
+let hydrationData;
 
-function getData() {
-  Promise.all([
-    fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData'),
-    fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData'),
-    fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData'),
-    fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData')
-]).then(responses => Promise.all(responses.map(response => response.json())))
-  .then(data => {
-    userData = createUserInstances(data[0].userData);
-    sleepData = createSleepInstances(data[1].sleepData);
-    activityData = createActivityInstances(data[2].activityData);
-    hydrationData = createHydrationInstances(data[3].hydrationData);
-  });
+function getUserData() {
+  return fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData')
+    .then(response => response.json())
 }
-
-getData();
+function getHydrationData() {
+  return fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData')
+    .then(response => response.json())
+}
+function getSleepData() {
+  return fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData')
+    .then(response => response.json())
+}
+function getActivityData() {
+  return fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData')
+    .then(response => response.json())
+}
 
 function createUserInstances(dataSet) {
   return dataSet.map(dataPiece => new User(dataPiece));
@@ -85,12 +85,27 @@ function createHydrationInstances(dataSet) {
   return dataSet.map(dataPiece => new Hydration(dataPiece));
 }
 
-setTimeout(function() {
-  console.log(userData);
-  console.log(sleepData);
-  console.log(activityData);
-  console.log(hydrationData);
-}, 2000);
+function getData() {
+  return Promise.all([getUserData(), getHydrationData(), getSleepData(), getActivityData()])
+    .then(dataSets => {
+      return [
+        createUserInstances(dataSets[0].userData), 
+        createHydrationInstances(dataSets[1].hydrationData), 
+        createSleepInstances(dataSets[2].sleepData), 
+        createActivityInstances(dataSets[3].activityData)
+      ]
+    })
+}
+
+getData()
+  .then(parsedData => {
+    hydrationData = parsedData[1];
+  })
+
+// instantiate the classes with the correct data sets
+// the class instantiations need to be inside of a then statement
+// all data populates from there
+
 
 async function startApp() {
 	let userData = await retrieveUserData();
