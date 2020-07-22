@@ -15,7 +15,10 @@ describe('User', function() {
 			strideLength: 4.3,
 			dailyStepGoal: 10000,
 			friends: [2, 3, 4]
-		}),
+		},
+		[{userID: 1, date: 'today', numOunces: 2}],
+		[{userID: 1, date: 'today', hoursSlept: 3, sleepQuality: 0}],
+		[{userId: 1, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2}]);
 		user2 = new User({
 			id: 2,
 			name: 'Allie McCarthy',
@@ -24,7 +27,10 @@ describe('User', function() {
 			strideLength: 3.3,
 			dailyStepGoal: 9000,
 			friends: [1, 3, 4]
-		}),
+		},
+		[{ userID: 2, date: 'today', numOunces: 2 }],
+		[{ userID: 2, date: 'today', hoursSlept: 3, sleepQuality: 0 }],
+		[{ userId: 2, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
 		user3 = new User({
 			id: 3,
 			name: 'The Rock',
@@ -33,7 +39,10 @@ describe('User', function() {
 			strideLength: 10,
 			dailyStepGoal: 60000,
 			friends: [1, 2, 4]
-		}),
+		},
+		[{ userID: 3, date: 'today', numOunces: 2 }],
+		[{ userID: 3, date: 'today', hoursSlept: 3, sleepQuality: 0 }],
+		[{ userId: 3, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
 		user4 = new User({
 			id: 4,
 			name: 'Rainbow Dash',
@@ -42,7 +51,10 @@ describe('User', function() {
 			strideLength: 3.8,
 			dailyStepGoal: 7000,
 			friends: [1, 2, 3]
-		}),
+		},
+		[{ userID: 4, date: 'today', numOunces: 2 }],
+		[{ userID: 4, date: 'today', hoursSlept: 3, sleepQuality: 0 }],
+		[{ userId: 4, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
 		badUser = new User({
 			id: 'one',
 			name: ['Bad User'],
@@ -51,7 +63,10 @@ describe('User', function() {
 			strideLength: '4.3',
 			dailyStepGoal: 'a lot',
 			friends: 2
-		});
+		},
+		[{ userID: 5, date: 'today', numOunces: 2 }],
+		[{ userID: 5, date: 'today', hoursSlept: 3, sleepQuality: 0 }],
+		[{ userId: 5, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
 	});
 
   it.skip('should be a function', function() {

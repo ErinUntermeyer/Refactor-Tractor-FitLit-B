@@ -12,15 +12,6 @@ class User {
     this.activityInfo = this.getDataFromUserID(activityData);
 	}
 
-  // add additional arguments to the constructor
-  // write a function that filters over the data that is being takin in
-  // Input: an array of objects
-  // Output: an array of objects with a diff length
-  // Use a filter method
-  // Iterate over each piece of data
-  // if (the userID matches this.id) then we add it to the return value
-  // return
-
   getDataFromUserID(dataSet) {
     return dataSet.filter(dataItem => this.id === dataItem.userID);
   };
