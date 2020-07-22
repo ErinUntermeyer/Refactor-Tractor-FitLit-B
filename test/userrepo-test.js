@@ -56,7 +56,7 @@ describe('User Repo', function() {
     expect(userRepo.calculateAverageStepGoal()).to.equal(9500);
 	});
 	
-	it.skip('should return 0 if users is null', function () {
+	it.skip('should return 0 if users is null', function() {
 		expect(userRepo1.calculateAverageStepGoal()).to.equal(0);
 	});
  });
