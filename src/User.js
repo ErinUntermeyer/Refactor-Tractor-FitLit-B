@@ -10,7 +10,7 @@ class User {
     this.hydrationInfo = this.getDataFromUserID(hydrationData);
     this.sleepInfo = this.getDataFromUserID(sleepData);
     this.activityInfo = this.getDataFromUserID(activityData);
-	}
+	};
 
   getDataFromUserID(dataSet) {
     return dataSet.filter(dataItem => this.id === dataItem.userID);
@@ -18,20 +18,20 @@ class User {
 
 	checkDataType(attribute, dataType) {
 		return typeof attribute === dataType ? attribute : null;
-	}
+	};
 
   getFirstName() {
     return this.name.split(' ', 1).join();
-  }
+  };
 
   getFriendsNames(userRepo) {
     let names = [];
     this.friends.forEach(friend => {
       let friendMatch = userRepo.users.find(user => user.id === friend);
       names.push(friendMatch.name);
-    })
+    });
     return names;
-  }
-}
+  };
+};
 
 export default User;

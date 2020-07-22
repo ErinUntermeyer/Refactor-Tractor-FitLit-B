@@ -33,30 +33,30 @@ describe('User Repo', function() {
 	[{ userId: 2, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
 	users = [user1, user2];
 	userRepo = new UserRepo(users);
-	userRepo1 = new UserRepo()
+	userRepo1 = new UserRepo();
   });
 
-  it.only('should be a function', function() {
+  it.skip('should be a function', function() {
     expect(UserRepo).to.be.a('function');
   });
 
-  it.only('should only take in an array of instances of User', function() {
+  it.skip('should only take in an array of instances of User', function() {
     expect(userRepo1.users).to.equal(null);
   });
 
-  it.only('should return user data when given user ID', function() {
+  it.skip('should return user data when given user ID', function() {
     expect(userRepo.getDataFromID(1)).to.equal(user1);
 	});
 	
-	it.only('should return null if user ID does not exist', function() {
+	it.skip('should return null if user ID does not exist', function() {
 		expect(userRepo.getDataFromID(3)).to.equal(null);
 	});
 
-  it.only('should return the average of all users step goals', function() {
+  it.skip('should return the average of all users step goals', function() {
     expect(userRepo.calculateAverageStepGoal()).to.equal(9500);
 	});
 	
-	it.only('should return 0 if users is null', function () {
+	it.skip('should return 0 if users is null', function () {
 		expect(userRepo1.calculateAverageStepGoal()).to.equal(0);
 	});
  });

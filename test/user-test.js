@@ -107,7 +107,7 @@ describe('User', function() {
     expect(user2.getFirstName()).to.equal('Allie');
   });
 
-  it.only('should return list of friend names from user repository', function() {
+  it.skip('should return list of friend names from user repository', function() {
     const users = [user1, user2, user3, user4];
     const userRepo = new UserRepo(users);
 
