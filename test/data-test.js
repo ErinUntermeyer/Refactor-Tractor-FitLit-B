@@ -6,8 +6,7 @@ describe('Data', function() {
   let data, badData;
 
   beforeEach(function() {
-    data = new Data(1, "07/22/2020");
-    badData = new Data("I dont believe in numbers", true)
+    data = new Data();
   })
 
   it.only('should be a function', function() {
@@ -16,21 +15,5 @@ describe('Data', function() {
 
   it.only('should be an instance of Data', function() {
     expect(data).to.be.an.instanceof(Data);
-  });
-
-  it.only('should have a userID', function() {
-    expect(data.userID).to.equal(1);
-  });
-
-  it.only('should have a date', function() {
-    expect(data.date).to.equal("07/22/2020");
-  });
-
-  it.only('should only accept a number for userID', function() {
-    expect(badData.userID).to.equal(null);
-  });
-
-  it.only('should only accept a string for date', function() {
-    expect(badData.date).to.equal(null);
   });
 })
