@@ -21,16 +21,20 @@ class User {
 	};
 
   getFirstName() {
-    return this.name.split(' ', 1).join();
+		return this.name ? this.name.split(' ', 1).join() : null;
   };
 
   getFriendsNames(userRepo) {
-    let names = [];
-    this.friends.forEach(friend => {
-      let friendMatch = userRepo.users.find(user => user.id === friend);
-      names.push(friendMatch.name);
-    });
-    return names;
+		let names = [];
+		if (this.friends === null) {
+			return null;
+		} else {
+			this.friends.forEach(friend => {
+				let friendMatch = userRepo.users.find(user => user.id === friend);
+				names.push(friendMatch.name);
+			});
+			return names;
+		};
   };
 };
 
