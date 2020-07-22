@@ -33,6 +33,6 @@ describe('Data', function() {
   });
 
   it.only('should be able to calculate an average statistic for all time', function() {
-    expect(data.calculateAllTimeAverage()).to.equal();
+    expect(data.calculateAllTimeAverage(testHydrationData, "numOunces")).to.equal(14);
   });
 })
