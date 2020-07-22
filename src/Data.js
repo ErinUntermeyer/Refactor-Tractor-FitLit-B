@@ -9,6 +9,10 @@ class Data {
     }, 0)
     return allTimeTotal / dataSet.length;
   }
+  retrieveDataByDay(dataSet, attribute, date) {
+    const dateMatch = dataSet.find(item => item.date === date);
+    return dateMatch[attribute];
+  }
 }
 
 export default Data;

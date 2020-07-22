@@ -19,8 +19,8 @@ describe('Data', function() {
     ];
     testActivityData = [
       {userID: 1, date: "2020/07/22", numSteps: 1002, minutesActive: 113, flightsOfStairs: 13},
-      {userID: 1, date: "2020/07/22", numSteps: 1010, minutesActive: 120, flightsOfStairs: 19},
-      {userID: 1, date: "2020/07/22", numSteps: 1953, minutesActive: 175, flightsOfStairs: 11}
+      {userID: 1, date: "2020/07/23", numSteps: 1010, minutesActive: 120, flightsOfStairs: 19},
+      {userID: 1, date: "2020/07/24", numSteps: 1953, minutesActive: 175, flightsOfStairs: 11}
     ];
   });
 
@@ -34,5 +34,9 @@ describe('Data', function() {
 
   it.only('should be able to calculate an average statistic for all time', function() {
     expect(data.calculateAllTimeAverage(testHydrationData, "numOunces")).to.equal(14);
+  });
+
+  it.only('should be able to retrieve data from any given day', function() {
+    expect(data.retrieveDataByDay(testSleepData, "hoursSlept", "2020/07/22")).to.equal(6.6);
   });
 })
