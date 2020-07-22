@@ -10,16 +10,7 @@ class User {
     this.hydrationInfo = this.getDataFromUserID(hydrationData);
     this.sleepInfo = this.getDataFromUserID(sleepData);
     this.activityInfo = this.getDataFromUserID(activityData);
-	}
-
-  // add additional arguments to the constructor
-  // write a function that filters over the data that is being takin in
-  // Input: an array of objects
-  // Output: an array of objects with a diff length
-  // Use a filter method
-  // Iterate over each piece of data
-  // if (the userID matches this.id) then we add it to the return value
-  // return
+	};
 
   getDataFromUserID(dataSet) {
     return dataSet.filter(dataItem => this.id === dataItem.userID);
@@ -27,20 +18,24 @@ class User {
 
 	checkDataType(attribute, dataType) {
 		return typeof attribute === dataType ? attribute : null;
-	}
+	};
 
   getFirstName() {
-    return this.name.split(' ', 1).join();
-  }
+		return this.name ? this.name.split(' ', 1).join() : null;
+  };
 
   getFriendsNames(userRepo) {
-    let names = [];
-    this.friends.forEach(friend => {
-      let friendMatch = userRepo.users.find(user => user.id === friend);
-      names.push(friendMatch.name);
-    })
-    return names;
-  }
-}
+		let names = [];
+		if (this.friends === null) {
+			return null;
+		} else {
+			this.friends.forEach(friend => {
+				let friendMatch = userRepo.users.find(user => user.id === friend);
+				names.push(friendMatch.name);
+			});
+			return names;
+		};
+  };
+};
 
 export default User;

@@ -4,11 +4,6 @@ import './css/style.scss';
 import './images/person walking on path.jpg';
 import './images/The Rock.jpg';
 
-// import userData from './data/users';
-// import hydrationData from './data/hydration';
-// import sleepData from './data/sleep';
-// import activityData from './data/activity';
-
 import User from './User';
 import Activity from './Activity';
 import Hydration from './Hydration';
@@ -100,8 +95,10 @@ getData()
     const userData = parsedData[0];
     const hydrationData = parsedData[1];
     const sleepData = parsedData[2];
-    const activityData = parsedData[3];
-    console.log(userData[0].hydrationInfo)
+		const activityData = parsedData[3];
+		const userRepo = new UserRepo(userData);
+		let currentUser = userRepo.getDataFromID(pickUser());
+		addInfoToSidebar(currentUser, userRepo);
   })
 
 // instantiate the classes with the correct data sets
@@ -110,17 +107,13 @@ getData()
 
 
 async function startApp() {
-	let userData = await retrieveUserData();
-  let userRepo = new UserRepo(userData);
   let hydrationRepo = new Hydration(await retrieveHydrationData()).hydrationData;
   console.log(hydrationRepo);
 	let sleepRepo = new Sleep(await retrieveSleepData());
   let activityRepo = new Activity(await retrieveActivityData());
-	let currentUser = userRepo.getDataFromUserID(pickUser(), userRepo); // this gets a single user object (the number from userNowId above)
-	let today = makeToday(userRepo, currentUser.id, await retrieveHydrationData()); // this takes in a data set, sorts the data set and gets the date from last element
+	let today = makeToday(userRepo, currentUser.id, await retrieveHydrationData());
 	let randomHistory = makeRandomDate(userRepo, currentUser.id, await retrieveHydrationData());
 	historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
-	addInfoToSidebar(currentUser, userRepo);
 	addHydrationInfo(currentUser.id, hydrationRepo, today, userRepo, randomHistory);
 	addSleepInfo(currentUser.id, sleepRepo, today, userRepo, randomHistory);
 	let winnerNow = makeWinnerID(activityRepo, currentUser, today, userRepo);
@@ -232,4 +225,4 @@ function makeStepStreakHTML(id, activityInfo, userStorage, method) {
   return method.map(streakData => `<li class="historical-list-listItem">${streakData}!</li>`).join('');
 }
 
-setTimeout(startApp(), 1000);
+// setTimeout(startApp(), 1000);
