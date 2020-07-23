@@ -18,6 +18,13 @@ describe('Sleep', function() {
     expect(sleep).to.be.an.instanceof(Sleep);
   });
 
+  it.only('should take in sleep data', function() {
+    expect(sleep.userID).to.equal(1);
+    expect(sleep.date).to.equal('2020/07/24');
+    expect(sleep.hoursSlept).to.equal(8.2);
+    expect(sleep.sleepQuality).to.equal(2.8);
+  });
+
   it.only('should only take in valid data', function() {
     expect(badSleep.userID).to.equal(null);
     expect(badSleep.date).to.equal(null);

@@ -18,6 +18,12 @@ describe('Hydration', function() {
     expect(hydration).to.be.an.instanceof(Hydration);
   });
 
+  it.only('should take in hydration data', function() {
+    expect(hydration.userID).to.equal(1);
+    expect(hydration.date).to.equal('2020/07/22');
+    expect(hydration.numOunces).to.equal(13);
+  });
+
   it.only('should only take in valid data', function() {
     expect(badHydration.userID).to.equal(null);
     expect(badHydration.date).to.equal(null);
