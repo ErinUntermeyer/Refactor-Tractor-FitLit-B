@@ -33,10 +33,18 @@ describe('Data', function() {
   });
 
   it.only('should be able to calculate an average statistic for all time', function() {
-    expect(data.calculateAllTimeAverage(testHydrationData, "numOunces")).to.equal(14);
+    expect(data.calculateAverage(testHydrationData, "numOunces")).to.equal(14);
   });
 
   it.only('should be able to retrieve data from any given day', function() {
     expect(data.retrieveDataByDay(testSleepData, "hoursSlept", "2020/07/22")).to.equal(6.6);
+  });
+
+  it.only('should be able to retrieve data from any given week', function() {
+    expect(data.retrieveAttributesByWeek(testSleepData, "hoursSlept", "2020/07/24")).to.deep.equal([8.2, 7.5, 6.6]);
+  });
+
+  it.only('should be able to retrieve average data from any given week', function() {
+    expect(data.retrieveAverageDataByWeek(testSleepData, "hoursSlept", "2020/07/24")).to.equal(7.43);
   });
 })
