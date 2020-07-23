@@ -4,11 +4,11 @@ class Data {
 	};
 
   calculateAverage(dataSet, attribute) {
-    const allTimeTotal = dataSet.reduce((total, item) => {
+    const attributeTotal = dataSet.reduce((total, item) => {
       total += item[attribute];
       return total;
     }, 0)
-    return allTimeTotal / dataSet.length;
+    return attributeTotal / dataSet.length;
   }
 
   retrieveDataByDay(dataSet, attribute, date) {
@@ -34,15 +34,11 @@ class Data {
     const weekData = this.retrieveDataByWeek(dataSet, date);
     return parseFloat((this.calculateAverage(weekData, attribute)).toFixed(2));
   }
+
+  findHighestValue(dataSet, attribute) {
+    const sortedData = dataSet.sort((a, b) => b[attribute] - a[attribute]);
+    return sortedData[0][attribute]
+  }
 }
 
 export default Data;
-
-
-
-// use sort on dataSet
-// use find to get date match
-// get the index of date match
-// use slice(index, index + 7)
-// then iterate through each of the objects
-// push the desired property

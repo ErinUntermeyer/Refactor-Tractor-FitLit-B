@@ -47,4 +47,8 @@ describe('Data', function() {
   it.only('should be able to retrieve average data from any given week', function() {
     expect(data.retrieveAverageDataByWeek(testSleepData, "hoursSlept", "2020/07/24")).to.equal(7.43);
   });
+
+  it.only('should be able to retrieve the highest value of an attribute', function() {
+    expect(data.findHighestValue(testActivityData, "minutesActive")).to.equal(175);
+  });
 })
