@@ -18,7 +18,7 @@ describe('User', function() {
 		},
 		[{userID: 1, date: 'today', numOunces: 2}],
 		[{userID: 1, date: 'today', hoursSlept: 3, sleepQuality: 0}],
-		[{userId: 1, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2}]);
+		[{userID: 1, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2}]);
 		user2 = new User({
 			id: 2,
 			name: 'Allie McCarthy',
@@ -30,7 +30,7 @@ describe('User', function() {
 		},
 		[{ userID: 2, date: 'today', numOunces: 2 }],
 		[{ userID: 2, date: 'today', hoursSlept: 3, sleepQuality: 0 }],
-		[{ userId: 2, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
+		[{ userID: 2, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
 		user3 = new User({
 			id: 3,
 			name: 'The Rock',
@@ -42,7 +42,7 @@ describe('User', function() {
 		},
 		[{ userID: 3, date: 'today', numOunces: 2 }],
 		[{ userID: 3, date: 'today', hoursSlept: 3, sleepQuality: 0 }],
-		[{ userId: 3, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
+		[{ userID: 3, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
 		user4 = new User({
 			id: 4,
 			name: 'Rainbow Dash',
@@ -54,7 +54,7 @@ describe('User', function() {
 		},
 		[{ userID: 4, date: 'today', numOunces: 2 }],
 		[{ userID: 4, date: 'today', hoursSlept: 3, sleepQuality: 0 }],
-		[{ userId: 4, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
+		[{ userID: 4, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
 		badUser = new User({
 			id: 'one',
 			name: ['Bad User'],
@@ -66,7 +66,7 @@ describe('User', function() {
 		},
 		[{ userID: 5, date: 'today', numOunces: 2 }],
 		[{ userID: 5, date: 'today', hoursSlept: 3, sleepQuality: 0 }],
-		[{ userId: 5, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
+		[{ userID: 5, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
 	});
 
   it.only('should be a function', function() {
@@ -107,11 +107,11 @@ describe('User', function() {
 		badUser.friends = [];
 		expect(badUser.friends).to.deep.equal([]);
 	});
-	
+
   it.only('should return user first name', function() {
     expect(user2.getFirstName()).to.equal('Allie');
 	});
-	
+
 	it.only('should return null if user name doesnt exist', function() {
 		expect(badUser.getFirstName()).to.equal(null);
 	});
@@ -122,7 +122,7 @@ describe('User', function() {
 
     expect(user2.getFriendsNames(userRepo)).to.deep.equal(['Alex Roth', 'The Rock', 'Rainbow Dash']);
 	});
-	
+
 	it.only('should return null if user has no friends', function() {
 		const users = [user1, user2, user3, user4];
 		const userRepo = new UserRepo(users);
