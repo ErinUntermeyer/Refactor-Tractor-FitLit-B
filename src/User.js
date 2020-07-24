@@ -35,6 +35,17 @@ class User extends Data{
 			return names;
 		};
   };
+
+  findRecordSteps() {
+    return super.findHighestValue(this.activityInfo, 'numSteps')
+  };
+
+  findBestNightOfSleepEver() {
+    const sortedArray = this.sleepInfo.sort((a, b) => {
+      return (b.sleepQuality + b.hoursSlept) - (a.sleepQuality + a.hoursSlept);
+    })
+    return sortedArray[0];
+  };
 };
 
 export default User;

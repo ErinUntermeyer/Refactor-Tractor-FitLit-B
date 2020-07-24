@@ -17,8 +17,8 @@ describe('User', function() {
 			friends: [2, 3, 4]
 		},
 		[{userID: 1, date: 'today', numOunces: 2}],
-		[{userID: 1, date: 'today', hoursSlept: 3, sleepQuality: 0}],
-		[{userID: 1, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2}]);
+		[{userID: 1, date: 'today', hoursSlept: 4, sleepQuality: 1}, {userID: 1, date: 'yesterday', hoursSlept: 3, sleepQuality: 3}],
+		[{userID: 1, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2}, {userID: 1, date: 'today', numSteps: 26, minutesActive: 40, flightsOfStairs: 2}]);
 		user2 = new User({
 			id: 2,
 			name: 'Allie McCarthy',
@@ -119,14 +119,20 @@ describe('User', function() {
   it.only('should return list of friend names from user repository', function() {
     const users = [user1, user2, user3, user4];
     const userRepo = new UserRepo(users);
-
     expect(user2.getFriendsNames(userRepo)).to.deep.equal(['Alex Roth', 'The Rock', 'Rainbow Dash']);
 	});
 
 	it.only('should return null if user has no friends', function() {
 		const users = [user1, user2, user3, user4];
 		const userRepo = new UserRepo(users);
-
 		expect(badUser.getFriendsNames(userRepo)).to.equal(null);
+	});
+
+  it.only('should find the record number of steps', function() {
+		expect(user1.findRecordSteps()).to.deep.equal({userID: 1, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2});
+	});
+
+  it.only('should find the best night of sleep ever', function() {
+		expect(user1.findBestNightOfSleepEver()).to.deep.equal({userID: 1, date: 'yesterday', hoursSlept: 3, sleepQuality: 3});
 	});
 });
