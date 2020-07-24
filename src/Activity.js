@@ -1,4 +1,5 @@
 import Data from './Data';
+import User from './User';
 
 class Activity extends Data {
   constructor(activityData) {
@@ -11,11 +12,20 @@ class Activity extends Data {
   };
 
   calculateMilesWalked(user) {
-    return parseFloat(((this.numSteps * user.strideLength) / 5280).toFixed(2));
-  }
+    if(user instanceof User === false) {
+      return null
+    } else {
+      return parseFloat(((this.numSteps * user.strideLength) / 5280).toFixed(2));
+    }
+  };
+
+  checkStepGoal(user) {
+    if(user instanceof User === false) {
+      return null
+    } else {
+      return this.numSteps > user.dailyStepGoal;
+    }
+  };
 };
 
 export default Activity;
-
-// Input: a user and date/day
-// Output: the number of miles the user walked that day

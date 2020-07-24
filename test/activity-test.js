@@ -24,6 +24,7 @@ describe('Activity', function() {
 		[{userID: 1, date: 'today', numSteps: 8013, minutesActive: 40, flightsOfStairs: 2}]
   );
 });
+
   it.only('should be a function', function() {
     expect(Activity).to.be.a('function');
   });
@@ -50,5 +51,14 @@ describe('Activity', function() {
 
   it.only('should calculate how many miles a user has walked that day', function() {
     expect(activity.calculateMilesWalked(user)).to.equal(6.53);
+  });
+
+  it.only('should indicate if the user has reached their step goal', function() {
+    expect(activity.checkStepGoal(user)).to.equal(false);
+  });
+
+  it.only('methods should only take in a user instance', function() {
+    expect(activity.calculateMilesWalked("not a user")).to.equal(null);
+    expect(activity.checkStepGoal("not a user")).to.equal(null);
   });
 });
