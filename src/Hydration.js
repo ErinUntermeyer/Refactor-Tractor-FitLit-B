@@ -1,30 +1,12 @@
-class Hydration {
+import Data from './Data';
+
+class Hydration extends Data {
   constructor(hydrationData) {
-    this.userID = hydrationData.userID;
-    this.date = hydrationData.date;
-    this.numOunces = hydrationData.numOunces;
-  }
-
-  calculateAverageOunces(id) {
-    let perDayUserHydration = this.hydrationData.filter((data) => id === data.userID);
-    return perDayUserHydration.reduce((sumSoFar, data) => {
-      return sumSoFar += data.numOunces;
-    }, 0) / perDayUserHydration.length;
-  }
-
-  calculateDailyOunces(id, date) {
-    let findOuncesByDate = this.hydrationData.find((data) => id === data.userID && date === data.date);
-    return findOuncesByDate.numOunces;
-  }
-
-  calculateFirstWeekOunces(userRepo, id) {
-    return userRepo.getFirstWeek(id, this.hydrationData).map((data) => `${data.date}: ${data.numOunces}`);
-  }
-  
-  calculateRandomWeekOunces(date, id, userRepo) {
-    return userRepo.getWeekFromDate(date, id, this.hydrationData).map((data) => `${data.date}: ${data.numOunces}`);
-  }
-}
-
+    super()
+    this.userID = super.checkDataType(hydrationData.userID, 'number');
+    this.date = super.checkDataType(hydrationData.date, 'string');
+    this.numOunces = super.checkDataType(hydrationData.numOunces, 'number');
+  };
+};
 
 export default Hydration;
