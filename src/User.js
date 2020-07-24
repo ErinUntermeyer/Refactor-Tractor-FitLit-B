@@ -35,6 +35,10 @@ class User extends Data{
 			return names;
 		};
   };
+
+  findRecordSteps() {
+    return super.findHighestValue(this.activityInfo, 'numSteps')
+  }
 };
 
 export default User;

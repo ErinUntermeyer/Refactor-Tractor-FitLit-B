@@ -49,6 +49,6 @@ describe('Data', function() {
   });
 
   it.only('should be able to retrieve the highest value of an attribute', function() {
-    expect(data.findHighestValue(testActivityData, 'minutesActive')).to.equal(175);
+    expect(data.findHighestValue(testActivityData, 'minutesActive')).to.deep.equal({userID: 1, date: '2020/07/24', numSteps: 1953, minutesActive: 175, flightsOfStairs: 11});
   });
 })
