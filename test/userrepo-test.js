@@ -17,7 +17,7 @@ describe('User Repo', function() {
 		friends: [2, 3, 4]
 	},
 	[{ userID: 1, date: 'today', numOunces: 2 }],
-	[{ userID: 1, date: 'today', hoursSlept: 3, sleepQuality: 0 }],
+	[{ userID: 1, date: 'today', hoursSlept: 3, sleepQuality: 4 }],
 	[{ userId: 1, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
 	user2 = new User({
 		id: 2,
@@ -36,28 +36,31 @@ describe('User Repo', function() {
 	userRepo1 = new UserRepo();
   });
 
-  it.skip('should be a function', function() {
+  it.only('should be a function', function() {
     expect(UserRepo).to.be.a('function');
   });
 
-  it.skip('should only take in an array of instances of User', function() {
+  it.only('should only take in an array of instances of User', function() {
     expect(userRepo1.users).to.equal(null);
   });
 
-  it.skip('should return user data when given user ID', function() {
+  it.only('should return user data when given user ID', function() {
     expect(userRepo.getDataFromID(1)).to.equal(user1);
 	});
-	
-	it.skip('should return null if user ID does not exist', function() {
+
+	it.only('should return null if user ID does not exist', function() {
 		expect(userRepo.getDataFromID(3)).to.equal(null);
 	});
 
-  it.skip('should return the average of all users step goals', function() {
+  it.only('should return the average of all users step goals', function() {
     expect(userRepo.calculateAverageStepGoal()).to.equal(9500);
 	});
-	
-	it.skip('should return 0 if users is null', function() {
+
+	it.only('should return 0 if users is null', function() {
 		expect(userRepo1.calculateAverageStepGoal()).to.equal(0);
 	});
- });
 
+  it.only('should return a list of users with sleep quality greater than three', function() {
+		expect(userRepo.findSleepQualityGreaterThanThree('today')).to.deep.equal([user1]);
+	});
+ });

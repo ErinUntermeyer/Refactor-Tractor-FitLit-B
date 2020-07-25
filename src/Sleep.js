@@ -8,6 +8,8 @@ class Sleep extends Data{
     this.hoursSlept = super.checkDataType(sleepData.hoursSlept, 'number');
     this.sleepQuality = super.checkDataType(sleepData.sleepQuality, 'number');
   };
+
+  
 };
 
 export default Sleep;

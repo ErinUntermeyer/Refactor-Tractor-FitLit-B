@@ -1,8 +1,21 @@
 import User from './User';
+import Data from './Data';
+import Sleep from './Sleep';
+import Hydration from './Hydration';
+import Activity from './Activity';
 
-class UserRepo {
+class UserRepo extends Data{
   constructor(users) {
+    super();
     this.users = this.checkInput(users) ? users : null;
+  };
+
+  findSleepQualityGreaterThanThree(date) {
+    return this.users.filter(user => {
+      const sleepQualityForWeek = super.retrieveDataByWeek(user.sleepInfo, date);
+      const averageSleepQuality = super.calculateAverage(sleepQualityForWeek, 'sleepQuality');
+      return averageSleepQuality > 3;
+    });
   };
 
   checkInput(users) {

@@ -1,6 +1,9 @@
 import { expect } from 'chai';
 
 import Data from '../src/Data';
+import Sleep from '../src/Sleep';
+import Hydration from '../src/Hydration';
+import Activity from '../src/Activity';
 
 describe('Data', function() {
   let data, testHydrationData, testSleepData, testActivityData;
@@ -8,19 +11,19 @@ describe('Data', function() {
   beforeEach(function() {
     data = new Data();
     testHydrationData = [
-      {userID: 1, date: '2020/07/22', numOunces: 13},
-      {userID: 1, date: '2020/07/23', numOunces: 14},
-      {userID: 1, date: '2020/07/24', numOunces: 15}
+      new Hydration({userID: 1, date: '2020/07/22', numOunces: 13}),
+      new Hydration({userID: 1, date: '2020/07/23', numOunces: 14}),
+      new Hydration({userID: 1, date: '2020/07/24', numOunces: 15})
     ];
     testSleepData = [
-      {userID: 1, date: '2020/07/22', hoursSlept: 6.6, sleepQuality: 3.9},
-      {userID: 1, date: '2020/07/23', hoursSlept: 7.5, sleepQuality: 2.5},
-      {userID: 1, date: '2020/07/24', hoursSlept: 8.2, sleepQuality: 2.8}
+      new Sleep({userID: 1, date: '2020/07/22', hoursSlept: 6.6, sleepQuality: 3.9}),
+      new Sleep({userID: 1, date: '2020/07/23', hoursSlept: 7.5, sleepQuality: 2.5}),
+      new Sleep({userID: 1, date: '2020/07/24', hoursSlept: 8.2, sleepQuality: 2.8})
     ];
     testActivityData = [
-      {userID: 1, date: '2020/07/22', numSteps: 1002, minutesActive: 113, flightsOfStairs: 13},
-      {userID: 1, date: '2020/07/23', numSteps: 1010, minutesActive: 120, flightsOfStairs: 19},
-      {userID: 1, date: '2020/07/24', numSteps: 1953, minutesActive: 175, flightsOfStairs: 11}
+      new Activity({userID: 1, date: '2020/07/22', numSteps: 1002, minutesActive: 113, flightsOfStairs: 13}),
+      new Activity({userID: 1, date: '2020/07/23', numSteps: 1010, minutesActive: 120, flightsOfStairs: 19}),
+      new Activity({userID: 1, date: '2020/07/24', numSteps: 1953, minutesActive: 175, flightsOfStairs: 11})
     ];
   });
 
@@ -31,6 +34,16 @@ describe('Data', function() {
   it.only('should be an instance of Data', function() {
     expect(data).to.be.an.instanceof(Data);
   });
+
+  it.only('should be able to validate data types', function() {
+    let hydrationInfo = testHydrationData[1].numOunces;
+    expect(data.checkDataType(hydrationInfo, 'number')).to.equal(hydrationInfo);
+    expect(data.checkDataType(hydrationInfo, 'string')).to.equal(null);
+  });
+
+  // it.only('should be able to validate a given data set', function() {
+  //   expect(data.checkDataSet(testSleepData)).to.equal(true);
+  // });
 
   it.only('should be able to calculate an average statistic for all time', function() {
     expect(data.calculateAverage(testHydrationData, 'numOunces')).to.equal(14);

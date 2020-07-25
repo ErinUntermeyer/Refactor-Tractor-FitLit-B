@@ -37,7 +37,7 @@ class User extends Data{
   };
 
   findRecordSteps() {
-    return super.findHighestValue(this.activityInfo, 'numSteps')
+    return super.findHighestValue(this.activityInfo, 'numSteps');
   };
 
   findBestNightOfSleepEver() {

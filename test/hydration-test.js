@@ -8,7 +8,7 @@ describe('Hydration', function() {
   beforeEach(function() {
     hydration = new Hydration({userID: 1, date: '2020/07/22', numOunces: 13});
     badHydration = new Hydration({userID: 'dehydrated', date: 20200722, numOunces: 'dying of thirst'});
-  })
+  });
 
   it.only('should be a function', function() {
     expect(Hydration).to.be.a('function');
