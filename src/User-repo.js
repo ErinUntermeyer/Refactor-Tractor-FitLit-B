@@ -19,7 +19,7 @@ class UserRepo extends Data{
   };
 
   findMostHoursSlept(date) {
-    const sleepData = this.users.map(user => super.retrieveDataByDay(user.sleepInfo, date);
+    const sleepData = this.users.map(user => super.retrieveDataByDay(user.sleepInfo, date));
     const mostHoursSlept = (sleepData.sort((a, b) => b.hoursSlept - a.hoursSlept))[0].hoursSlept;
     return this.users.filter(user => {
       let validSleepMatch = user.sleepInfo.find(sleep => {

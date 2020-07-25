@@ -30,7 +30,7 @@ describe('User', function() {
 		},
 		[{ userID: 2, date: 'today', numOunces: 2 }],
 		[{ userID: 2, date: 'today', hoursSlept: 3, sleepQuality: 0 }],
-		[{ userID: 2, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
+		[{ userID: 2, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }, { userID: 2, date: 'tomorrow', numSteps: 9013, minutesActive: 40, flightsOfStairs: 2 }]);
 		user3 = new User({
 			id: 3,
 			name: 'The Rock',
@@ -134,5 +134,9 @@ describe('User', function() {
 
   it.only('should find the best night of sleep ever', function() {
 		expect(user1.findBestNightOfSleepEver()).to.deep.equal({userID: 1, date: 'yesterday', hoursSlept: 3, sleepQuality: 3});
+	});
+
+  it.only('should find all days a step goal was reached', function() {
+		expect(user2.findAllDaysStepGoalReached()).to.deep.equal(['tomorrow']);
 	});
 });
