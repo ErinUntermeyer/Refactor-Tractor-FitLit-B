@@ -15,9 +15,13 @@ class Data {
     return attributeTotal / dataSet.length;
   }
 
-  retrieveDataByDay(dataSet, attribute, date) {
+  retrieveDataByDay(dataSet, date, attribute) {
     const dateMatch = dataSet.find(item => item.date === date);
-    return dateMatch[attribute];
+    if (attribute) {
+      return dateMatch[attribute];
+    } else {
+      return dateMatch;
+    }
   }
 
   sortByDate(dataSet) {

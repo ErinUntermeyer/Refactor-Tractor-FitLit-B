@@ -50,7 +50,7 @@ describe('Data', function() {
   });
 
   it.only('should be able to retrieve data from any given day', function() {
-    expect(data.retrieveDataByDay(testSleepData, 'hoursSlept', '2020/07/22')).to.equal(6.6);
+    expect(data.retrieveDataByDay(testSleepData, '2020/07/22', 'hoursSlept' )).to.equal(6.6);
   });
 
   it.only('should be able to retrieve data from any given week', function() {

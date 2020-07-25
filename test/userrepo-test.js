@@ -63,4 +63,8 @@ describe('User Repo', function() {
   it.only('should return a list of users with sleep quality greater than three', function() {
 		expect(userRepo.findSleepQualityGreaterThanThree('today')).to.deep.equal([user1]);
 	});
+
+  it.only('should return the user that has slept the most hours', function() {
+		expect(userRepo.findMostHoursSlept('today')).to.deep.equal(users);
+	});
  });

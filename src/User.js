@@ -43,7 +43,7 @@ class User extends Data{
   findBestNightOfSleepEver() {
     const sortedArray = this.sleepInfo.sort((a, b) => {
       return (b.sleepQuality + b.hoursSlept) - (a.sleepQuality + a.hoursSlept);
-    })
+    });
     return sortedArray[0];
   };
 };
