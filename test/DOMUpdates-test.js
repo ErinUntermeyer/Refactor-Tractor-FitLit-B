@@ -11,10 +11,10 @@ import Data from '../src/Data';
 import DOMupdates from '../src/DOMupdates';
 
 describe('DOMupdates', function() {
-	let DOMupdates1, user;
+	let domUpdates, user;
 
 	beforeEach(function() {
-		DOMupdates1 = new DOMupdates();
+		domUpdates = new DOMupdates();
 		user = new User({
 			id: 1,
 			name: 'Alex Roth',
@@ -41,15 +41,21 @@ describe('DOMupdates', function() {
 	});
 	
 	it.only('should display hydration data for today', function() {
-		DOMupdates1.displayHydrationToday(user.hydrationInfo, 'today')
+		domUpdates.displayHydrationToday(user.hydrationInfo, 'today')
 		expect(document.querySelector).to.have.been.called(1);
 		expect(document.querySelector).to.have.been.called.with('#hydration-today');
 	});
 
 	it.only('should display hydration data for current week', function () {
-		DOMupdates1.displayHydrationWeek(user.hydrationInfo, 'today')
+		domUpdates.displayHydrationWeek(user.hydrationInfo, 'today')
 		expect(document.querySelector).to.have.been.called(1);
 		expect(document.querySelector).to.have.been.called.with('#hydration-this-week');
+	});
+
+	it.only('should display hydration data average', function () {
+		domUpdates.displayHydrationAverage(user.hydrationInfo)
+		expect(document.querySelector).to.have.been.called(1);
+		expect(document.querySelector).to.have.been.called.with('#hydration-average');
 	});
 
 });

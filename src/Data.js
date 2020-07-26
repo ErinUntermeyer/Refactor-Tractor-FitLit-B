@@ -12,7 +12,7 @@ class Data {
       total += item[attribute];
       return total;
     }, 0);
-    return attributeTotal / dataSet.length;
+    return parseFloat((attributeTotal / dataSet.length).toFixed(2));
   };
 
   retrieveDataByDay(dataSet, date, attribute) {

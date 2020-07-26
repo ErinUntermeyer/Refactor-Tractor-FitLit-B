@@ -10,9 +10,10 @@ import Hydration from './Hydration';
 import Sleep from './Sleep';
 import Activity from './Activity';
 import Data from './Data';
-import DOMUpdates from './DOMUpdates';
+import DOMupdates from './DOMupdates';
+
 const data = new Data();
-const domUpdates = new DOMUpdates();
+const domUpdates = new DOMupdates();
 
 var sidebarName = document.getElementById('sidebarName');
 var stepGoalCard = document.getElementById('stepGoalCard');
@@ -21,7 +22,6 @@ var userAddress = document.getElementById('userAddress');
 var userEmail = document.getElementById('userEmail');
 var userStridelength = document.getElementById('userStridelength');
 var friendList = document.getElementById('friendList');
-var hydrationAverage = document.getElementById('hydrationAverage');
 var hydrationEarlierWeek = document.getElementById('hydrationEarlierWeek');
 var historicalWeek = document.querySelectorAll('.historicalWeek');
 var sleepToday = document.getElementById('sleepToday');
@@ -103,12 +103,12 @@ getData()
 		addInfoToSidebar(currentUser, userRepo);
 		const mostRecentDate = data.sortByDate(hydrationData)[0].date;
 		displayHydrationInfo(currentUser.hydrationInfo, mostRecentDate);
-		// domUpdates.addHydrationInfo(mostRecentDate, userRepo, hydrationData);
 	})
 	
 	function displayHydrationInfo(dataSet, date) {
 		domUpdates.displayHydrationToday(dataSet, date);
 		domUpdates.displayHydrationWeek(dataSet, date);
+		domUpdates.displayHydrationAverage(dataSet);
 	}
 
 // instantiate the classes with the correct data sets
@@ -215,5 +215,3 @@ function makeFriendChallengeHTML(id, activityInfo, userStorage, method) {
 function makeStepStreakHTML(id, activityInfo, userStorage, method) {
   return method.map(streakData => `<li class="historical-list-listItem">${streakData}!</li>`).join('');
 }
-
-// setTimeout(startApp(), 1000);
