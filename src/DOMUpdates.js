@@ -14,6 +14,7 @@ class DOMupdates extends Data {
 	};
 
 	displayHydrationWeek(dataSet, date) {
+		const hydrationThisWeek = document.querySelector('#hydration-this-week');
 		const weekHydrationData = super.retrieveDataByWeek(dataSet, date);
 		weekHydrationData.forEach(day => {
 			hydrationThisWeek.innerHTML += `<p>On ${day.date}: ${day.numOunces}oz</p>`;

@@ -21,9 +21,7 @@ var userAddress = document.getElementById('userAddress');
 var userEmail = document.getElementById('userEmail');
 var userStridelength = document.getElementById('userStridelength');
 var friendList = document.getElementById('friendList');
-
 var hydrationAverage = document.getElementById('hydrationAverage');
-var hydrationThisWeek = document.getElementById('hydrationThisWeek');
 var hydrationEarlierWeek = document.getElementById('hydrationEarlierWeek');
 var historicalWeek = document.querySelectorAll('.historicalWeek');
 var sleepToday = document.getElementById('sleepToday');
