@@ -3,6 +3,10 @@ class Data {
 		return typeof attribute === dataType ? attribute : null;
 	};
 
+  // checkDataSet(dataSet) {
+  //   return dataSet.every(data => data instanceof Hydration || data instanceof Sleep || data instanceof Activity);
+  // }
+
   calculateAverage(dataSet, attribute) {
     const attributeTotal = dataSet.reduce((total, item) => {
       total += item[attribute];
@@ -11,9 +15,13 @@ class Data {
     return attributeTotal / dataSet.length;
   }
 
-  retrieveDataByDay(dataSet, attribute, date) {
+  retrieveDataByDay(dataSet, date, attribute) {
     const dateMatch = dataSet.find(item => item.date === date);
-    return dateMatch[attribute];
+    if (attribute) {
+      return dateMatch[attribute];
+    } else {
+      return dateMatch;
+    }
   }
 
   sortByDate(dataSet) {
@@ -37,7 +45,7 @@ class Data {
 
   findHighestValue(dataSet, attribute) {
     const sortedData = dataSet.sort((a, b) => b[attribute] - a[attribute]);
-    return sortedData[0]
+    return sortedData[0];
   }
 }
 

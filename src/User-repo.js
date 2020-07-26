@@ -1,8 +1,32 @@
 import User from './User';
+import Data from './Data';
+import Sleep from './Sleep';
+import Hydration from './Hydration';
+import Activity from './Activity';
 
-class UserRepo {
+class UserRepo extends Data{
   constructor(users) {
+    super();
     this.users = this.checkInput(users) ? users : null;
+  };
+
+  findSleepQualityGreaterThanThree(date) {
+    return this.users.filter(user => {
+      const sleepQualityForWeek = super.retrieveDataByWeek(user.sleepInfo, date);
+      const averageSleepQuality = super.calculateAverage(sleepQualityForWeek, 'sleepQuality');
+      return averageSleepQuality > 3;
+    });
+  };
+
+  findMostHoursSlept(date) {
+    const sleepData = this.users.map(user => super.retrieveDataByDay(user.sleepInfo, date));
+    const mostHoursSlept = (sleepData.sort((a, b) => b.hoursSlept - a.hoursSlept))[0].hoursSlept;
+    return this.users.filter(user => {
+      let validSleepMatch = user.sleepInfo.find(sleep => {
+        return sleep.date === date && sleep.hoursSlept === mostHoursSlept;
+      });
+      return validSleepMatch;
+    });
   };
 
   checkInput(users) {
@@ -28,6 +52,15 @@ class UserRepo {
 			return totalStepGoal / this.users.length;
 		};
 	};
+
+  findAllTimeAverageAttribute(date, attribute) {
+    const attributeSum = this.users.reduce((total, user) => {
+      const userAttribute = super.retrieveDataByDay(user.activityInfo, date, attribute);
+      total += userAttribute;
+      return total;
+    }, 0);
+    return attributeSum / this.users.length;
+  };
 };
 
 export default UserRepo;
