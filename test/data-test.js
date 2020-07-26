@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 
 import Data from '../src/Data';
-import Sleep from '../src/Sleep';
 import Hydration from '../src/Hydration';
+import Sleep from '../src/Sleep';
 import Activity from '../src/Activity';
 
 describe('Data', function() {
