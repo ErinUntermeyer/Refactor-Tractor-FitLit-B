@@ -52,6 +52,15 @@ class UserRepo extends Data{
 			return totalStepGoal / this.users.length;
 		};
 	};
+
+  findAllTimeAverageStairsClimbed(date) {
+    const totalFlightsOfStairs = this.users.reduce((flights, user) => {
+      const userFlights = super.retrieveDataByDay(user.activityInfo, date, 'flightsOfStairs');
+      flights += userFlights;
+      return flights;
+    }, 0);
+    return totalFlightsOfStairs / this.users.length;
+  };
 };
 
 export default UserRepo;
