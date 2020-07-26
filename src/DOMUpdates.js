@@ -5,10 +5,12 @@ import Sleep from './Sleep';
 import Activity from './Activity';
 import Data from './Data';
 
-class DOMUpdates extends Data {
+
+class DOMupdates extends Data {
 	displayHydrationToday(dataSet, date) {
+		const hydrationToday = document.querySelector('#hydration-today');
 		const dayHydrationData = super.retrieveDataByDay(dataSet, date, 'numOunces');
-		hydrationToday.innerHTML += `<p>You drank ${dayHydrationData}oz of water today</p>`;
+		hydrationToday.innerHTML += `You drank ${dayHydrationData}oz of water today`;
 	};
 
 	displayHydrationWeek(dataSet, date) {
@@ -27,4 +29,4 @@ class DOMUpdates extends Data {
 };
 
 
-export default DOMUpdates;
+export default DOMupdates;
