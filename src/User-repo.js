@@ -53,13 +53,13 @@ class UserRepo extends Data{
 		};
 	};
 
-  findAllTimeAverageStairsClimbed(date) {
-    const totalFlightsOfStairs = this.users.reduce((flights, user) => {
-      const userFlights = super.retrieveDataByDay(user.activityInfo, date, 'flightsOfStairs');
-      flights += userFlights;
-      return flights;
+  findAllTimeAverageAttribute(date, attribute) {
+    const attributeSum = this.users.reduce((total, user) => {
+      const userAttribute = super.retrieveDataByDay(user.activityInfo, date, attribute);
+      total += userAttribute;
+      return total;
     }, 0);
-    return totalFlightsOfStairs / this.users.length;
+    return attributeSum / this.users.length;
   };
 };
 

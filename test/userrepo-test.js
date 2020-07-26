@@ -72,6 +72,6 @@ describe('User Repo', function() {
 	});
 
   it.only('should return all time average flights of stairs for all users', function() {
-		expect(userRepo.findAllTimeAverageStairsClimbed('today')).to.equal(3);
+		expect(userRepo.findAllTimeAverageAttribute('today', 'flightsOfStairs')).to.equal(3);
 	});
  });
