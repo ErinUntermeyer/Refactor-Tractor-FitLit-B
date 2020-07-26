@@ -8,6 +8,6 @@ import Hydration from '../src/Hydration';
 import Activity from '../src/Activity';
 
 describe('DOMupdates', function() {
-
+	
 
 });
