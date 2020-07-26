@@ -5,10 +5,14 @@ import './images/person walking on path.jpg';
 import './images/The Rock.jpg';
 
 import User from './User';
-import Activity from './Activity';
+import UserRepo from './User-repo';
 import Hydration from './Hydration';
 import Sleep from './Sleep';
-import UserRepo from './User-repo';
+import Activity from './Activity';
+import Data from './Data';
+import DOMUpdates from './DOMUpdates';
+const data = new Data();
+const domUpdates = new DOMUpdates();
 
 var sidebarName = document.getElementById('sidebarName');
 var stepGoalCard = document.getElementById('stepGoalCard');
@@ -97,8 +101,13 @@ getData()
     const sleepData = parsedData[2];
 		const activityData = parsedData[3];
 		const userRepo = new UserRepo(userData);
-		let currentUser = userRepo.getDataFromID(pickUser());
+		const currentUser = userRepo.getDataFromID(pickUser());
 		addInfoToSidebar(currentUser, userRepo);
+		console.log(currentUser)
+		const mostRecentDate = data.sortByDate(hydrationData)[0].date;
+		domUpdates.displayHydrationToday(currentUser.hydrationInfo, mostRecentDate)
+		// domUpdates.addHydrationInfo(mostRecentDate, userRepo, hydrationData);
+		console.log(hydrationData);
   })
 
 // instantiate the classes with the correct data sets
@@ -107,14 +116,8 @@ getData()
 
 
 async function startApp() {
-  let hydrationRepo = new Hydration(await retrieveHydrationData()).hydrationData;
-  console.log(hydrationRepo);
-	let sleepRepo = new Sleep(await retrieveSleepData());
-  let activityRepo = new Activity(await retrieveActivityData());
-	let today = makeToday(userRepo, currentUser.id, await retrieveHydrationData());
 	let randomHistory = makeRandomDate(userRepo, currentUser.id, await retrieveHydrationData());
 	historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
-	addHydrationInfo(currentUser.id, hydrationRepo, today, userRepo, randomHistory);
 	addSleepInfo(currentUser.id, sleepRepo, today, userRepo, randomHistory);
 	let winnerNow = makeWinnerID(activityRepo, currentUser, today, userRepo);
 	addActivityInfo(currentUser.id, activityRepo, today, userRepo, randomHistory, currentUser, winnerNow);
@@ -144,24 +147,15 @@ function makeWinnerID(activityInfo, user, dateString, userStorage){
   return activityInfo.getWinnerId(user, dateString, userStorage)
 }
 
-// can call this getToday
-function makeToday(userStorage, id, dataSet) {
-	// return dataSet[dataSet.length - 1].date
-  var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
-  return sortedArray[0].date;
-}
+// function makeToday(userStorage, id, dataSet) {
+//   var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
+//   return sortedArray[0].date;
+// }
 
 function makeRandomDate(userStorage, id, dataSet) {
   var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
   return sortedArray[Math.floor(Math.random() * sortedArray.length + 1)].date
 
-}
-
-function addHydrationInfo(id, hydrationRepo, dateString, userStorage, laterDateString) {
-  hydrationToday.insertAdjacentHTML('afterBegin', `<p>You drank</p><p><span class="number">${hydrationRepo.calculateDailyOunces(id, dateString)}</span></p><p>oz water today.</p>`);
-  hydrationAverage.insertAdjacentHTML('afterBegin', `<p>Your average water intake is</p><p><span class="number">${hydrationRepo.calculateAverageOunces(id)}</span></p> <p>oz per day.</p>`)
-  hydrationThisWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id, hydrationRepo, userStorage, hydrationRepo.calculateFirstWeekOunces(userStorage, id)));
-  hydrationEarlierWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id, hydrationRepo, userStorage, hydrationRepo.calculateRandomWeekOunces(laterDateString, id, userStorage)));
 }
 
 function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
