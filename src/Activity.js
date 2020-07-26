@@ -13,18 +13,18 @@ class Activity extends Data {
 
   calculateMilesWalked(user) {
     if(user instanceof User === false) {
-      return null
+      return null;
     } else {
       return parseFloat(((this.numSteps * user.strideLength) / 5280).toFixed(2));
-    }
+    };
   };
 
   checkStepGoal(user) {
     if(user instanceof User === false) {
-      return null
+      return null;
     } else {
       return this.numSteps > user.dailyStepGoal;
-    }
+    };
   };
 };
 

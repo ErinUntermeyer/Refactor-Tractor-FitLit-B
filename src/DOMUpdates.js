@@ -29,5 +29,4 @@ class DOMupdates extends Data {
 
 };
 
-
 export default DOMupdates;

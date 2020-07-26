@@ -3,11 +3,11 @@ const expect = chai.expect;
 const spies = require('chai-spies');
 chai.use(spies);
 
-import Data from '../src/Data';
-import Sleep from '../src/Sleep';
-import Hydration from '../src/Hydration';
-import Activity from '../src/Activity';
 import User from '../src/User';
+import Hydration from '../src/Hydration';
+import Sleep from '../src/Sleep';
+import Activity from '../src/Activity';
+import Data from '../src/Data';
 import DOMupdates from '../src/DOMupdates';
 
 describe('DOMupdates', function() {

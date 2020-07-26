@@ -51,7 +51,7 @@ class User extends Data{
     const stepGoalReached = this.activityInfo.filter(activity => {
       if (activity.numSteps > this.dailyStepGoal) {
         return activity.date;
-      }
+      };
     });
     return stepGoalReached.map(day => day.date);
   };
