@@ -103,12 +103,15 @@ getData()
 		const userRepo = new UserRepo(userData);
 		const currentUser = userRepo.getDataFromID(pickUser());
 		addInfoToSidebar(currentUser, userRepo);
-		console.log(currentUser)
 		const mostRecentDate = data.sortByDate(hydrationData)[0].date;
-		domUpdates.displayHydrationToday(currentUser.hydrationInfo, mostRecentDate)
+		displayHydrationInfo(currentUser.hydrationInfo, mostRecentDate);
 		// domUpdates.addHydrationInfo(mostRecentDate, userRepo, hydrationData);
-		console.log(hydrationData);
-  })
+	})
+	
+	function displayHydrationInfo(dataSet, date) {
+		domUpdates.displayHydrationToday(dataSet, date);
+		domUpdates.displayHydrationWeek(dataSet, date);
+	}
 
 // instantiate the classes with the correct data sets
 // the class instantiations need to be inside of a then statement
@@ -156,10 +159,6 @@ function makeRandomDate(userStorage, id, dataSet) {
   var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
   return sortedArray[Math.floor(Math.random() * sortedArray.length + 1)].date
 
-}
-
-function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
-  return method.map(drinkData => `<li class="historical-list-listItem">On ${drinkData}oz</li>`).join('');
 }
 
 function addSleepInfo(id, sleepInfo, dateString, userStorage, laterDateString) {
