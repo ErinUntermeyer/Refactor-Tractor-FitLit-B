@@ -31,6 +31,11 @@ class Data {
 
   retrieveDataByDay(dataSet, date, attribute) {
 		const dateMatch = dataSet.find(item => item.date === date);
+
+    if (!dateMatch) {
+      return 0;
+    }
+
     if (attribute) {
       return dateMatch[attribute];
     } else {

@@ -27,6 +27,11 @@ class DOMupdates extends Data {
 	displayMilesWalked(user, date) {
 		const milesWalkedToday = document.querySelector('#miles-walked-today');
 		const activityForDay = super.retrieveDataByDay(user.activityInfo, date);
+
+		if (activityForDay === 0) {
+			return 0;
+		}
+		
 		const milesWalked = activityForDay.calculateMilesWalked(user);
 		milesWalkedToday.innerHTML = `You walked ${milesWalked} miles today`;
 	};
