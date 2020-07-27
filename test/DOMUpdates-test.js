@@ -63,5 +63,4 @@ describe('DOMupdates', function() {
 		expect(document.querySelector).to.have.been.called.with('#hydration-average');
 		expect(document.querySelector).to.have.been.called.with('#sleep-quality-average');
 	});
-
 });

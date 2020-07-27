@@ -20,7 +20,21 @@ class DOMupdates extends Data {
 			case 'sleepQuality':
 				pageElement.innerHTML = `Your sleep quality was ${dataForDay} out of 5`;
 				break;
+			case 'numSteps':
+				pageElement.innerHTML = `You took ${dataForDay} steps today`
+				break;
+			case 'minutesActive':
+				pageElement.innerHTML = `You were active for ${dataForDay} minutes today`;
+				break;
 		};
+	};
+
+	displayMilesWalked(user, date) {
+		const milesWalkedToday = document.querySelector('#miles-walked-today');
+		const activityForDay = super.retrieveDataByDay(user.activityInfo, date);
+		const milesWalked = activityForDay.calculateMilesWalked(user);
+		milesWalkedToday.innerHTML = `You walked ${milesWalked} miles today`;
+
 	};
 
 	displayDataForWeek(dataSet, date, attribute, elementID) {
@@ -60,6 +74,5 @@ class DOMupdates extends Data {
 		};
 	};
 };
-
 
 export default DOMupdates;

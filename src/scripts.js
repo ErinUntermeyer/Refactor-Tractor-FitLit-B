@@ -28,11 +28,9 @@ var avUserSleepQuality = document.getElementById('avUserSleepQuality');
 var friendChallengeListToday = document.getElementById('friendChallengeListToday');
 var friendChallengeListHistory = document.getElementById('friendChallengeListHistory');
 var bigWinner = document.getElementById('bigWinner');
-var userStepsToday = document.getElementById('userStepsToday');
 var avgStepsToday = document.getElementById('avgStepsToday');
 var userStairsToday = document.getElementById('userStairsToday');
 var avgStairsToday = document.getElementById('avgStairsToday');
-var userMinutesToday = document.getElementById('userMinutesToday');
 var avgMinutesToday = document.getElementById('avgMinutesToday');
 var userStepsThisWeek = document.getElementById('userStepsThisWeek');
 var userStairsThisWeek = document.getElementById('userStairsThisWeek');
@@ -100,6 +98,7 @@ getData()
 		const mostRecentDate = data.sortByDate(hydrationData)[0].date;
 		displayHydrationInfo(currentUser.hydrationInfo, mostRecentDate);
 		displaySleepInfo(currentUser.sleepInfo, mostRecentDate);
+		displayActivityInfo(currentUser.activityInfo, mostRecentDate, currentUser);
 	})
 	
 	function displayHydrationInfo(dataSet, date) {
@@ -117,9 +116,11 @@ getData()
 		domUpdates.displayDataAverages(dataSet, 'sleepQuality', '#sleep-quality-average');
 	}
 
-// instantiate the classes with the correct data sets
-// the class instantiations need to be inside of a then statement
-// all data populates from there
+	function displayActivityInfo(dataSet, date, user) {
+		domUpdates.displayDataToday(dataSet, date, 'numSteps', '#num-steps-today');
+		domUpdates.displayDataToday(dataSet, date, 'minutesActive', '#minutes-active-today');
+		domUpdates.displayMilesWalked(user, date);
+	}
 
 
 async function startApp() {
