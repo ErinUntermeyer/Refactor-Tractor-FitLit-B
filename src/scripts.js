@@ -25,8 +25,6 @@ var friendList = document.getElementById('friendList');
 var hydrationEarlierWeek = document.getElementById('hydrationEarlierWeek');
 var historicalWeek = document.querySelectorAll('.historicalWeek');
 var avUserSleepQuality = document.getElementById('avUserSleepQuality');
-var sleepThisWeek = document.getElementById('sleepThisWeek');
-var sleepEarlierWeek = document.getElementById('sleepEarlierWeek');
 var friendChallengeListToday = document.getElementById('friendChallengeListToday');
 var friendChallengeListHistory = document.getElementById('friendChallengeListHistory');
 var bigWinner = document.getElementById('bigWinner');
@@ -106,13 +104,17 @@ getData()
 	
 	function displayHydrationInfo(dataSet, date) {
 		domUpdates.displayDataToday(dataSet, date, 'numOunces', '#hydration-today');
-		domUpdates.displayHydrationWeek(dataSet, date);
-		domUpdates.displayHydrationAverage(dataSet);
+		domUpdates.displayDataForWeek(dataSet, date, 'numOunces', '#hydration-this-week');
+		domUpdates.displayDataAverages(dataSet, 'numOunces', '#hydration-average');
 	}
 
 	function displaySleepInfo(dataSet, date) {
 		domUpdates.displayDataToday(dataSet, date, 'hoursSlept', '#hours-slept-today');
 		domUpdates.displayDataToday(dataSet, date, 'sleepQuality', '#sleep-quality-today');
+		domUpdates.displayDataForWeek(dataSet, date, 'hoursSlept', '#hours-slept-this-week');
+		domUpdates.displayDataForWeek(dataSet, date, 'sleepQuality', '#sleep-quality-this-week');
+		domUpdates.displayDataAverages(dataSet, 'hoursSlept', '#hours-slept-average');
+		domUpdates.displayDataAverages(dataSet, 'sleepQuality', '#sleep-quality-average');
 	}
 
 // instantiate the classes with the correct data sets
@@ -160,14 +162,6 @@ function makeRandomDate(userStorage, id, dataSet) {
   var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
   return sortedArray[Math.floor(Math.random() * sortedArray.length + 1)].date
 
-}
-
-function makeSleepHTML(id, sleepInfo, userStorage, method) {
-  return method.map(sleepData => `<li class="historical-list-listItem">On ${sleepData} hours</li>`).join('');
-}
-
-function makeSleepQualityHTML(id, sleepInfo, userStorage, method) {
-  return method.map(sleepQualityData => `<li class="historical-list-listItem">On ${sleepQualityData}/5 quality of sleep</li>`).join('');
 }
 
 function addActivityInfo(id, activityInfo, dateString, userStorage, laterDateString, user, winnerId) {

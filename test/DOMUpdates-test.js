@@ -40,22 +40,28 @@ describe('DOMupdates', function() {
 		chai.spy.restore();
 	});
 	
-	it.only('should display hydration data for today', function() {
-		domUpdates.displayHydrationToday(user.hydrationInfo, 'today')
-		expect(document.querySelector).to.have.been.called(1);
+	it.only('should display data for today', function() {
+		domUpdates.displayDataToday(user.hydrationInfo, 'today', 'numOunces', '#hydration-today');
+		domUpdates.displayDataToday(user.hydrationInfo, 'today', 'hoursSlept', '#hours-slept-today');
+		expect(document.querySelector).to.have.been.called(2);
 		expect(document.querySelector).to.have.been.called.with('#hydration-today');
+		expect(document.querySelector).to.have.been.called.with('#hours-slept-today');
 	});
 
-	it.only('should display hydration data for current week', function () {
-		domUpdates.displayHydrationWeek(user.hydrationInfo, 'today')
-		expect(document.querySelector).to.have.been.called(1);
+	it.only('should display data for current week', function () {
+		domUpdates.displayDataForWeek(user.hydrationInfo, 'today', 'numOunces', '#hydration-this-week')
+		domUpdates.displayDataForWeek(user.hydrationInfo, 'today', 'hoursSlept', '#hours-slept-this-week')
+		expect(document.querySelector).to.have.been.called(2);
 		expect(document.querySelector).to.have.been.called.with('#hydration-this-week');
+		expect(document.querySelector).to.have.been.called.with('#hours-slept-this-week');
 	});
 
-	it.only('should display hydration data average', function () {
-		domUpdates.displayHydrationAverage(user.hydrationInfo)
-		expect(document.querySelector).to.have.been.called(1);
+	it.only('should display data averages', function () {
+		domUpdates.displayDataAverages(user.hydrationInfo, 'numOunces', '#hydration-average');
+		domUpdates.displayDataAverages(user.hydrationInfo, 'sleepQuality', '#sleep-quality-average');
+		expect(document.querySelector).to.have.been.called(2);
 		expect(document.querySelector).to.have.been.called.with('#hydration-average');
+		expect(document.querySelector).to.have.been.called.with('#sleep-quality-average');
 	});
 
 });

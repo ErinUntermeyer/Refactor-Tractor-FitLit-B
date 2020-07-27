@@ -23,22 +23,42 @@ class DOMupdates extends Data {
 		};
 	};
 
-	displayHydrationWeek(dataSet, date) {
-		const hydrationThisWeek = document.querySelector('#hydration-this-week');
-		const weekHydrationData = super.retrieveDataByWeek(dataSet, date);
-		weekHydrationData.forEach(day => {
-			hydrationThisWeek.innerHTML += `<p>On ${day.date}: ${day.numOunces}oz</p>`;
-		});
+	displayDataForWeek(dataSet, date, attribute, elementID) {
+		const pageElement = document.querySelector(elementID);
+		const dataForWeek = super.retrieveDataByWeek(dataSet, date);
+		switch(attribute) {
+			case 'numOunces':
+				dataForWeek.forEach(day => {
+					pageElement.innerHTML += `<p>On ${day.date}: ${day.numOunces}oz</p>`;
+				});
+				break;
+			case 'hoursSlept':
+				dataForWeek.forEach(day => {
+					pageElement.innerHTML += `<p>On ${day.date} you slept ${day.hoursSlept} hours</p>`;
+				});
+				break;
+			case 'sleepQuality':
+				dataForWeek.forEach(day => {
+					pageElement.innerHTML += `<p>On ${day.date} your sleep quality was ${day.sleepQuality} out of 5</p>`;
+				});
+				break;
+		};
 	};
 
-	displayHydrationAverage(dataSet) {
-		const hydrationAverage = document.querySelector('#hydration-average');
-		hydrationAverage.innerHTML = `Your average water intake is ${super.calculateAverage(dataSet, 'numOunces')}oz per day.`;
+	displayDataAverages(dataSet, attribute, elementID) {
+		const pageElement = document.querySelector(elementID);
+		const dataAverages = super.calculateAverage(dataSet, attribute);
+		switch(attribute) {
+			case 'numOunces':
+				pageElement.innerHTML = `Your average water intake is ${dataAverages}oz per day`;
+				break;
+			case 'hoursSlept':
+				pageElement.innerHTML = `You slept an average of ${dataAverages} hours per night`;
+				break;
+			case 'sleepQuality':
+				pageElement.innerHTML = `Your average sleep quality was ${dataAverages} out of 5`;
+		};
 	};
-
-	// avUserSleepQuality.insertAdjacentHTML("afterBegin", `<p>The average user's sleep quality is</p> <p><span class="number">${Math.round(sleepInfo.calculateAllUserSleepQuality() * 100) / 100}</span></p><p>out of 5.</p>`);
-	// sleepThisWeek.insertAdjacentHTML('afterBegin', makeSleepHTML(id, sleepInfo, userStorage, sleepInfo.calculateWeekSleep(dateString, id, userStorage)));
-	// sleepEarlierWeek.insertAdjacentHTML('afterBegin', makeSleepHTML(id, sleepInfo, userStorage, sleepInfo.calculateWeekSleep(laterDateString, id, userStorage)));
 };
 
 
