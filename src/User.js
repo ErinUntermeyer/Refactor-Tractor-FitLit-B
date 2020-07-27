@@ -24,17 +24,15 @@ class User extends Data{
   };
 
   getFriendsNames(userRepo) {
-		let names = [];
-		if (this.friends === null) {
-			return null;
-		} else {
-			this.friends.forEach(friend => {
-				let friendMatch = userRepo.users.find(user => user.id === friend);
-				names.push(friendMatch.name);
-			});
-			return names;
-		};
-  };
+    if (this.friends == 'This user has no friends') {
+      return this.friends;
+    } else {
+      return this.friends.map(friend => {
+        const friendMatch = userRepo.users.find(user => user.id === friend);
+        return friendMatch.name;
+      })
+    }
+	};
 
   findRecordSteps() {
     return super.findHighestValue(this.activityInfo, 'numSteps');

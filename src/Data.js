@@ -1,7 +1,21 @@
 class Data {
   checkDataType(attribute, dataType) {
-		return typeof attribute === dataType ? attribute : null;
+		return typeof attribute === dataType ? attribute : this.giveDefaultValue(dataType);
 	};
+
+  giveDefaultValue(dataType) {
+    switch(dataType) {
+      case 'string':
+        return 'Invalid value given';
+        break;
+      case 'number':
+        return 0;
+        break;
+      case 'object':
+        return ['This user has no friends'];
+        break;
+    };
+  };
 
   // checkDataSet(dataSet) {
   //   return dataSet.every(data => data instanceof Hydration || data instanceof Sleep || data instanceof Activity);
