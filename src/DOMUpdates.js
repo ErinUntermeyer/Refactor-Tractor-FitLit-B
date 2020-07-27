@@ -1,8 +1,3 @@
-import User from './User';
-import UserRepo from './User-repo';
-import Hydration from './Hydration';
-import Sleep from './Sleep';
-import Activity from './Activity';
 import Data from './Data';
 
 
@@ -34,7 +29,6 @@ class DOMupdates extends Data {
 		const activityForDay = super.retrieveDataByDay(user.activityInfo, date);
 		const milesWalked = activityForDay.calculateMilesWalked(user);
 		milesWalkedToday.innerHTML = `You walked ${milesWalked} miles today`;
-
 	};
 
 	displayDataForWeek(dataSet, date, attribute, elementID) {
@@ -56,6 +50,22 @@ class DOMupdates extends Data {
 					pageElement.innerHTML += `<p>On ${day.date} your sleep quality was ${day.sleepQuality} out of 5</p>`;
 				});
 				break;
+			case 'numSteps':
+				dataForWeek.forEach(day => {
+					pageElement.innerHTML += `<p>On ${day.date} you took ${day.numSteps} steps</p>`;
+				});
+				break;
+			case 'minutesActive':
+				dataForWeek.forEach(day => {
+					pageElement.innerHTML += `<p>On ${day.date} you were active for ${day.minutesActive} minutes</p>`;
+				});
+				break;
+			case 'flightsOfStairs':
+				dataForWeek.forEach(day => {
+					pageElement.innerHTML += `<p>On ${day.date} climbed ${day.flightsOfStairs} flights of stairs</p>`;
+				});
+				break;
+
 		};
 	};
 

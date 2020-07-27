@@ -16,7 +16,7 @@ class Data {
   };
 
   retrieveDataByDay(dataSet, date, attribute) {
-    const dateMatch = dataSet.find(item => item.date === date);
+		const dateMatch = dataSet.find(item => item.date === date);
     if (attribute) {
       return dateMatch[attribute];
     } else {
