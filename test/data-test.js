@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 
-import Data from '../src/Data';
-import Sleep from '../src/Sleep';
 import Hydration from '../src/Hydration';
+import Sleep from '../src/Sleep';
 import Activity from '../src/Activity';
+import Data from '../src/Data';
 
 describe('Data', function() {
   let data, testHydrationData, testSleepData, testActivityData;

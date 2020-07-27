@@ -79,7 +79,7 @@ h1 {
   text-align: left;
 }
 
-.body-main-infoContainter {
+.card-display-wrapper {
   width: 100%;
   border: 1px solid black;
   margin: 0 0 1em;
@@ -88,7 +88,7 @@ h1 {
   overflow: scroll;
 }
 
-.main-column-hydration {
+.main-row-hydration {
   display: flex;
   flex-direction: row;
   height: 25%

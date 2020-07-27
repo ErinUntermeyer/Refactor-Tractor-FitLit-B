@@ -1,8 +1,5 @@
 import User from './User';
 import Data from './Data';
-import Sleep from './Sleep';
-import Hydration from './Hydration';
-import Activity from './Activity';
 
 class UserRepo extends Data{
   constructor(users) {
@@ -34,7 +31,7 @@ class UserRepo extends Data{
 			return users.every(user => user instanceof User);
 		} else {
 			return null;
-		}
+		};
   };
 
   getDataFromID(id) {

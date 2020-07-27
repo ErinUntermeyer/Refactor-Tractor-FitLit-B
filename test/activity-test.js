@@ -1,8 +1,9 @@
 import { expect } from 'chai';
 
-import Activity from '../src/Activity';
-import UserRepo from '../src/User-repo';
 import User from '../src/User';
+import Hydration from '../src/Hydration';
+import Sleep from '../src/Sleep';
+import Activity from '../src/Activity';
 
 describe('Activity', function() {
   let activity, badActivity, user;
@@ -19,9 +20,9 @@ describe('Activity', function() {
 			dailyStepGoal: 10000,
 			friends: [2, 3, 4]
 		},
-		[{userID: 1, date: 'today', numOunces: 2}],
-		[{userID: 1, date: 'today', hoursSlept: 3, sleepQuality: 0}],
-		[{userID: 1, date: 'today', numSteps: 8013, minutesActive: 40, flightsOfStairs: 2}]
+		[new Hydration({userID: 1, date: 'today', numOunces: 2})],
+		[new Sleep({userID: 1, date: 'today', hoursSlept: 3, sleepQuality: 0})],
+		[new Activity({userID: 1, date: 'today', numSteps: 8013, minutesActive: 40, flightsOfStairs: 2})]
   );
 });
 

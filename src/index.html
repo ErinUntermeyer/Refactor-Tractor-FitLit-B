@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Activity Tracker</title>
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap">
 </head>
 
 <body>
@@ -40,21 +40,21 @@
             </section>
       </section>
     </section>
-    <section class="body-main-infoContainter">
-      <section class="main-column-hydration">
+    <section class="card-display-wrapper">
+      <article class="main-row-hydration">
         <section class="infoContainer-cardContainer-card-horizontal">
           <div class="card-today-hydration">
-            <p id="hydrationToday"></p>
+            <p id="hydration-today"></p>
           </div>
           <div class="card-today-hydration">
-            <p id="hydrationAverage"></p>
+            <p id="hydration-average"></p>
           </div>
         </section>
         <section class="infoContainer-cardContainer-card-vertical">
           <div class="card-history-hydration">
             <p class="thisWeek">Water intake this week:</p>
             <div class="sidebar-header-line"></div>
-            <ul class="card-vertical-list" id="hydrationThisWeek">
+            <ul class="card-vertical-list" id="hydration-this-week">
               <!-- Hydration week list goes here -->
             </ul>
           </div>
@@ -66,17 +66,25 @@
             </ul>
           </div>
         </section>
-      </section>
+      </article>
       <section class="main-column-activity">
         <section class="infoContainer-cardContainer-card-horizontal">
           <section class="horizontalCard-activity-container">
             <div class="card-today-activity">
-              <p id="userStepsToday"></p>
+              <p id="num-steps-today"></p>
             </div>
             <div class="card-today-activity">
               <p id="avgStepsToday"></p>
             </div>
-          </section>
+					</section>
+					<section class="horizontalCard-activity-container">
+						<div class="card-today-activity">
+							<p id="num-steps-today"></p>
+						</div>
+						<div class="card-today-activity">
+							<p id="miles-walked-today"></p>
+						</div>
+					</section>
           <section class="horizontalCard-activity-container">
             <div class="card-today-activity">
               <p id="userStairsToday"></p>
@@ -87,7 +95,7 @@
           </section>
           <section class="horizontalCard-activity-container">
             <div class="card-today-activity">
-              <p id="userMinutesToday"></p>
+              <p id="minutes-active-today"></p>
             </div>
             <div class="card-today-activity">
               <p id="avgMinutesToday"></p>
@@ -99,14 +107,14 @@
             <div class="card-history-activity">
               <p class="thisWeek">Your steps this week</p>
               <div class="sidebar-header-line"></div>
-              <ul class="card-vertical-list" id="userStepsThisWeek">
+              <ul class="card-vertical-list" id="num-steps-this-week">
                 <!-- Activity week list goes here -->
               </ul>
             </div>
             <div class="card-history-activity">
               <p class="thisWeek">Your stair count this week</p>
               <div class="sidebar-header-line"></div>
-              <ul class="card-vertical-list" id="userStairsThisWeek">
+              <ul class="card-vertical-list" id="flights-of-stairs-this-week">
                 <!-- Activity week list goes here -->
               </ul>
             </div>
@@ -115,7 +123,7 @@
             <div class="card-history-activity">
               <p class="thisWeek">Your minutes of activity this week</p>
               <div class="sidebar-header-line"></div>
-              <ul class="card-vertical-list" id="userMinutesThisWeek">
+              <ul class="card-vertical-list" id="minutes-active-this-week">
                 <!-- Activity week list goes here -->
               </ul>
             </div>
@@ -132,27 +140,30 @@
       <section class="main-column-sleep">
         <section class="infoContainer-cardContainer-card-horizontal">
           <div class="card-today-sleep">
-            <p id="sleepToday"></p>
+            <p id="hours-slept-today"></p>
           </div>
           <div class="card-today-sleep">
-            <p id="sleepQualityToday"></p>
+            <p id="sleep-quality-today"></p>
           </div>
           <div class="card-today-sleep">
-            <p id="avUserSleepQuality"></p>
-          </div>
+            <p id="hours-slept-average"></p>
+					</div>
+					<div class="card-today-sleep">
+						<p id="sleep-quality-average"></p>
+					</div>
         </section>
         <section class="infoContainer-cardContainer-card-vertical">
           <div class="card-history-sleep">
             <p class="thisWeek">Hours of sleep this week</p>
             <div class="sidebar-header-line"></div>
-            <ul class="card-vertical-list" id="sleepThisWeek">
+            <ul class="card-vertical-list" id="hours-slept-this-week">
               <!-- Sleep week list goes here -->
             </ul>
           </div>
           <div class="card-history-sleep">
-            <p class="historicalWeek"></p>
+						<p class="thisWeek">Sleep quality this week</p>
             <div class="sidebar-header-line"></div>
-            <ul class="card-vertical-list" id="sleepEarlierWeek">
+            <ul class="card-vertical-list" id="sleep-quality-this-week">
               <!-- Sleep week list goes here -->
             </ul>
           </div>
@@ -192,5 +203,4 @@
     </section>
   </section>
 </body>
-
 </html>

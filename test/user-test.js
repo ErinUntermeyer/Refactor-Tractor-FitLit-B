@@ -1,7 +1,10 @@
 import { expect } from 'chai';
 
-import UserRepo from '../src/User-repo';
 import User from '../src/User';
+import UserRepo from '../src/User-repo';
+import Hydration from '../src/Hydration';
+import Sleep from '../src/Sleep';
+import Activity from '../src/Activity';
 
 describe('User', function() {
 	let user1, user2, user3, user4, badUser;
@@ -16,9 +19,9 @@ describe('User', function() {
 			dailyStepGoal: 10000,
 			friends: [2, 3, 4]
 		},
-		[{userID: 1, date: 'today', numOunces: 2}],
-		[{userID: 1, date: 'today', hoursSlept: 4, sleepQuality: 1}, {userID: 1, date: 'yesterday', hoursSlept: 3, sleepQuality: 3}],
-		[{userID: 1, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2}, {userID: 1, date: 'today', numSteps: 26, minutesActive: 40, flightsOfStairs: 2}]);
+		[new Hydration({userID: 1, date: 'today', numOunces: 2})],
+		[new Sleep({userID: 1, date: 'today', hoursSlept: 4, sleepQuality: 1}), new Sleep({userID: 1, date: 'yesterday', hoursSlept: 3, sleepQuality: 3})],
+		[new Activity({userID: 1, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2}), new Activity({userID: 1, date: 'today', numSteps: 26, minutesActive: 40, flightsOfStairs: 2})]);
 		user2 = new User({
 			id: 2,
 			name: 'Allie McCarthy',
@@ -28,9 +31,9 @@ describe('User', function() {
 			dailyStepGoal: 9000,
 			friends: [1, 3, 4]
 		},
-		[{ userID: 2, date: 'today', numOunces: 2 }],
-		[{ userID: 2, date: 'today', hoursSlept: 3, sleepQuality: 0 }],
-		[{ userID: 2, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }, { userID: 2, date: 'tomorrow', numSteps: 9013, minutesActive: 40, flightsOfStairs: 2 }]);
+		[new Hydration({ userID: 2, date: 'today', numOunces: 2 })],
+		[new Sleep({ userID: 2, date: 'today', hoursSlept: 3, sleepQuality: 0 })],
+		[new Activity({ userID: 2, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }), new Activity({ userID: 2, date: 'tomorrow', numSteps: 9013, minutesActive: 40, flightsOfStairs: 2 })]);
 		user3 = new User({
 			id: 3,
 			name: 'The Rock',
@@ -40,9 +43,9 @@ describe('User', function() {
 			dailyStepGoal: 60000,
 			friends: [1, 2, 4]
 		},
-		[{ userID: 3, date: 'today', numOunces: 2 }],
-		[{ userID: 3, date: 'today', hoursSlept: 3, sleepQuality: 0 }],
-		[{ userID: 3, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
+		[new Hydration({ userID: 3, date: 'today', numOunces: 2 })],
+		[new Sleep({ userID: 3, date: 'today', hoursSlept: 3, sleepQuality: 0 })],
+		[new Activity({ userID: 3, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 })]);
 		user4 = new User({
 			id: 4,
 			name: 'Rainbow Dash',
@@ -52,9 +55,9 @@ describe('User', function() {
 			dailyStepGoal: 7000,
 			friends: [1, 2, 3]
 		},
-		[{ userID: 4, date: 'today', numOunces: 2 }],
-		[{ userID: 4, date: 'today', hoursSlept: 3, sleepQuality: 0 }],
-		[{ userID: 4, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
+		[new Hydration({ userID: 4, date: 'today', numOunces: 2 })],
+		[new Sleep({ userID: 4, date: 'today', hoursSlept: 3, sleepQuality: 0 })],
+		[new Activity({ userID: 4, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 })]);
 		badUser = new User({
 			id: 'one',
 			name: ['Bad User'],
@@ -64,9 +67,9 @@ describe('User', function() {
 			dailyStepGoal: 'a lot',
 			friends: 'I have no friends'
 		},
-		[{ userID: 5, date: 'today', numOunces: 2 }],
-		[{ userID: 5, date: 'today', hoursSlept: 3, sleepQuality: 0 }],
-		[{ userID: 5, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 }]);
+		[new Hydration({ userID: 5, date: 'today', numOunces: 2 })],
+		[new Sleep({ userID: 5, date: 'today', hoursSlept: 3, sleepQuality: 0 })],
+		[new Activity({ userID: 5, date: 'today', numSteps: 30, minutesActive: 40, flightsOfStairs: 2 })]);
 	});
 
   it.only('should be a function', function() {
