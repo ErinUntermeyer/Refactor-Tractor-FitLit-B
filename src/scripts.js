@@ -24,8 +24,6 @@ var userStridelength = document.getElementById('userStridelength');
 var friendList = document.getElementById('friendList');
 var hydrationEarlierWeek = document.getElementById('hydrationEarlierWeek');
 var historicalWeek = document.querySelectorAll('.historicalWeek');
-var sleepToday = document.getElementById('sleepToday');
-var sleepQualityToday = document.getElementById('sleepQualityToday');
 var avUserSleepQuality = document.getElementById('avUserSleepQuality');
 var sleepThisWeek = document.getElementById('sleepThisWeek');
 var sleepEarlierWeek = document.getElementById('sleepEarlierWeek');
@@ -103,12 +101,18 @@ getData()
 		addInfoToSidebar(currentUser, userRepo);
 		const mostRecentDate = data.sortByDate(hydrationData)[0].date;
 		displayHydrationInfo(currentUser.hydrationInfo, mostRecentDate);
+		displaySleepInfo(currentUser.sleepInfo, mostRecentDate);
 	})
 	
 	function displayHydrationInfo(dataSet, date) {
-		domUpdates.displayHydrationToday(dataSet, date);
+		domUpdates.displayDataToday(dataSet, date, 'numOunces', '#hydration-today');
 		domUpdates.displayHydrationWeek(dataSet, date);
 		domUpdates.displayHydrationAverage(dataSet);
+	}
+
+	function displaySleepInfo(dataSet, date) {
+		domUpdates.displayDataToday(dataSet, date, 'hoursSlept', '#hours-slept-today');
+		domUpdates.displayDataToday(dataSet, date, 'sleepQuality', '#sleep-quality-today');
 	}
 
 // instantiate the classes with the correct data sets
@@ -119,7 +123,6 @@ getData()
 async function startApp() {
 	let randomHistory = makeRandomDate(userRepo, currentUser.id, await retrieveHydrationData());
 	historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
-	addSleepInfo(currentUser.id, sleepRepo, today, userRepo, randomHistory);
 	let winnerNow = makeWinnerID(activityRepo, currentUser, today, userRepo);
 	addActivityInfo(currentUser.id, activityRepo, today, userRepo, randomHistory, currentUser, winnerNow);
 	addFriendGameInfo(currentUser.id, activityRepo, userRepo, today, randomHistory, currentUser);
@@ -157,14 +160,6 @@ function makeRandomDate(userStorage, id, dataSet) {
   var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
   return sortedArray[Math.floor(Math.random() * sortedArray.length + 1)].date
 
-}
-
-function addSleepInfo(id, sleepInfo, dateString, userStorage, laterDateString) {
-  sleepToday.insertAdjacentHTML("afterBegin", `<p>You slept</p> <p><span class="number">${sleepInfo.calculateDailySleep(id, dateString)}</span></p> <p>hours today.</p>`);
-  sleepQualityToday.insertAdjacentHTML("afterBegin", `<p>Your sleep quality was</p> <p><span class="number">${sleepInfo.calculateDailySleepQuality(id, dateString)}</span></p><p>out of 5.</p>`);
-  avUserSleepQuality.insertAdjacentHTML("afterBegin", `<p>The average user's sleep quality is</p> <p><span class="number">${Math.round(sleepInfo.calculateAllUserSleepQuality() *100)/100}</span></p><p>out of 5.</p>`);
-  sleepThisWeek.insertAdjacentHTML('afterBegin', makeSleepHTML(id, sleepInfo, userStorage, sleepInfo.calculateWeekSleep(dateString, id, userStorage)));
-  sleepEarlierWeek.insertAdjacentHTML('afterBegin', makeSleepHTML(id, sleepInfo, userStorage, sleepInfo.calculateWeekSleep(laterDateString, id, userStorage)));
 }
 
 function makeSleepHTML(id, sleepInfo, userStorage, method) {

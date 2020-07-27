@@ -7,10 +7,20 @@ import Data from './Data';
 
 
 class DOMupdates extends Data {
-	displayHydrationToday(dataSet, date) {
-		const hydrationToday = document.querySelector('#hydration-today');
-		const dayHydrationData = super.retrieveDataByDay(dataSet, date, 'numOunces');
-		hydrationToday.innerHTML = `You drank ${dayHydrationData}oz of water today`;
+	displayDataToday(dataSet, date, attribute, elementID) {
+		const pageElement = document.querySelector(elementID);
+		const dataForDay = super.retrieveDataByDay(dataSet, date, attribute);
+		switch(attribute) {
+			case 'numOunces':
+				pageElement.innerHTML = `You drank ${dataForDay}oz of water today`;
+				break;
+			case 'hoursSlept':
+				pageElement.innerHTML = `You slept ${dataForDay} hours today`;
+				break;
+			case 'sleepQuality':
+				pageElement.innerHTML = `Your sleep quality was ${dataForDay} out of 5`;
+				break;
+		};
 	};
 
 	displayHydrationWeek(dataSet, date) {
@@ -25,6 +35,11 @@ class DOMupdates extends Data {
 		const hydrationAverage = document.querySelector('#hydration-average');
 		hydrationAverage.innerHTML = `Your average water intake is ${super.calculateAverage(dataSet, 'numOunces')}oz per day.`;
 	};
+
+	// avUserSleepQuality.insertAdjacentHTML("afterBegin", `<p>The average user's sleep quality is</p> <p><span class="number">${Math.round(sleepInfo.calculateAllUserSleepQuality() * 100) / 100}</span></p><p>out of 5.</p>`);
+	// sleepThisWeek.insertAdjacentHTML('afterBegin', makeSleepHTML(id, sleepInfo, userStorage, sleepInfo.calculateWeekSleep(dateString, id, userStorage)));
+	// sleepEarlierWeek.insertAdjacentHTML('afterBegin', makeSleepHTML(id, sleepInfo, userStorage, sleepInfo.calculateWeekSleep(laterDateString, id, userStorage)));
 };
+
 
 export default DOMupdates;
