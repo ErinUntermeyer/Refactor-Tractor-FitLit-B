@@ -29,10 +29,12 @@ class DOMupdates extends Data {
 		const activityForDay = super.retrieveDataByDay(user.activityInfo, date);
 
 		if (activityForDay === 0) {
-			return 0;
+			const milesWalked = 0;
+			milesWalkedToday.innerHTML = `You walked ${milesWalked} miles today`;
+			return;
 		}
 
-		const milesWalked = activityForDay.calculateMilesWalked(user);
+		const milesWalked = activityForDay.calculateMilesWalked(user)
 		milesWalkedToday.innerHTML = `You walked ${milesWalked} miles today`;
 	};
 
