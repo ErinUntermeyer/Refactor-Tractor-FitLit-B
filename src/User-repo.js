@@ -4,7 +4,7 @@ import Data from './Data';
 class UserRepo extends Data{
   constructor(users) {
     super();
-    this.users = this.checkInput(users) ? users : null;
+    this.users = this.checkInput(users) ? users : 'Invalid input given';
   };
 
   findSleepQualityGreaterThanThree(date) {
@@ -36,11 +36,11 @@ class UserRepo extends Data{
 
   getDataFromID(id) {
     let userMatch = this.users.find(user => id === user.id);
-    return userMatch === undefined ? null : userMatch;
+    return userMatch === undefined ? 'No matching user found' : userMatch;
   };
 
   calculateAverageStepGoal() {
-		if (this.users === null) {
+		if (this.users === 'Invalid input given') {
 			return 0;
 		} else {
 			const totalStepGoal = this.users.reduce((totalSteps, data) => {
