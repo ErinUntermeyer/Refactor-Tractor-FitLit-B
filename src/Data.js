@@ -21,11 +21,24 @@ class Data {
   //   return dataSet.every(data => data instanceof Hydration || data instanceof Sleep || data instanceof Activity);
   // }
 
-  calculateAverage(dataSet, attribute) {
-    const attributeTotal = dataSet.reduce((total, item) => {
-      total += item[attribute];
-      return total;
-    }, 0);
+  calculateAverage(dataSet, attribute, date) {
+    let attributeTotal;
+    if (date) {
+      attributeTotal = dataSet.reduce((total, user) => {
+        const activityMatch = user.activityInfo.find(activity => activity.date === date);
+        if (!activityMatch) {
+          total = 0;
+          return total;
+        }
+        total += activityMatch[attribute];
+        return total;
+      }, 0)
+    } else {
+      attributeTotal = dataSet.reduce((total, item) => {
+        total += item[attribute];
+        return total;
+      }, 0);
+    }
     return parseFloat((attributeTotal / dataSet.length).toFixed(2));
   };
 
