@@ -25,8 +25,8 @@ describe('Hydration', function() {
   });
 
   it.only('should only take in valid data', function() {
-    expect(badHydration.userID).to.equal(null);
-    expect(badHydration.date).to.equal(null);
-    expect(badHydration.numOunces).to.equal(null);
+    expect(badHydration.userID).to.equal(0);
+    expect(badHydration.date).to.equal('Invalid value given');
+    expect(badHydration.numOunces).to.equal(0);
   });
 });

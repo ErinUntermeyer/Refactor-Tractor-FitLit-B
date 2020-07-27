@@ -26,9 +26,9 @@ describe('Sleep', function() {
   });
 
   it.only('should only take in valid data', function() {
-    expect(badSleep.userID).to.equal(null);
-    expect(badSleep.date).to.equal(null);
-    expect(badSleep.hoursSlept).to.equal(null);
-    expect(badSleep.sleepQuality).to.equal(null);
+    expect(badSleep.userID).to.equal(0);
+    expect(badSleep.date).to.equal('Invalid value given');
+    expect(badSleep.hoursSlept).to.equal(0);
+    expect(badSleep.sleepQuality).to.equal(0);
   });
 });
