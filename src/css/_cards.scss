@@ -1,6 +1,6 @@
-$hydration-primary: #5BC8AC;
-$sleep-primary: #EC96A4;
-$activity-primary: #DFE166;
+$hydration-primary: #60C5F0;
+$sleep-primary: #F07A8E;
+$activity-primary: #F0E848;
 
 %small-border {
   border: 1px solid black;
@@ -30,7 +30,8 @@ $activity-primary: #DFE166;
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-family: sans-serif;
+  font-family: inherit;
+  font-size: 1.2em;
   width: 95%;
   flex-grow: .1;
 }
@@ -39,11 +40,16 @@ $activity-primary: #DFE166;
   text-align: center;
   justify-content: flex-start;
   margin: 3%;
+  overflow: scroll;
   @extend %column-wrapper
 }
 
+li {
+  margin: 2%;
+}
+
 .list-header {
-  font-weight: bolder;
+  font-weight: bold;
 }
 
 .list-text {
