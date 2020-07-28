@@ -90,64 +90,51 @@ getData()
 		const userRepo = new UserRepo(userData);
 		const currentUser = userRepo.getDataFromID(pickUser());
     const mostRecentDate = data.sortByDate(hydrationData)[0].date;
-		addInfoToSidebar(currentUser, userRepo, mostRecentDate);
+		displayUserInfo(currentUser, userRepo);
 		displayHydrationInfo(currentUser.hydrationInfo, mostRecentDate);
 		displaySleepInfo(currentUser.sleepInfo, mostRecentDate);
 		displayActivityInfo(currentUser.activityInfo, mostRecentDate, currentUser, userRepo);
 	});
 
-	function displayHydrationInfo(dataSet, date) {
-		domUpdates.displayDataToday(dataSet, date, 'numOunces', '#hydration-today');
-		domUpdates.displayDataForWeek(dataSet, date, 'numOunces', '#hydration-this-week');
-		domUpdates.displayDataAverages(dataSet, 'numOunces', '#hydration-average');
-	};
-
-	function displaySleepInfo(dataSet, date) {
-		domUpdates.displayDataToday(dataSet, date, 'hoursSlept', '#hours-slept-today');
-		domUpdates.displayDataToday(dataSet, date, 'sleepQuality', '#sleep-quality-today');
-		domUpdates.displayDataForWeek(dataSet, date, 'hoursSlept', '#hours-slept-this-week');
-		domUpdates.displayDataForWeek(dataSet, date, 'sleepQuality', '#sleep-quality-this-week');
-		domUpdates.displayDataAverages(dataSet, 'hoursSlept', '#hours-slept-average');
-		domUpdates.displayDataAverages(dataSet, 'sleepQuality', '#sleep-quality-average');
-	};
-
-	function displayActivityInfo(dataSet, date, user, userRepo) {
-		domUpdates.displayDataToday(dataSet, date, 'numSteps', '#num-steps-today');
-		domUpdates.displayDataToday(dataSet, date, 'minutesActive', '#minutes-active-today');
-		domUpdates.displayMilesWalked(user, date);
-		domUpdates.displayDataForWeek(dataSet, date, 'numSteps', '#num-steps-this-week');
-		domUpdates.displayDataForWeek(dataSet, date, 'minutesActive', '#minutes-active-this-week');
-		domUpdates.displayDataForWeek(dataSet, date, 'flightsOfStairs', '#flights-of-stairs-this-week');
-    domUpdates.compareUserToOthers(dataSet, date, 'numSteps', '#num-steps-average', userRepo);
-    domUpdates.compareUserToOthers(dataSet, date, 'minutesActive', '#minutes-active-average', userRepo);
-    domUpdates.compareUserToOthers(dataSet, date, 'flightsOfStairs', '#flights-of-stairs-average', userRepo);
-	};
-
-
-async function startApp() {
-	let randomHistory = makeRandomDate(userRepo, currentUser.id, await retrieveHydrationData());
-	historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
-	let winnerNow = makeWinnerID(activityRepo, currentUser, today, userRepo);
-	addFriendGameInfo(currentUser.id, activityRepo, userRepo, today, randomHistory, currentUser);
+function displayUserInfo(currentUser, userRepo) {
+  domUpdates.displayUserData(currentUser, userRepo, 'name', '#user-name');
+  domUpdates.displayUserData(currentUser, userRepo, 'address', '#user-address');
+  domUpdates.displayUserData(currentUser, userRepo, 'email', '#user-email');
+  domUpdates.displayUserData(currentUser, userRepo, 'strideLength', '#user-stride-length');
+  domUpdates.displayUserData(currentUser, userRepo, 'dailyStepGoal', '#user-step-goal');
+  domUpdates.displayUserData(currentUser, userRepo, 'avgDailyStepGoal', '#avg-step-goal');
+  domUpdates.displayUserData(currentUser, userRepo, 'friends', '#friend-list');
 }
+
+function displayHydrationInfo(dataSet, date) {
+	domUpdates.displayDataToday(dataSet, date, 'numOunces', '#hydration-today');
+	domUpdates.displayDataForWeek(dataSet, date, 'numOunces', '#hydration-this-week');
+	domUpdates.displayDataAverages(dataSet, 'numOunces', '#hydration-average');
+};
+
+function displaySleepInfo(dataSet, date) {
+	domUpdates.displayDataToday(dataSet, date, 'hoursSlept', '#hours-slept-today');
+	domUpdates.displayDataToday(dataSet, date, 'sleepQuality', '#sleep-quality-today');
+	domUpdates.displayDataForWeek(dataSet, date, 'hoursSlept', '#hours-slept-this-week');
+	domUpdates.displayDataForWeek(dataSet, date, 'sleepQuality', '#sleep-quality-this-week');
+	domUpdates.displayDataAverages(dataSet, 'hoursSlept', '#hours-slept-average');
+	domUpdates.displayDataAverages(dataSet, 'sleepQuality', '#sleep-quality-average');
+};
+
+function displayActivityInfo(dataSet, date, currentUser, userRepo) {
+	domUpdates.displayDataToday(dataSet, date, 'numSteps', '#num-steps-today');
+	domUpdates.displayDataToday(dataSet, date, 'minutesActive', '#minutes-active-today');
+	domUpdates.displayMilesWalked(currentUser, date);
+	domUpdates.displayDataForWeek(dataSet, date, 'numSteps', '#num-steps-this-week');
+	domUpdates.displayDataForWeek(dataSet, date, 'minutesActive', '#minutes-active-this-week');
+	domUpdates.displayDataForWeek(dataSet, date, 'flightsOfStairs', '#flights-of-stairs-this-week');
+  domUpdates.compareUserToOthers(dataSet, date, 'numSteps', '#num-steps-average', userRepo);
+  domUpdates.compareUserToOthers(dataSet, date, 'minutesActive', '#minutes-active-average', userRepo);
+  domUpdates.compareUserToOthers(dataSet, date, 'flightsOfStairs', '#flights-of-stairs-average', userRepo);
+};
 
 function pickUser() {
 	return Math.floor(Math.random() * 50);
-}
-
-function addInfoToSidebar(user, userStorage, date) {
-  sidebarName.innerText = user.name;
-  headerText.innerText = `${user.getFirstName()}'s Activity Tracker`;
-  stepGoalCard.innerText = `Your daily step goal is ${user.dailyStepGoal}`
-  avStepGoalCard.innerText = `The average daily step goal is ${data.calculateAverage(userStorage.users, 'dailyStepGoal', date)}`;
-  userAddress.innerText = user.address;
-  userEmail.innerText = user.email;
-  userStridelength.innerText = `Your stridelength is ${user.strideLength} meters`;
-  friendList.insertAdjacentHTML('afterBegin', makeFriendHTML(user, userStorage))
-};
-
-function makeFriendHTML(user, userStorage) {
-  return user.getFriendsNames(userStorage).map(friendName => `<li class='historical-list-listItem'>${friendName}</li>`).join('');
 }
 
 function makeWinnerID(activityInfo, user, dateString, userStorage){

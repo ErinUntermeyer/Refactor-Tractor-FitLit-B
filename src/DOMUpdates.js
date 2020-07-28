@@ -1,7 +1,35 @@
 import Data from './Data';
 
-
 class DOMupdates extends Data {
+	displayUserData(user, userRepo, attribute, elementID) {
+		const pageElement = document.querySelector(elementID);
+		switch(attribute) {
+			case 'name':
+				pageElement.innerHTML = user.name;
+				break;
+			case 'address':
+				pageElement.innerHTML = user.address;
+				break;
+			case 'email':
+				pageElement.innerHTML = user.email;
+				break;
+			case 'strideLength':
+				pageElement.innerHTML = `Your stridelength is ${user.strideLength} feet`;
+				break;
+			case 'dailyStepGoal':
+				pageElement.innerHTML = `Your daily step goal is ${user.dailyStepGoal}`;
+				break;
+			case 'avgDailyStepGoal':
+				pageElement.innerHTML = `The average daily step goal is ${super.calculateAverage(userRepo.users, 'dailyStepGoal')}`;
+				break;
+			case 'friends':
+				const friendNames = user.getFriendsNames(userRepo);
+				friendNames.forEach(friend => {
+					pageElement.innerHTML += `${friend}`;
+				})
+		}
+	}
+
 	displayDataToday(dataSet, date, attribute, elementID) {
 		const pageElement = document.querySelector(elementID);
 		const dataForDay = super.retrieveDataByDay(dataSet, date, attribute);
