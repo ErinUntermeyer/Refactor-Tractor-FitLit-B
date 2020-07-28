@@ -16,20 +16,20 @@ h1 {
   padding-top: 10px;
 }
 
-.main {
+main {
   display: flex;
   flex-direction: row;
   height: 1500px;
 }
 
-.main-sidebar-body {
+.sidebar {
   display: flex;
   flex-direction: row;
   width: 25%;
   height: 100%;
 }
 
-.body-sidebar-sidebarContainer {
+.user-info-wrapper {
   background-color: #9A9DAB;
   border: 1px solid black;
   display: flex;
@@ -51,15 +51,7 @@ h1 {
   width: inherit;
 }
 
-.sidebar-header-line {
-  color: #ffffff;
-  border: 1px solid black;
-  margin: 1em 1em 0 1em;
-  height: 0;
-  width: 80%;
-}
-
-.sidebar-header-userImage {
+.user-image {
   border-radius: 50%;
   border-color: black;
   border-style: solid;
@@ -68,15 +60,6 @@ h1 {
   width: 200px;
   margin: 4px 2px 2px 2px;
   justify-content: center;
-}
-
-.sidebar-body-friendContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar-friendContainer-listItems {
-  text-align: left;
 }
 
 .card-display-wrapper {
@@ -88,25 +71,25 @@ h1 {
   overflow: scroll;
 }
 
-.main-row-hydration {
+.hydration-wrapper {
   display: flex;
   flex-direction: row;
   height: 25%
 }
 
-.main-column-activity {
+.activity-wrapper {
   display: flex;
   flex-direction: row;
   height: 50%
 }
 
-.main-column-sleep {
+.sleep-wrapper {
   display: flex;
   flex-direction: row;
   height: 35%
 }
 
-.infoContainer-cardContainer-card-horizontal {
+.left-card-container {
   width: 100%;
   background-color: white;
   border: 1px solid black;
@@ -117,15 +100,7 @@ h1 {
   justify-content: space-between;
 }
 
-.horizontalCard-activity-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%;
-  overflow: scroll;
-}
-
-.infoContainer-cardContainer-card-vertical {
+.right-card-container {
   width: 100%;
   background-color: white;
   border: 1px solid black;
@@ -174,42 +149,27 @@ h1 {
   width: 40%;
 }
 
-.card-history-hydration {
+.activity-list, .hydration-list, .sleep-list {
   text-align: center;
+  font-size: 1em;
+  margin: .5em;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 50%;
+}
+
+.hydration-list {
   background-color: #5BC8AC;
-  font-size: 1em;
-  margin: .5em;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 50%;
 }
 
-.card-history-sleep {
-  text-align: center;
+.sleep-list {
   background-color: #EC96A4;
-  font-size: 1em;
-  margin: .5em;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 50%;
 }
 
-.card-history-activity {
-  text-align: center;
+.activity-list {
   background-color: #DFE166;
-  font-size: 1em;
-  margin: .5em;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 50%;
-  height: 93%;
-  overflow: scroll;
 }
 
 .number {
@@ -227,7 +187,7 @@ h1 {
   color: black;
 }
 
-.thisWeek {
+.this-week {
   text-align: center;
   font-size: 1em;
   font-weight: bolder;

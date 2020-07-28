@@ -12,19 +12,19 @@ describe('Activity', function() {
     activity = new Activity({userID: 1, date: 'today', numSteps: 8013, minutesActive: 40, flightsOfStairs: 2});
     badActivity = new Activity({userID: 'lazy', date: 20200722, numSteps: 'zero', minutesActive: 'none', flightsOfStairs: 'nada'});
     user = new User({
-			id: 1,
-			name: 'Alex Roth',
-			address: '1234 Turing Street, Denver CO 80301-1697',
-			email: 'alex.roth1@hotmail.com',
-			strideLength: 4.3,
-			dailyStepGoal: 10000,
-			friends: [2, 3, 4]
-		},
-		[new Hydration({userID: 1, date: 'today', numOunces: 2})],
-		[new Sleep({userID: 1, date: 'today', hoursSlept: 3, sleepQuality: 0})],
-		[new Activity({userID: 1, date: 'today', numSteps: 8013, minutesActive: 40, flightsOfStairs: 2})]
-  );
-});
+      id: 1,
+      name: 'Alex Roth',
+      address: '1234 Turing Street, Denver CO 80301-1697',
+      email: 'alex.roth1@hotmail.com',
+      strideLength: 4.3,
+      dailyStepGoal: 10000,
+      friends: [2, 3, 4]
+    },
+    [new Hydration({userID: 1, date: 'today', numOunces: 2})],
+    [new Sleep({userID: 1, date: 'today', hoursSlept: 3, sleepQuality: 0})],
+    [new Activity({userID: 1, date: 'today', numSteps: 8013, minutesActive: 40, flightsOfStairs: 2})]
+    );
+  });
 
   it.only('should be a function', function() {
     expect(Activity).to.be.a('function');
