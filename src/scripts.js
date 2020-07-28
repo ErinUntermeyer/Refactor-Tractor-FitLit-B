@@ -1,7 +1,6 @@
 import './css/base.scss';
 import './css/style.scss';
 
-import './images/person walking on path.jpg';
 import './images/The Rock.jpg';
 
 import User from './User';
@@ -15,30 +14,21 @@ import DOMupdates from './DOMupdates';
 const data = new Data();
 const domUpdates = new DOMupdates();
 
-var friendList = document.getElementById('friendList');
-var avUserSleepQuality = document.getElementById('avUserSleepQuality');
-var friendChallengeListToday = document.getElementById('friendChallengeListToday');
-var friendChallengeListHistory = document.getElementById('friendChallengeListHistory');
-var bigWinner = document.getElementById('bigWinner');
-var userStairsToday = document.getElementById('userStairsToday');
-var bestUserSteps = document.getElementById('bestUserSteps');
-var streakList = document.getElementById('streakList');
-var streakListMinutes = document.getElementById('streakListMinutes')
-
-// fetch all data
-
 function getUserData() {
   return fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData')
     .then(response => response.json())
 }
+
 function getHydrationData() {
   return fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData')
     .then(response => response.json())
 }
+
 function getSleepData() {
   return fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData')
     .then(response => response.json())
 }
+
 function getActivityData() {
   return fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData')
     .then(response => response.json())
@@ -127,24 +117,4 @@ function displayActivityInfo(dataSet, date, currentUser, userRepo) {
 
 function pickUser() {
 	return Math.floor(Math.random() * 50);
-}
-
-function makeWinnerID(activityInfo, user, dateString, userStorage){
-  return activityInfo.getWinnerId(user, dateString, userStorage)
-}
-
-function addFriendGameInfo(id, activityInfo, userStorage, dateString, laterDateString, user) {
-  friendChallengeListToday.insertAdjacentHTML("afterBegin", makeFriendChallengeHTML(id, activityInfo, userStorage, activityInfo.showChallengeListAndWinner(user, dateString, userStorage)));
-  streakList.insertAdjacentHTML("afterBegin", makeStepStreakHTML(id, activityInfo, userStorage, activityInfo.getStreak(userStorage, id, 'numSteps')));
-  streakListMinutes.insertAdjacentHTML("afterBegin", makeStepStreakHTML(id, activityInfo, userStorage, activityInfo.getStreak(userStorage, id, 'minutesActive')));
-  friendChallengeListHistory.insertAdjacentHTML("afterBegin", makeFriendChallengeHTML(id, activityInfo, userStorage, activityInfo.showChallengeListAndWinner(user, dateString, userStorage)));
-  bigWinner.insertAdjacentHTML('afterBegin', `THIS WEEK'S WINNER! ${activityInfo.showcaseWinner(user, dateString, userStorage)} steps`)
-}
-
-function makeFriendChallengeHTML(id, activityInfo, userStorage, method) {
-  return method.map(friendChallengeData => `<li class="historical-list-listItem">Your friend ${friendChallengeData} average steps.</li>`).join('');
-}
-
-function makeStepStreakHTML(id, activityInfo, userStorage, method) {
-  return method.map(streakData => `<li class="historical-list-listItem">${streakData}!</li>`).join('');
 }
