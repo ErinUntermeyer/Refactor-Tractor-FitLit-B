@@ -66,16 +66,14 @@ getData()
   .then(parsedData => {
     const userData = parsedData[0];
     const hydrationData = parsedData[1];
-    const sleepData = parsedData[2];
-		const activityData = parsedData[3];
-		const userRepo = new UserRepo(userData);
-		const currentUser = userRepo.getDataFromID(pickUser());
+    const userRepo = new UserRepo(userData);
+    const currentUser = userRepo.getDataFromID(pickUser());
     const mostRecentDate = data.sortByDate(hydrationData)[0].date;
-		displayUserInfo(currentUser, userRepo);
-		displayHydrationInfo(currentUser.hydrationInfo, mostRecentDate);
-		displaySleepInfo(currentUser.sleepInfo, mostRecentDate);
-		displayActivityInfo(currentUser.activityInfo, mostRecentDate, currentUser, userRepo);
-	});
+    displayUserInfo(currentUser, userRepo);
+    displayHydrationInfo(currentUser.hydrationInfo, mostRecentDate);
+    displaySleepInfo(currentUser.sleepInfo, mostRecentDate);
+    displayActivityInfo(currentUser.activityInfo, mostRecentDate, currentUser, userRepo);
+  });
 
 function displayUserInfo(currentUser, userRepo) {
   domUpdates.displayHeaderText(currentUser);
@@ -89,32 +87,32 @@ function displayUserInfo(currentUser, userRepo) {
 }
 
 function displayHydrationInfo(dataSet, date) {
-	domUpdates.displayDataToday(dataSet, date, 'numOunces', '#hydration-today');
-	domUpdates.displayDataForWeek(dataSet, date, 'numOunces', '#hydration-this-week');
-	domUpdates.displayDataAverages(dataSet, 'numOunces', '#hydration-average');
-};
+  domUpdates.displayDataToday(dataSet, date, 'numOunces', '#hydration-today');
+  domUpdates.displayDataForWeek(dataSet, date, 'numOunces', '#hydration-this-week');
+  domUpdates.displayDataAverages(dataSet, 'numOunces', '#hydration-average');
+}
 
 function displaySleepInfo(dataSet, date) {
-	domUpdates.displayDataToday(dataSet, date, 'hoursSlept', '#hours-slept-today');
-	domUpdates.displayDataToday(dataSet, date, 'sleepQuality', '#sleep-quality-today');
-	domUpdates.displayDataForWeek(dataSet, date, 'hoursSlept', '#hours-slept-this-week');
-	domUpdates.displayDataForWeek(dataSet, date, 'sleepQuality', '#sleep-quality-this-week');
-	domUpdates.displayDataAverages(dataSet, 'hoursSlept', '#hours-slept-average');
-	domUpdates.displayDataAverages(dataSet, 'sleepQuality', '#sleep-quality-average');
-};
+  domUpdates.displayDataToday(dataSet, date, 'hoursSlept', '#hours-slept-today');
+  domUpdates.displayDataToday(dataSet, date, 'sleepQuality', '#sleep-quality-today');
+  domUpdates.displayDataForWeek(dataSet, date, 'hoursSlept', '#hours-slept-this-week');
+  domUpdates.displayDataForWeek(dataSet, date, 'sleepQuality', '#sleep-quality-this-week');
+  domUpdates.displayDataAverages(dataSet, 'hoursSlept', '#hours-slept-average');
+  domUpdates.displayDataAverages(dataSet, 'sleepQuality', '#sleep-quality-average');
+}
 
 function displayActivityInfo(dataSet, date, currentUser, userRepo) {
-	domUpdates.displayDataToday(dataSet, date, 'numSteps', '#num-steps-today');
-	domUpdates.displayDataToday(dataSet, date, 'minutesActive', '#minutes-active-today');
-	domUpdates.displayMilesWalked(currentUser, date);
-	domUpdates.displayDataForWeek(dataSet, date, 'numSteps', '#num-steps-this-week');
-	domUpdates.displayDataForWeek(dataSet, date, 'minutesActive', '#minutes-active-this-week');
-	domUpdates.displayDataForWeek(dataSet, date, 'flightsOfStairs', '#flights-of-stairs-this-week');
+  domUpdates.displayDataToday(dataSet, date, 'numSteps', '#num-steps-today');
+  domUpdates.displayDataToday(dataSet, date, 'minutesActive', '#minutes-active-today');
+  domUpdates.displayMilesWalked(currentUser, date);
+  domUpdates.displayDataForWeek(dataSet, date, 'numSteps', '#num-steps-this-week');
+  domUpdates.displayDataForWeek(dataSet, date, 'minutesActive', '#minutes-active-this-week');
+  domUpdates.displayDataForWeek(dataSet, date, 'flightsOfStairs', '#flights-of-stairs-this-week');
   domUpdates.compareUserToOthers(dataSet, date, 'numSteps', '#num-steps-average', userRepo);
   domUpdates.compareUserToOthers(dataSet, date, 'minutesActive', '#minutes-active-average', userRepo);
   domUpdates.compareUserToOthers(dataSet, date, 'flightsOfStairs', '#flights-of-stairs-average', userRepo);
-};
+}
 
 function pickUser() {
-	return Math.floor(Math.random() * 50);
+  return Math.floor(Math.random() * 50);
 }

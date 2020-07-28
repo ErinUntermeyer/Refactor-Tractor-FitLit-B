@@ -1,11 +1,11 @@
 import User from './User';
 import Data from './Data';
 
-class UserRepo extends Data{
+class UserRepo extends Data {
   constructor(users) {
     super();
     this.users = this.checkInput(users) ? users : 'Invalid input given';
-  };
+  }
 
   findSleepQualityGreaterThanThree(date) {
     return this.users.filter(user => {
@@ -13,7 +13,7 @@ class UserRepo extends Data{
       const averageSleepQuality = super.calculateAverage(sleepQualityForWeek, 'sleepQuality');
       return averageSleepQuality > 3;
     });
-  };
+  }
 
   findMostHoursSlept(date) {
     const sleepData = this.users.map(user => super.retrieveDataByDay(user.sleepInfo, date));
@@ -24,31 +24,31 @@ class UserRepo extends Data{
       });
       return validSleepMatch;
     });
-  };
+  }
 
   checkInput(users) {
-		if (typeof users === 'object') {
-			return users.every(user => user instanceof User);
-		} else {
-			return null;
-		};
-  };
+    if (typeof users === 'object') {
+      return users.every(user => user instanceof User);
+    } else {
+      return null;
+    }
+  }
 
   getDataFromID(id) {
     let userMatch = this.users.find(user => id === user.id);
     return userMatch === undefined ? 'No matching user found' : userMatch;
-  };
+  }
 
   calculateAverageStepGoal() {
-		if (this.users === 'Invalid input given') {
-			return 0;
-		} else {
-			const totalStepGoal = this.users.reduce((totalSteps, data) => {
-				return totalSteps += data.dailyStepGoal;
-			}, 0);
-			return totalStepGoal / this.users.length;
-		};
-	};
+    if (this.users === 'Invalid input given') {
+      return 0;
+    } else {
+      const totalStepGoal = this.users.reduce((totalSteps, data) => {
+        return totalSteps += data.dailyStepGoal;
+      }, 0);
+      return totalStepGoal / this.users.length;
+    }
+  }
 
   findAllTimeAverageAttribute(date, attribute) {
     const attributeSum = this.users.reduce((total, user) => {
@@ -57,7 +57,7 @@ class UserRepo extends Data{
       return total;
     }, 0);
     return attributeSum / this.users.length;
-  };
-};
+  }
+}
 
 export default UserRepo;
