@@ -71,7 +71,7 @@ getData()
     const mostRecentDate = data.sortByDate(hydrationData)[0].date;
     displayUserInfo(currentUser, userRepo);
     displayHydrationInfo(currentUser.hydrationInfo, mostRecentDate);
-    displaySleepInfo(currentUser.sleepInfo, mostRecentDate);
+    displaySleepInfo(currentUser.sleepInfo, mostRecentDate, currentUser);
     displayActivityInfo(currentUser.activityInfo, mostRecentDate, currentUser, userRepo);
   });
 
@@ -92,13 +92,14 @@ function displayHydrationInfo(dataSet, date) {
   domUpdates.displayDataAverages(dataSet, 'numOunces', '#hydration-average');
 }
 
-function displaySleepInfo(dataSet, date) {
+function displaySleepInfo(dataSet, date, currentUser) {
   domUpdates.displayDataToday(dataSet, date, 'hoursSlept', '#hours-slept-today');
   domUpdates.displayDataToday(dataSet, date, 'sleepQuality', '#sleep-quality-today');
   domUpdates.displayDataForWeek(dataSet, date, 'hoursSlept', '#hours-slept-this-week');
   domUpdates.displayDataForWeek(dataSet, date, 'sleepQuality', '#sleep-quality-this-week');
   domUpdates.displayDataAverages(dataSet, 'hoursSlept', '#hours-slept-average');
   domUpdates.displayDataAverages(dataSet, 'sleepQuality', '#sleep-quality-average');
+  domUpdates.displayBestNightOfSleepEver(currentUser);
 }
 
 function displayActivityInfo(dataSet, date, currentUser, userRepo) {
@@ -111,6 +112,7 @@ function displayActivityInfo(dataSet, date, currentUser, userRepo) {
   domUpdates.compareUserToOthers(dataSet, date, 'numSteps', '#num-steps-average', userRepo);
   domUpdates.compareUserToOthers(dataSet, date, 'minutesActive', '#minutes-active-average', userRepo);
   domUpdates.compareUserToOthers(dataSet, date, 'flightsOfStairs', '#flights-of-stairs-average', userRepo);
+  domUpdates.displayAllTimeSteps(currentUser);
 }
 
 function pickUser() {
