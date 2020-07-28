@@ -39,6 +39,7 @@ $activity-primary: #DFE166;
   text-align: center;
   justify-content: flex-start;
   margin: 3%;
+  overflow: scroll;
   @extend %column-wrapper
 }
 
