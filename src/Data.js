@@ -78,7 +78,7 @@ class Data {
   findHighestValue(dataSet, attribute) {
     const sortedData = dataSet.sort((a, b) => b[attribute] - a[attribute]);
     return sortedData[0];
-  }
+	}
 }
 
 export default Data;

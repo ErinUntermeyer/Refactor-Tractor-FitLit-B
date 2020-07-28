@@ -14,6 +14,7 @@ import DOMupdates from './DOMupdates';
 const data = new Data();
 const domUpdates = new DOMupdates();
 
+// fetch GET
 function getUserData() {
   return fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData')
     .then(response => response.json())
@@ -32,6 +33,73 @@ function getSleepData() {
 function getActivityData() {
   return fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData')
     .then(response => response.json())
+}
+
+// fetch POST
+function formatHydrationData(currentUser, date) {
+	const numOuncesElement = document.querySelector('#num-ounces');
+	const hydrationData = {
+		userID: currentUser.id,
+		date: date,
+		numOunces: numOuncesInput.value
+	}
+	return hydrationData
+}
+
+function formatSleepData(currentUser, date) {
+	const hoursSleptElement = document.querySelector('#hours-slept');
+	const sleepQualityElement = document.querySelector('#sleep-quality');
+	const sleepData = {
+		userID: currentUser.id,
+		date: date,
+		hoursSlept: hoursSleptElement.value,
+		sleepQuality: sleepQualityElement.value
+	}
+	return sleepData
+}
+
+function formatActivityData(currentUser, date) {
+	const numStepsElement = document.querySelector('#num-steps');
+	const minutesActiveElement = document.querySelector('#minutes-active');
+	const flightsOfStairsElement = document.querySelector('#flights-of-stairs');
+	const activityData = {
+		userID: currentUser.id,
+		date: date,
+		numSteps: numStepsElement.value,
+		minutesActive: minutesActiveElement.value,
+		flightsOfStairs: flightsOfStairsElement.value
+	}
+	return activityData
+}
+
+function postHydrationData() {
+	fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData', {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(formatHydrationData())
+	})
+}
+
+function postSleepData() {
+	fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(formatSleepData())
+	})
+}
+
+function postActivityData() {
+	fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData', {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(formatActivityData())
+	})
 }
 
 function createUserInstances(userDataSet, hydrationDataSet, sleepDataSet, activityDataSet) {
