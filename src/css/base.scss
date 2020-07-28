@@ -1,6 +1,19 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: pink;
+@import 'header';
+@import 'user-info';
+@import 'cards';
+@import 'forms';
+
+* {
+  margin: 0;
+}
 
 body {
-  background-color: $primary-background;
+  font-family: 'Open Sans';
+  background-color: #4d4e4f;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
 }
