@@ -29,18 +29,17 @@ $activity-primary: #DFE166;
   margin: auto;
   justify-content: center;
   align-items: center;
-  font-size: 1.5em;
+  text-align: center;
   font-family: sans-serif;
   width: 95%;
   flex-grow: .1;
 }
 
 %list-wrapper {
-  display: flex;
-  flex-direction: column;
   text-align: center;
   justify-content: flex-start;
   margin: 3%;
+  @extend %column-wrapper
 }
 
 .list-header {
