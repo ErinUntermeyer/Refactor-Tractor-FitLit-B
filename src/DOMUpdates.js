@@ -5,7 +5,7 @@ class DOMupdates extends Data {
 		const headerText = document.querySelector('#header-text');
 		headerText.innerHTML = `${user.getFirstName()}'s Activity Tracker`;
 	}
-	
+
 	displayUserData(user, userRepo, attribute, elementID) {
 		const pageElement = document.querySelector(elementID);
 		switch(attribute) {
@@ -30,7 +30,7 @@ class DOMupdates extends Data {
 			case 'friends':
 				const friendNames = user.getFriendsNames(userRepo);
 				friendNames.forEach(friend => {
-					pageElement.innerHTML += `${friend}`;
+					pageElement.innerHTML += `<li>${friend}</li>`;
 				})
 		}
 	}
@@ -77,32 +77,32 @@ class DOMupdates extends Data {
 		switch(attribute) {
 			case 'numOunces':
 				dataForWeek.forEach(day => {
-					pageElement.innerHTML += `<p>On ${day.date}: ${day.numOunces}oz</p>`;
+					pageElement.innerHTML += `<li>On ${day.date}: ${day.numOunces}oz</li>`;
 				});
 				break;
 			case 'hoursSlept':
 				dataForWeek.forEach(day => {
-					pageElement.innerHTML += `<p>On ${day.date} you slept ${day.hoursSlept} hours</p>`;
+					pageElement.innerHTML += `<li>On ${day.date} you slept ${day.hoursSlept} hours</li>`;
 				});
 				break;
 			case 'sleepQuality':
 				dataForWeek.forEach(day => {
-					pageElement.innerHTML += `<p>On ${day.date} your sleep quality was ${day.sleepQuality} out of 5</p>`;
+					pageElement.innerHTML += `<li>On ${day.date} your sleep quality was ${day.sleepQuality} out of 5</li>`;
 				});
 				break;
 			case 'numSteps':
 				dataForWeek.forEach(day => {
-					pageElement.innerHTML += `<p>On ${day.date} you took ${day.numSteps} steps</p>`;
+					pageElement.innerHTML += `<li	>On ${day.date} you took ${day.numSteps} steps</li	>`;
 				});
 				break;
 			case 'minutesActive':
 				dataForWeek.forEach(day => {
-					pageElement.innerHTML += `<p>On ${day.date} you were active for ${day.minutesActive} minutes</p>`;
+					pageElement.innerHTML += `<li	>On ${day.date} you were active for ${day.minutesActive} minutes</li	>`;
 				});
 				break;
 			case 'flightsOfStairs':
 				dataForWeek.forEach(day => {
-					pageElement.innerHTML += `<p>On ${day.date} climbed ${day.flightsOfStairs} flights of stairs</p>`;
+					pageElement.innerHTML += `<li	>On ${day.date} climbed ${day.flightsOfStairs} flights of stairs</li	>`;
 				});
 				break;
 
