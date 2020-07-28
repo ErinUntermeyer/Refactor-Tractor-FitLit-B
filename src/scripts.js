@@ -13,6 +13,8 @@ import DOMupdates from './DOMupdates';
 
 const data = new Data();
 const domUpdates = new DOMupdates();
+let currentUser;
+let mostRecentDate;
 
 const rightCardContainer = document.querySelector('.right-card-container');
 rightCardContainer.addEventListener('click', postData);
@@ -142,9 +144,6 @@ function getData() {
       return [userInstances, hydrationInstances, sleepInstances, activityInstances]
     })
 }
-
-var currentUser;
-var mostRecentDate;
 
 getData()
   .then(parsedData => {
