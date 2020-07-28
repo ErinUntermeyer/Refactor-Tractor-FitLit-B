@@ -27,29 +27,27 @@ $activity-primary: #DFE166;
 %info-card {
   display: flex;
   margin: auto;
-  text-align: center;
+  justify-content: center;
   align-items: center;
   font-size: 1.5em;
   font-family: sans-serif;
   width: 95%;
+  flex-grow: .1;
 }
 
-%list-layout {
-  text-align: center;
-  font-size: 1em;
-  margin: .5em;
-  font-family: sans-serif;
+%list-wrapper {
   display: flex;
   flex-direction: column;
+  text-align: center;
   justify-content: flex-start;
-  width: 50%;
+  margin: 3%;
 }
 
 .list-header {
   font-weight: bolder;
 }
 
-.card-vertical-list {
+.list-text {
   list-style-type: none;
   font-weight: lighter;
   font-style: italic;
@@ -110,15 +108,15 @@ $activity-primary: #DFE166;
 .hydration-list {
   width: 95%;
   background-color: $hydration-primary;
-  @extend %list-layout;
+  @extend %list-wrapper;
 }
 
 .sleep-list {
   background-color: $sleep-primary;
-  @extend %list-layout;
+  @extend %list-wrapper;
 }
 
 .activity-list {
   background-color: $activity-primary;
-  @extend %list-layout;
+  @extend %list-wrapper;
 }
