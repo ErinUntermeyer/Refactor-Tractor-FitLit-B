@@ -10,7 +10,7 @@ In this project, we were to refactor a pre-existing codebase for an almost-compl
 
 ## Application Preview
 
-<img src="http://g.recordit.co/KwE3ynz4Ud.gif" alt="What's Cookin Main Page" height=auto width=75%/>
+<img src="http://g.recordit.co/3tTWLQO6U9.gif" alt="Refactor Tractor: Fit-Lit main page" height=auto width=75%/>
 
 ## Install/Setup Instructions
 
