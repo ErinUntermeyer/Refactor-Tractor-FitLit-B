@@ -12,24 +12,25 @@
         <section class="user-info-wrapper">
           <h2 class="sidebar-header-name" id="user-name"></h2>
           <img src="./images/The Rock.jpg" class="user-image" alt="The Rock smiling"></img>
-          <p class="sidebar-header-userInfo" id="user-address"></p>
-          <p class="sidebar-header-userInfo" id="user-email"></p>
-          <p class="sidebar-header-userInfo" id="user-stride-length"></p>
-          <p class="sidebar-header-userInfo" id="user-step-goal"></p>
-          <p class="sidebar-header-userInfo" id="avg-step-goal"></p>
-          <p class="sidebar-header-userInfo">Friends</p>
-          <ul class="card-vertical-list" id="friend-list"></ul>
+          <p class="user-info-text" id="user-address"></p>
+          <p class="user-info-text" id="user-email"></p>
+          <p class="user-info-text" id="user-stride-length"></p>
+          <p class="user-info-text" id="user-step-goal"></p>
+          <p class="user-info-text" id="avg-step-goal"></p>
+          <p class="user-info-text">Friends</p>
+          <ul class="list-text" id="friend-list"></ul>
         </section>
       </aside>
-      <section class="card-display-wrapper">
+      <section class="main-wrapper">
         <section class="hydration-wrapper">
           <section class="left-card-container">
-            <p class="card-today-hydration" id="hydration-today"></p>
-            <p class="card-today-hydration" id="hydration-average"></p>
+            <p class="info-card-hydration" id="hydration-today"></p>
+            <p class="info-card-hydration" id="hydration-average"></p>
           </section>
           <section class="middle-card-container">
-            <p class="hydration-list">Water intake this week:</p>
-            <ul class="card-vertical-list" id="hydration-this-week"></ul>
+            <ul class="list-text hydration-list" id="hydration-this-week">
+              <p class="list-text">Water intake this week:</p>
+            </ul>
           </section>
           <section class="right-card-container">
 						<form>
@@ -46,22 +47,24 @@
         </section>
         <section class="activity-wrapper">
           <section class="left-card-container">
-            <p class="card-today-activity" id="all-time-steps"></p>
-            <p class="card-today-activity" id="num-steps-today"></p>
-            <p class="card-today-activity" id="num-steps-average"></p>
-  					<p class="card-today-activity" id="num-steps-today"></p>
-  					<p class="card-today-activity" id="miles-walked-today"></p>
-            <p class="card-today-activity" id="flights-of-stairs-average"></p>
-            <p class="card-today-activity" id="minutes-active-today"></p>
-            <p class="card-today-activity" id="minutes-active-average"></p>
+            <p class="info-card-activity" id="all-time-steps"></p>
+            <p class="info-card-activity" id="num-steps-today"></p>
+  					<p class="info-card-activity" id="miles-walked-today"></p>
+            <p class="info-card-activity" id="minutes-active-today"></p>
+            <p class="info-card-activity" id="num-steps-average"></p>
+            <p class="info-card-activity" id="flights-of-stairs-average"></p>
+            <p class="info-card-activity" id="minutes-active-average"></p>
           </section>
           <section class="middle-card-container">
-            <p class="this-week activity-list">Your steps this week</p>
-            <ul class="card-vertical-list" id="num-steps-this-week"></ul>
-            <p class="this-week activity-list">Your stair count this week</p>
-            <ul class="card-vertical-list" id="flights-of-stairs-this-week"></ul>
-            <p class="this-week activity-list">Your minutes of activity this week</p>
-            <ul class="card-vertical-list" id="minutes-active-this-week"></ul>
+            <ul class="list-text activity-list" id="num-steps-this-week">
+              <li class="list-header">Your steps this week</li>
+            </ul>
+            <ul class="list-text activity-list" id="flights-of-stairs-this-week">
+              <li class="list-header">Your stair count this week</li>
+            </ul>
+            <ul class="list-text activity-list" id="minutes-active-this-week">
+              <li class="list-header">Your minutes of activity this week</li>
+            </ul>
 					</section>
 					<section class="right-card-container">
 						<form>
@@ -82,17 +85,19 @@
         </section>
         <section class="sleep-wrapper">
           <section class="left-card-container">
-            <p class="card-today-sleep" id="best-sleep-ever"></p>
-            <p class="card-today-sleep" id="hours-slept-today"></p>
-            <p class="card-today-sleep" id="sleep-quality-today"></p>
-            <p class="card-today-sleep" id="hours-slept-average"></p>
-  					<p class="card-today-sleep" id="sleep-quality-average"></p>
+            <p class="info-card-sleep" id="best-sleep-ever"></p>
+            <p class="info-card-sleep" id="hours-slept-today"></p>
+            <p class="info-card-sleep" id="sleep-quality-today"></p>
+            <p class="info-card-sleep" id="hours-slept-average"></p>
+  					<p class="info-card-sleep" id="sleep-quality-average"></p>
           </section>
           <section class="middle-card-container">
-            <p class="this-week sleep-list">Hours of sleep this week</p>
-            <ul class="card-vertical-list" id="hours-slept-this-week"></ul>
-  					<p class="this-week sleep-list">Sleep quality this week</p>
-            <ul class="card-vertical-list" id="sleep-quality-this-week"></ul>
+            <ul class="list-text sleep-list" id="hours-slept-this-week">
+              <li class="list-header">Hours of sleep this week</li>
+            </ul>
+            <ul class="list-text sleep-list" id="sleep-quality-this-week">
+    					<p class="list-header">Sleep quality this week</p>
+            </ul>
 					</section>
 					<section class="right-card-container">
 						<form>

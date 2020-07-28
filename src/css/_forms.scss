@@ -1,0 +1,32 @@
+$primary-color: #9A9DAB;
+
+form {
+  margin: 4%;
+  background: $primary-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 96%;
+}
+
+fieldset {
+  height: 200px;
+  border: none;
+}
+
+legend {
+  font-weight: bold;
+}
+
+label {
+  display: block;
+}
+
+button {
+  width: 100%;
+  margin-top: 1em;
+  height: 2em;
+  font-family: inherit;
+  border: none;
+  align-self: center;
+}
