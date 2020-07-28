@@ -9,10 +9,10 @@
 <body>
   <h1 id="headerText">Activity Tracker</h1>
   <main>
-    <aside class="main-sidebar-body">
+    <aside class="sidebar">
       <section class="user-info-wrapper">
         <h2 class="sidebar-header-name" id="user-name">Name Name</h2>
-        <img src="./images/The Rock.jpg" class="sidebar-header-userImage"></img>
+        <img src="./images/The Rock.jpg" class="user-image" alt="The Rock smiling"></img>
         <p class="sidebar-header-userInfo" id="user-address"></p>
         <p class="sidebar-header-userInfo" id="user-email"></p>
         <p class="sidebar-header-userInfo" id="user-stride-length"></p>
@@ -23,34 +23,18 @@
       </section>
     </aside>
     <section class="card-display-wrapper">
-      <article class="main-row-hydration">
-        <section class="infoContainer-cardContainer-card-horizontal">
-          <div class="card-today-hydration">
-            <p id="hydration-today"></p>
-          </div>
-          <div class="card-today-hydration">
-            <p id="hydration-average"></p>
-          </div>
+      <section class="hydration-wrapper">
+        <section class="left-card-container">
+          <p class="card-today-hydration" id="hydration-today"></p>
+          <p class="card-today-hydration" id="hydration-average"></p>
         </section>
-        <section class="infoContainer-cardContainer-card-vertical">
-          <div class="card-history-hydration">
-            <p class="thisWeek">Water intake this week:</p>
-            <div class="sidebar-header-line"></div>
-            <ul class="card-vertical-list" id="hydration-this-week">
-              <!-- Hydration week list goes here -->
-            </ul>
-          </div>
-          <div class="card-history-hydration">
-            <p class="historicalWeek"></p>
-            <div class="sidebar-header-line"></div>
-            <ul class="card-vertical-list" id="hydrationEarlierWeek">
-              <!-- Hydration week list goes here -->
-            </ul>
-          </div>
+        <section class="right-card-container">
+          <p class="card-history-hydration">Water intake this week:</p>
+          <ul class="card-vertical-list" id="hydration-this-week"></ul>
         </section>
-      </article>
-      <section class="main-column-activity">
-        <section class="infoContainer-cardContainer-card-horizontal">
+      </section>
+      <section class="activity-wrapper">
+        <section class="left-card-container">
           <section class="horizontalCard-activity-container">
             <div class="card-today-activity">
               <p id="num-steps-today"></p>
@@ -81,7 +65,7 @@
             </div>
           </section>
         </section>
-        <section class="infoContainer-cardContainer-card-horizontal">
+        <section class="right-card-container">
           <section class="horizontalCard-activity-container">
             <div class="card-history-activity">
               <p class="thisWeek">Your steps this week</p>
@@ -116,8 +100,8 @@
           </section>
         </section>
       </section>
-      <section class="main-column-sleep">
-        <section class="infoContainer-cardContainer-card-horizontal">
+      <section class="sleep-wrapper">
+        <section class="left-card-container">
           <div class="card-today-sleep">
             <p id="hours-slept-today"></p>
           </div>
@@ -131,7 +115,7 @@
 						<p id="sleep-quality-average"></p>
 					</div>
         </section>
-        <section class="infoContainer-cardContainer-card-vertical">
+        <section class="right-card-container">
           <div class="card-history-sleep">
             <p class="thisWeek">Hours of sleep this week</p>
             <div class="sidebar-header-line"></div>
@@ -149,11 +133,11 @@
         </section>
       </section>
     </section>
-    <aside class="main-sidebar-body">
+    <aside class="sidebar">
       <section class="body-sidebar-sidebarContainer">
         <h2 class="sidebar-header-name" id="sidebarName">FRIENDLY STEP CHALLENGE!</h2>
         <div class="sidebar-header-line"></div>
-        <img src="./images/person walking on path.jpg" class="sidebar-header-userImage"></img>
+        <img src="./images/person walking on path.jpg" class="user-image" alt="Person running on track"></img>
         <div class="sidebar-header-line"></div>
         <p class="sidebar-header-userInfo" id="bigWinner"></p>
         <div class="sidebar-header-line"></div>

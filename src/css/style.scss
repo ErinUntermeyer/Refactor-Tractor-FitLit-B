@@ -22,7 +22,7 @@ main {
   height: 1500px;
 }
 
-.main-sidebar-body {
+.sidebar {
   display: flex;
   flex-direction: row;
   width: 25%;
@@ -51,7 +51,7 @@ main {
   width: inherit;
 }
 
-.sidebar-header-userImage {
+.user-image {
   border-radius: 50%;
   border-color: black;
   border-style: solid;
@@ -71,25 +71,25 @@ main {
   overflow: scroll;
 }
 
-.main-row-hydration {
+.hydration-wrapper {
   display: flex;
   flex-direction: row;
   height: 25%
 }
 
-.main-column-activity {
+.activity-wrapper {
   display: flex;
   flex-direction: row;
   height: 50%
 }
 
-.main-column-sleep {
+.sleep-wrapper {
   display: flex;
   flex-direction: row;
   height: 35%
 }
 
-.infoContainer-cardContainer-card-horizontal {
+.left-card-container {
   width: 100%;
   background-color: white;
   border: 1px solid black;
@@ -108,7 +108,7 @@ main {
   overflow: scroll;
 }
 
-.infoContainer-cardContainer-card-vertical {
+.right-card-container {
   width: 100%;
   background-color: white;
   border: 1px solid black;

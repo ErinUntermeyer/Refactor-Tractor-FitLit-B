@@ -15,16 +15,8 @@ import DOMupdates from './DOMupdates';
 const data = new Data();
 const domUpdates = new DOMupdates();
 
-var sidebarName = document.getElementById('sidebarName');
-var stepGoalCard = document.getElementById('stepGoalCard');
-var avStepGoalCard = document.getElementById('avStepGoalCard');
 var headerText = document.getElementById('headerText');
-var userAddress = document.getElementById('userAddress');
-var userEmail = document.getElementById('userEmail');
-var userStridelength = document.getElementById('userStridelength');
 var friendList = document.getElementById('friendList');
-var hydrationEarlierWeek = document.getElementById('hydrationEarlierWeek');
-var historicalWeek = document.querySelectorAll('.historicalWeek');
 var avUserSleepQuality = document.getElementById('avUserSleepQuality');
 var friendChallengeListToday = document.getElementById('friendChallengeListToday');
 var friendChallengeListHistory = document.getElementById('friendChallengeListHistory');
