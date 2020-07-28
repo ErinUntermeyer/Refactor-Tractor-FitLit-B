@@ -129,15 +129,27 @@ class DOMupdates extends Data {
     const avgOfAllData = super.calculateAverage(userRepo.users, attribute, date);
     switch (attribute) {
     case 'numSteps':
-      pageElement.innerHTML = `Step Count: ${userData} All users: ${avgOfAllData}`;
+      pageElement.innerHTML = `Step Count: ${userData.numSteps} All users: ${avgOfAllData}`;
       break;
     case 'minutesActive':
-      pageElement.innerHTML = `Minutes Active: ${userData} All users: ${avgOfAllData}`;
+      pageElement.innerHTML = `Minutes Active: ${userData.minutesActive} All users: ${avgOfAllData}`;
       break;
     case 'flightsOfStairs':
-      pageElement.innerHTML = `Flights of Stairs: ${userData} All users: ${avgOfAllData}`;
+      pageElement.innerHTML = `Flights of Stairs: ${userData.flightsOfStairs} All users: ${avgOfAllData}`;
       break;
     }
+  }
+
+  displayBestNightOfSleepEver(user) {
+    const bestSleepElement = document.querySelector('#best-sleep-ever')
+    const bestSleep = user.findBestNightOfSleepEver()
+    bestSleepElement.innerHTML = `On ${bestSleep.date} you had the best night of sleep ever!`;
+  }
+
+  displayAllTimeSteps(user) {
+    const allTimeStepsElement = document.querySelector('#all-time-steps')
+    const allTimeSteps = user.findRecordSteps()
+    allTimeStepsElement.innerHTML = `Your all time steps record is ${allTimeSteps.numSteps}!`
   }
 }
 
