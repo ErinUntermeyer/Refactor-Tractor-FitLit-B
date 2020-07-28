@@ -38,8 +38,12 @@ describe('Data', function() {
   it.only('should be able to validate data types', function() {
     let hydrationInfo = testHydrationData[1].numOunces;
     expect(data.checkDataType(hydrationInfo, 'number')).to.equal(hydrationInfo);
-    expect(data.checkDataType(hydrationInfo, 'string')).to.equal(null);
+    expect(data.checkDataType(hydrationInfo, 'string')).to.equal('Invalid value given');
   });
+
+  it('should be able to assign a default value of the correct type if none is given', function() {
+    expect(data.giveDefaultValue('string')).to.equal('Invalid value given');
+  })
 
   // it.only('should be able to validate a given data set', function() {
   //   expect(data.checkDataSet(testSleepData)).to.equal(true);

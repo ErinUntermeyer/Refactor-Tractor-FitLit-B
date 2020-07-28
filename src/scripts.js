@@ -17,6 +17,7 @@ const domUpdates = new DOMupdates();
 
 var sidebarName = document.getElementById('sidebarName');
 var stepGoalCard = document.getElementById('stepGoalCard');
+var avStepGoalCard = document.getElementById('avStepGoalCard');
 var headerText = document.getElementById('headerText');
 var userAddress = document.getElementById('userAddress');
 var userEmail = document.getElementById('userEmail');
@@ -28,10 +29,7 @@ var avUserSleepQuality = document.getElementById('avUserSleepQuality');
 var friendChallengeListToday = document.getElementById('friendChallengeListToday');
 var friendChallengeListHistory = document.getElementById('friendChallengeListHistory');
 var bigWinner = document.getElementById('bigWinner');
-var avgStepsToday = document.getElementById('avgStepsToday');
 var userStairsToday = document.getElementById('userStairsToday');
-var avgStairsToday = document.getElementById('avgStairsToday');
-var avgMinutesToday = document.getElementById('avgMinutesToday');
 var bestUserSteps = document.getElementById('bestUserSteps');
 var streakList = document.getElementById('streakList');
 var streakListMinutes = document.getElementById('streakListMinutes')
@@ -91,13 +89,13 @@ getData()
 		const activityData = parsedData[3];
 		const userRepo = new UserRepo(userData);
 		const currentUser = userRepo.getDataFromID(pickUser());
-		addInfoToSidebar(currentUser, userRepo);
-		const mostRecentDate = data.sortByDate(hydrationData)[0].date;
+    const mostRecentDate = data.sortByDate(hydrationData)[0].date;
+		addInfoToSidebar(currentUser, userRepo, mostRecentDate);
 		displayHydrationInfo(currentUser.hydrationInfo, mostRecentDate);
 		displaySleepInfo(currentUser.sleepInfo, mostRecentDate);
-		displayActivityInfo(currentUser.activityInfo, mostRecentDate, currentUser);
+		displayActivityInfo(currentUser.activityInfo, mostRecentDate, currentUser, userRepo);
 	});
-	
+
 	function displayHydrationInfo(dataSet, date) {
 		domUpdates.displayDataToday(dataSet, date, 'numOunces', '#hydration-today');
 		domUpdates.displayDataForWeek(dataSet, date, 'numOunces', '#hydration-this-week');
@@ -113,13 +111,16 @@ getData()
 		domUpdates.displayDataAverages(dataSet, 'sleepQuality', '#sleep-quality-average');
 	};
 
-	function displayActivityInfo(dataSet, date, user) {
+	function displayActivityInfo(dataSet, date, user, userRepo) {
 		domUpdates.displayDataToday(dataSet, date, 'numSteps', '#num-steps-today');
 		domUpdates.displayDataToday(dataSet, date, 'minutesActive', '#minutes-active-today');
 		domUpdates.displayMilesWalked(user, date);
 		domUpdates.displayDataForWeek(dataSet, date, 'numSteps', '#num-steps-this-week');
 		domUpdates.displayDataForWeek(dataSet, date, 'minutesActive', '#minutes-active-this-week');
 		domUpdates.displayDataForWeek(dataSet, date, 'flightsOfStairs', '#flights-of-stairs-this-week');
+    domUpdates.compareUserToOthers(dataSet, date, 'numSteps', '#num-steps-average', userRepo);
+    domUpdates.compareUserToOthers(dataSet, date, 'minutesActive', '#minutes-active-average', userRepo);
+    domUpdates.compareUserToOthers(dataSet, date, 'flightsOfStairs', '#flights-of-stairs-average', userRepo);
 	};
 
 
@@ -134,14 +135,14 @@ function pickUser() {
 	return Math.floor(Math.random() * 50);
 }
 
-function addInfoToSidebar(user, userStorage) {
+function addInfoToSidebar(user, userStorage, date) {
   sidebarName.innerText = user.name;
   headerText.innerText = `${user.getFirstName()}'s Activity Tracker`;
-  stepGoalCard.innerText = `Your daily step goal is ${user.dailyStepGoal}.`
-  avStepGoalCard.innerText = `The average daily step goal is ${userStorage.calculateAverageStepGoal()}`;
+  stepGoalCard.innerText = `Your daily step goal is ${user.dailyStepGoal}`
+  avStepGoalCard.innerText = `The average daily step goal is ${data.calculateAverage(userStorage.users, 'dailyStepGoal', date)}`;
   userAddress.innerText = user.address;
   userEmail.innerText = user.email;
-  userStridelength.innerText = `Your stridelength is ${user.strideLength} meters.`;
+  userStridelength.innerText = `Your stridelength is ${user.strideLength} meters`;
   friendList.insertAdjacentHTML('afterBegin', makeFriendHTML(user, userStorage))
 };
 
@@ -151,13 +152,6 @@ function makeFriendHTML(user, userStorage) {
 
 function makeWinnerID(activityInfo, user, dateString, userStorage){
   return activityInfo.getWinnerId(user, dateString, userStorage)
-}
-
-function addActivityInfo(id, activityInfo, dateString, userStorage, laterDateString, user, winnerId) {
-  avgStairsToday.insertAdjacentHTML("afterBegin", `<p>Stair Count: </p><p>All Users</p><p><span class="number">${activityInfo.getAllUserAverageForDay(dateString, userStorage, 'flightsOfStairs')}</span></p>`)
-  avgStepsToday.insertAdjacentHTML("afterBegin", `<p>Step Count:</p><p>All Users</p><p><span class="number">${activityInfo.getAllUserAverageForDay(dateString, userStorage, 'numSteps')}</span></p>`)
-	avgMinutesToday.insertAdjacentHTML("afterBegin", `<p>Active Minutes:</p><p>All Users</p><p><span class="number">${activityInfo.getAllUserAverageForDay(dateString, userStorage, 'minutesActive')}</span></p>`)
-  bestUserSteps.insertAdjacentHTML("afterBegin", makeStepsHTML(user, activityInfo, userStorage, activityInfo.userDataForWeek(winnerId, dateString, userStorage, "numSteps")));
 }
 
 function addFriendGameInfo(id, activityInfo, userStorage, dateString, laterDateString, user) {

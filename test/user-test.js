@@ -91,19 +91,19 @@ describe('User', function() {
 	});
 
 	it.only('should only take a number for id, strideLength and dailyStepGoal', function() {
-		expect(badUser.id).to.equal(null);
-		expect(badUser.strideLength).to.equal(null);
-		expect(badUser.dailyStepGoal).to.equal(null);
+		expect(badUser.id).to.equal(0);
+		expect(badUser.strideLength).to.equal(0);
+		expect(badUser.dailyStepGoal).to.equal(0);
 	});
 
 	it.only('should only take a string for name, address and email', function() {
-		expect(badUser.name).to.equal(null);
-		expect(badUser.address).to.equal(null);
-		expect(badUser.email).to.equal(null);
+		expect(badUser.name).to.equal('Invalid value given');
+		expect(badUser.address).to.equal('Invalid value given');
+		expect(badUser.email).to.equal('Invalid value given');
 	});
 
 	it.only('should only take an array of friends', function () {
-		expect(badUser.friends).to.equal(null);
+		expect(badUser.friends).to.deep.equal(['This user has no friends']);
 	});
 
 	it.only('should be able to take an empty array of friends', function() {
@@ -115,8 +115,8 @@ describe('User', function() {
     expect(user2.getFirstName()).to.equal('Allie');
 	});
 
-	it.only('should return null if user name doesnt exist', function() {
-		expect(badUser.getFirstName()).to.equal(null);
+	it.only('should return default value if user name doesnt exist', function() {
+		expect(badUser.getFirstName()).to.equal('Invalid');
 	});
 
   it.only('should return list of friend names from user repository', function() {
@@ -125,10 +125,10 @@ describe('User', function() {
     expect(user2.getFriendsNames(userRepo)).to.deep.equal(['Alex Roth', 'The Rock', 'Rainbow Dash']);
 	});
 
-	it.only('should return null if user has no friends', function() {
+	it.only('should return the default value if user has no friends', function() {
 		const users = [user1, user2, user3, user4];
 		const userRepo = new UserRepo(users);
-		expect(badUser.getFriendsNames(userRepo)).to.equal(null);
+		expect(badUser.getFriendsNames(userRepo)).to.deep.equal(['This user has no friends']);
 	});
 
   it.only('should find the record number of steps', function() {

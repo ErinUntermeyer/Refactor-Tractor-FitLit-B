@@ -27,7 +27,14 @@ class DOMupdates extends Data {
 	displayMilesWalked(user, date) {
 		const milesWalkedToday = document.querySelector('#miles-walked-today');
 		const activityForDay = super.retrieveDataByDay(user.activityInfo, date);
-		const milesWalked = activityForDay.calculateMilesWalked(user);
+
+		if (activityForDay === 0) {
+			const milesWalked = 0;
+			milesWalkedToday.innerHTML = `You walked ${milesWalked} miles today`;
+			return;
+		}
+
+		const milesWalked = activityForDay.calculateMilesWalked(user)
 		milesWalkedToday.innerHTML = `You walked ${milesWalked} miles today`;
 	};
 
@@ -83,6 +90,30 @@ class DOMupdates extends Data {
 				pageElement.innerHTML = `Your average sleep quality was ${dataAverages} out of 5`;
 		};
 	};
+
+	compareUserToOthers(dataSet, date, attribute, elementID, userRepo) {
+		const pageElement = document.querySelector(elementID);
+		const userData = super.retrieveDataByDay(dataSet, date);
+		const avgOfAllData = super.calculateAverage(userRepo.users, attribute, date);
+		switch(attribute) {
+			case 'numSteps':
+				pageElement.innerHTML = `Step Count: ${userData} All users: ${avgOfAllData}`;
+				break;
+			case 'minutesActive':
+				pageElement.innerHTML = `Minutes Active: ${userData} All users: ${avgOfAllData}`;
+				break;
+			case 'flightsOfStairs':
+				pageElement.innerHTML = `Flights of Stairs: ${userData} All users: ${avgOfAllData}`;
+				break;
+		}
+	}
+
+	addActivityInfo(id, activityInfo, dateString, userStorage, laterDateString, user, winnerId) {
+	  avgStairsToday.insertAdjacentHTML("afterBegin", `<p>Stair Count: </p><p>All Users</p><p><span class="number">${activityInfo.getAllUserAverageForDay(dateString, userStorage, 'flightsOfStairs')}</span></p>`)
+	  avgStepsToday.insertAdjacentHTML("afterBegin", `<p>Step Count:</p><p>All Users</p><p><span class="number">${activityInfo.getAllUserAverageForDay(dateString, userStorage, 'numSteps')}</span></p>`)
+		avgMinutesToday.insertAdjacentHTML("afterBegin", `<p>Active Minutes:</p><p>All Users</p><p><span class="number">${activityInfo.getAllUserAverageForDay(dateString, userStorage, 'minutesActive')}</span></p>`)
+	  bestUserSteps.insertAdjacentHTML("afterBegin", makeStepsHTML(user, activityInfo, userStorage, activityInfo.userDataForWeek(winnerId, dateString, userStorage, "numSteps")));
+	}
 };
 
 export default DOMupdates;

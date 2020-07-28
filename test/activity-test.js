@@ -43,11 +43,11 @@ describe('Activity', function() {
   });
 
   it.only('should only take in valid data', function() {
-    expect(badActivity.userID).to.equal(null);
-    expect(badActivity.date).to.equal(null);
-    expect(badActivity.numSteps).to.equal(null);
-    expect(badActivity.minutesActive).to.equal(null);
-    expect(badActivity.flightsOfStairs).to.equal(null);
+    expect(badActivity.userID).to.equal(0);
+    expect(badActivity.date).to.equal('Invalid value given');
+    expect(badActivity.numSteps).to.equal(0);
+    expect(badActivity.minutesActive).to.equal(0);
+    expect(badActivity.flightsOfStairs).to.equal(0);
   });
 
   it.only('should calculate how many miles a user has walked that day', function() {

@@ -44,7 +44,7 @@ describe('User Repo', function() {
   });
 
   it.only('should only take in an array of instances of User', function() {
-    expect(userRepo1.users).to.equal(null);
+    expect(userRepo1.users).to.equal('Invalid input given');
   });
 
   it.only('should return user data when given user ID', function() {
@@ -52,7 +52,7 @@ describe('User Repo', function() {
 	});
 
 	it.only('should return null if user ID does not exist', function() {
-		expect(userRepo.getDataFromID(3)).to.equal(null);
+		expect(userRepo.getDataFromID(3)).to.equal('No matching user found');
 	});
 
   it.only('should return the average of all users step goals', function() {
