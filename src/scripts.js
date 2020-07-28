@@ -15,7 +15,6 @@ import DOMupdates from './DOMupdates';
 const data = new Data();
 const domUpdates = new DOMupdates();
 
-var headerText = document.getElementById('headerText');
 var friendList = document.getElementById('friendList');
 var avUserSleepQuality = document.getElementById('avUserSleepQuality');
 var friendChallengeListToday = document.getElementById('friendChallengeListToday');

@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <h1 id="headerText">Activity Tracker</h1>
+  <h1 id="header-text">Activity Tracker</h1>
   <main>
     <aside class="sidebar">
       <section class="user-info-wrapper">
@@ -35,69 +35,36 @@
       </section>
       <section class="activity-wrapper">
         <section class="left-card-container">
-          <section class="horizontalCard-activity-container">
-            <div class="card-today-activity">
-              <p id="num-steps-today"></p>
-            </div>
-            <div class="card-today-activity">
-              <p id="num-steps-average"></p>
-            </div>
-					</section>
-					<section class="horizontalCard-activity-container">
-						<div class="card-today-activity">
-							<p id="num-steps-today"></p>
-						</div>
-					</section>
-          <section class="horizontalCard-activity-container">
-            <div class="card-today-activity">
-							<p id="miles-walked-today"></p>
-						</div>
-            <div class="card-today-activity">
-              <p id="flights-of-stairs-average"></p>
-            </div>
-          </section>
-          <section class="horizontalCard-activity-container">
-            <div class="card-today-activity">
-              <p id="minutes-active-today"></p>
-            </div>
-            <div class="card-today-activity">
-              <p id="minutes-active-average"></p>
-            </div>
-          </section>
+          <p class="card-today-activity" id="num-steps-today"></p>
+          <p class="card-today-activity" id="num-steps-average"></p>
+					<p class="card-today-activity" id="num-steps-today"></p>
+					<p class="card-today-activity" id="miles-walked-today"></p>
+          <p class="card-today-activity" id="flights-of-stairs-average"></p>
+          <p class="card-today-activity" id="minutes-active-today"></p>
+          <p class="card-today-activity" id="minutes-active-average"></p>
         </section>
         <section class="right-card-container">
-          <section class="horizontalCard-activity-container">
-            <div class="card-history-activity">
-              <p class="thisWeek">Your steps this week</p>
-              <div class="sidebar-header-line"></div>
-              <ul class="card-vertical-list" id="num-steps-this-week">
-                <!-- Activity week list goes here -->
-              </ul>
-            </div>
-            <div class="card-history-activity">
-              <p class="thisWeek">Your stair count this week</p>
-              <div class="sidebar-header-line"></div>
-              <ul class="card-vertical-list" id="flights-of-stairs-this-week">
-                <!-- Activity week list goes here -->
-              </ul>
-            </div>
-          </section>
-          <section class="horizontalCard-activity-container">
-            <div class="card-history-activity">
-              <p class="thisWeek">Your minutes of activity this week</p>
-              <div class="sidebar-header-line"></div>
-              <ul class="card-vertical-list" id="minutes-active-this-week">
-                <!-- Activity week list goes here -->
-              </ul>
-            </div>
-            <div class="card-history-activity">
-              <p class="thisWeek">Winner's steps this week</p>
-              <div class="sidebar-header-line"></div>
-              <ul class="card-vertical-list" id="bestUserSteps">
-                <!-- Activity week list goes here -->
-              </ul>
-            </div>
-          </section>
+          <div class="card-history-activity">
+            <p class="thisWeek">Your steps this week</p>
+            <div class="sidebar-header-line"></div>
+            <ul class="card-vertical-list" id="num-steps-this-week">
+              <!-- Activity week list goes here -->
+            </ul>
+          </div>
+          <div class="card-history-activity">
+            <p class="thisWeek">Your stair count this week</p>
+            <div class="sidebar-header-line"></div>
+            <ul class="card-vertical-list" id="flights-of-stairs-this-week">
+              <!-- Activity week list goes here -->
+            </ul>
+          </div>
+          <div class="card-history-activity">
+            <p class="thisWeek">Your minutes of activity this week</p>
+            <div class="sidebar-header-line"></div>
+            <ul class="card-vertical-list" id="minutes-active-this-week">
+              <!-- Activity week list goes here -->
+            </ul>
+          </div>
         </section>
       </section>
       <section class="sleep-wrapper">
