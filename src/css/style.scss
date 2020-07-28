@@ -1,6 +1,7 @@
 @import 'header';
 @import 'user-info';
 @import 'cards';
+@import 'forms';
 
 * {
   margin: 0;
@@ -8,34 +9,11 @@
 
 body {
   font-family: 'Open Sans';
-  margin: 0;
   background-color: #4d4e4f;
-  height: auto;
 }
 
 main {
   display: flex;
   flex-direction: row;
-  height: 1500px;
-}
-
-.number {
-  font-size: 2em;
-  font-weight: bolder;
-  color: #4d4e4f;
-  font-kerning: normal;
-}
-
-.historicalWeek {
-  text-align: center;
-  font-size: 1em;
-  font-weight: bolder;
-  margin: .5em;
-  color: black;
-}
-
-.historical-list-listItem {
-  padding: .3em;
-  font-weight: bold;
-  font-family: sans-serif;
+  height: 100vh;
 }

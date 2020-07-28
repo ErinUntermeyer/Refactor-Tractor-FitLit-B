@@ -56,6 +56,7 @@ $activity-primary: #DFE166;
 
 .main-wrapper {
   display: flex;
+  width: 100%;
   flex-flow: column nowrap;
   overflow: scroll;
   @extend %column-wrapper;
@@ -63,17 +64,17 @@ $activity-primary: #DFE166;
 }
 
 .hydration-wrapper {
-  height: 25%;
+  height: 250px;
   @extend %row-wrapper;
 }
 
 .activity-wrapper {
-  height: 50%;
+  height: 450px;
   @extend %row-wrapper;
 }
 
 .sleep-wrapper {
-  height: 35%;
+  height: 325px;
   @extend %row-wrapper;
 }
 
