@@ -112,6 +112,7 @@ $activity-primary: #DFE166;
 }
 
 .sleep-list {
+  width: 45%;
   background-color: $sleep-primary;
   @extend %list-wrapper;
 }
