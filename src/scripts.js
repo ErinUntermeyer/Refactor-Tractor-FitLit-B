@@ -13,7 +13,23 @@ import DOMupdates from './DOMupdates';
 
 const data = new Data();
 const domUpdates = new DOMupdates();
+let currentUser;
+let mostRecentDate;
 
+const rightCardContainer = document.querySelector('.right-card-container');
+rightCardContainer.addEventListener('click', postData);
+
+function postData(event) {
+	if (event.target.classList.contains('hydration')) {
+		postHydrationData();
+	} else if (event.target.classList.contains('sleep')) {
+		postSleepData();
+	} else if (event.target.classList.contains('activity')) {
+		postActivityData();
+	}
+}
+
+// fetch GET
 function getUserData() {
   return fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/users/userData')
     .then(response => response.json())
@@ -32,6 +48,73 @@ function getSleepData() {
 function getActivityData() {
   return fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData')
     .then(response => response.json())
+}
+
+// fetch POST
+function formatHydrationData() {
+	const numOuncesElement = document.querySelector('#num-ounces');
+	const hydrationData = {
+		userID: currentUser.id,
+		date: mostRecentDate,
+		numOunces: parseInt(numOuncesElement.value)
+	}
+	return hydrationData
+}
+
+function formatSleepData() {
+	const hoursSleptElement = document.querySelector('#hours-slept');
+	const sleepQualityElement = document.querySelector('#sleep-quality');
+	const sleepData = {
+		userID: currentUser.id,
+		date: mostRecentDate,
+		hoursSlept: parseInt(hoursSleptElement.value),
+		sleepQuality: parseInt(sleepQualityElement.value)
+	}
+	return sleepData
+}
+
+function formatActivityData() {
+	const numStepsElement = document.querySelector('#num-steps');
+	const minutesActiveElement = document.querySelector('#minutes-active');
+	const flightsOfStairsElement = document.querySelector('#flights-of-stairs');
+	const activityData = {
+		userID: currentUser.id,
+		date: mostRecentDate,
+		numSteps: parseInt(numStepsElement.value),
+		minutesActive: parseInt(minutesActiveElement.value),
+		flightsOfStairs: parseInt(flightsOfStairsElement.value)
+	}
+	return activityData
+}
+
+function postHydrationData(currentUser, date) {
+	fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/hydration/hydrationData', {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(formatHydrationData(currentUser, date))
+	})
+}
+
+function postSleepData(currentUser, date) {
+	fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/sleep/sleepData', {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(formatSleepData(currentUser, date))
+	})
+}
+
+function postActivityData(currentUser, date) {
+	fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData', {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(formatActivityData(currentUser, date))
+	})
 }
 
 function createUserInstances(userDataSet, hydrationDataSet, sleepDataSet, activityDataSet) {
@@ -67,8 +150,8 @@ getData()
     const userData = parsedData[0];
     const hydrationData = parsedData[1];
     const userRepo = new UserRepo(userData);
-    const currentUser = userRepo.getDataFromID(pickUser());
-    const mostRecentDate = data.sortByDate(hydrationData)[0].date;
+		currentUser = userRepo.getDataFromID(pickUser());
+		mostRecentDate = data.sortByDate(hydrationData)[0].date;
     displayUserInfo(currentUser, userRepo);
     displayHydrationInfo(currentUser.hydrationInfo, mostRecentDate);
     displaySleepInfo(currentUser.sleepInfo, mostRecentDate, currentUser);

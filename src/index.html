@@ -27,9 +27,21 @@
             <p class="card-today-hydration" id="hydration-today"></p>
             <p class="card-today-hydration" id="hydration-average"></p>
           </section>
-          <section class="right-card-container">
+          <section class="middle-card-container">
             <p class="hydration-list">Water intake this week:</p>
             <ul class="card-vertical-list" id="hydration-this-week"></ul>
+          </section>
+          <section class="right-card-container">
+						<form>
+							<fieldset>
+								<legend>How much water did you drink today?</legend>
+								<p>
+									<label for="num-ounces">Ounces drank:</label>
+									<input type="number" id="num-ounces" min="0"></input>
+									<button class="hydration" type="button">Post it!</button>
+								</p>
+							</fieldset>
+						</form>
           </section>
         </section>
         <section class="activity-wrapper">
@@ -43,14 +55,30 @@
             <p class="card-today-activity" id="minutes-active-today"></p>
             <p class="card-today-activity" id="minutes-active-average"></p>
           </section>
-          <section class="right-card-container">
+          <section class="middle-card-container">
             <p class="this-week activity-list">Your steps this week</p>
             <ul class="card-vertical-list" id="num-steps-this-week"></ul>
             <p class="this-week activity-list">Your stair count this week</p>
             <ul class="card-vertical-list" id="flights-of-stairs-this-week"></ul>
             <p class="this-week activity-list">Your minutes of activity this week</p>
             <ul class="card-vertical-list" id="minutes-active-this-week"></ul>
-          </section>
+					</section>
+					<section class="right-card-container">
+						<form>
+							<fieldset>
+								<legend>How active were you today?</legend>
+								<p>
+									<label for="num-steps">Number of steps:</label>
+									<input type="number" id="num-steps" min="0"></input>
+									<label for="minutes-active">Minutes active:</label>
+									<input type="number" id="minutes-active" min="0"></input>
+									<label for="flights-of-stairs">Flights of stairs:</label>
+									<input type="number" id="flights-of-stairs" min="0"></input>
+									<button class="activity" type="button">Post it!</button>
+								</p>
+							</fieldset>
+						</form>
+					</section>
         </section>
         <section class="sleep-wrapper">
           <section class="left-card-container">
@@ -60,12 +88,26 @@
             <p class="card-today-sleep" id="hours-slept-average"></p>
   					<p class="card-today-sleep" id="sleep-quality-average"></p>
           </section>
-          <section class="right-card-container">
+          <section class="middle-card-container">
             <p class="this-week sleep-list">Hours of sleep this week</p>
             <ul class="card-vertical-list" id="hours-slept-this-week"></ul>
   					<p class="this-week sleep-list">Sleep quality this week</p>
             <ul class="card-vertical-list" id="sleep-quality-this-week"></ul>
-          </section>
+					</section>
+					<section class="right-card-container">
+						<form>
+							<fieldset>
+								<legend>How'd you sleep?</legend>
+								<p>
+									<label for="hours-slept">Hours slept:</label>
+									<input type="number" id="hours-slept" min="0"></input>
+									<label for="sleep-quality">Sleep quality (1-5):</label>
+									<input type="number" id="sleep-quality" min="0" max="5"></input>
+									<button class="sleep" type="button">Post it!</button>
+								</p>
+							</fieldset>
+						</form>
+					</section>
         </section>
       </section>
     </main>
