@@ -1,6 +1,11 @@
 import Data from './Data';
 
 class DOMupdates extends Data {
+	displayHeaderText(user) {
+		const headerText = document.querySelector('#header-text');
+		headerText.innerHTML = `${user.getFirstName()}'s Activity Tracker`;
+	}
+	
 	displayUserData(user, userRepo, attribute, elementID) {
 		const pageElement = document.querySelector(elementID);
 		switch(attribute) {

@@ -88,6 +88,7 @@ getData()
 	});
 
 function displayUserInfo(currentUser, userRepo) {
+  domUpdates.displayHeaderText(currentUser);
   domUpdates.displayUserData(currentUser, userRepo, 'name', '#user-name');
   domUpdates.displayUserData(currentUser, userRepo, 'address', '#user-address');
   domUpdates.displayUserData(currentUser, userRepo, 'email', '#user-email');
