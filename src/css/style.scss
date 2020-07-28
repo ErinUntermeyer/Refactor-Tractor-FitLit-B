@@ -1,5 +1,6 @@
 @import 'header';
 @import 'user-info';
+@import 'cards';
 
 * {
   margin: 0;
@@ -18,116 +19,6 @@ main {
   height: 1500px;
 }
 
-.card-display-wrapper {
-  width: 100%;
-  border: 1px solid black;
-  margin: 0 0 1em;
-  display: flex;
-  flex-direction: column;
-  overflow: scroll;
-}
-
-.hydration-wrapper {
-  display: flex;
-  flex-direction: row;
-  height: 25%
-}
-
-.activity-wrapper {
-  display: flex;
-  flex-direction: row;
-  height: 50%
-}
-
-.sleep-wrapper {
-  display: flex;
-  flex-direction: row;
-  height: 35%
-}
-
-.left-card-container {
-  width: 100%;
-  background-color: white;
-  border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 1%;
-  justify-content: space-between;
-}
-
-.middle-card-container {
-  width: 100%;
-  background-color: white;
-  border: 1px solid black;
-  display: flex;
-  flex-direction: row;
-  margin: 1%;
-  overflow: scroll;
-}
-
-.card-today-hydration {
-  text-align: center;
-  background-color: #5BC8AC;
-  height: auto;
-  font-size: 1.5em;
-  margin: .5em;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 80%;
-}
-
-.card-today-sleep {
-  text-align: center;
-  background-color: #EC96A4;
-  height: auto;
-  font-size: 1.5em;
-  margin: .5em;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 80%;
-}
-
-.card-today-activity {
-  text-align: center;
-  background-color: #DFE166;
-  height: auto;
-  font-size: 1.5em;
-  margin: .3em;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 40%;
-}
-
-.activity-list, .hydration-list, .sleep-list {
-  text-align: center;
-  font-size: 1em;
-  margin: .5em;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 50%;
-}
-
-.hydration-list {
-  background-color: #5BC8AC;
-}
-
-.sleep-list {
-  background-color: #EC96A4;
-}
-
-.activity-list {
-  background-color: #DFE166;
-}
-
 .number {
   font-size: 2em;
   font-weight: bolder;
@@ -141,22 +32,6 @@ main {
   font-weight: bolder;
   margin: .5em;
   color: black;
-}
-
-.this-week {
-  text-align: center;
-  font-size: 1em;
-  font-weight: bolder;
-  margin: .5em;
-  color: black;
-}
-
-.card-vertical-list {
-  list-style-type: none;
-  font-weight: lighter;
-  font-style: italic;
-  padding-left: 0;
-  font-size: 1em;
 }
 
 .historical-list-listItem {

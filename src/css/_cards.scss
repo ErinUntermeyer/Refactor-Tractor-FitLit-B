@@ -1,0 +1,124 @@
+$hydration-primary: #5BC8AC;
+$sleep-primary: #EC96A4;
+$activity-primary: #DFE166;
+
+%small-border {
+  border: 1px solid black;
+}
+
+%row-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+%column-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+%card-container {
+  width: 100%;
+  background-color: white;
+  border: 1px solid black;
+  margin: 1%;
+  overflow: scroll;
+}
+
+%info-card {
+  display: flex;
+  margin: auto;
+  text-align: center;
+  align-items: center;
+  font-size: 1.5em;
+  font-family: sans-serif;
+  width: 95%;
+}
+
+%list-layout {
+  text-align: center;
+  font-size: 1em;
+  margin: .5em;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 50%;
+}
+
+.list-header {
+  font-weight: bolder;
+}
+
+.card-vertical-list {
+  list-style-type: none;
+  font-weight: lighter;
+  font-style: italic;
+  padding-left: 0;
+  font-size: 1em;
+}
+
+.main-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: scroll;
+  @extend %column-wrapper;
+  @extend %small-border;
+}
+
+.hydration-wrapper {
+  height: 25%;
+  @extend %row-wrapper;
+}
+
+.activity-wrapper {
+  height: 50%;
+  @extend %row-wrapper;
+}
+
+.sleep-wrapper {
+  height: 35%;
+  @extend %row-wrapper;
+}
+
+.left-card-container {
+  @extend %card-container;
+  @extend %column-wrapper;
+}
+
+.middle-card-container {
+  overflow: scroll;
+  @extend %card-container;
+  @extend %row-wrapper;
+}
+
+.info-card-hydration {
+  height: 45%;
+  background-color: $hydration-primary;
+  @extend %info-card;
+}
+
+.info-card-sleep {
+  background-color: $sleep-primary;
+  @extend %info-card;
+}
+
+.info-card-activity {
+  background-color: $activity-primary;
+  @extend %info-card;
+}
+
+.hydration-list {
+  width: 95%;
+  background-color: $hydration-primary;
+  @extend %list-layout;
+}
+
+.sleep-list {
+  background-color: $sleep-primary;
+  @extend %list-layout;
+}
+
+.activity-list {
+  background-color: $activity-primary;
+  @extend %list-layout;
+}
